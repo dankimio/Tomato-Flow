@@ -23,7 +23,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxv-ph-lBJ" customClass="RoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
-                                <rect key="frame" x="159" y="276" width="282" height="34"/>
+                                <rect key="frame" x="158" y="276" width="284" height="34"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,24 +77,82 @@
                                     <constraint firstItem="A71-Pa-qZN" firstAttribute="leading" secondItem="9rf-X6-5pN" secondAttribute="leading" id="kGr-ZU-LWZ"/>
                                     <constraint firstAttribute="bottom" secondItem="A71-Pa-qZN" secondAttribute="bottom" id="wrS-Vf-a7q"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PHh-Tm-eqj"/>
+                                    </mask>
+                                </variation>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oPp-UK-blI">
+                                <rect key="frame" x="158" y="384" width="284" height="90"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="jdP-km-ep9"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w6S-eU-ZPU">
+                                    <size key="itemSize" width="30" height="30"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyCell" id="SH8-ck-m6d" customClass="EmptyCell" customModule="Pomodoro_Flow" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Tomato Empty" translatesAutoresizingMaskIntoConstraints="NO" id="hWt-OX-emy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilledCell" id="Doh-Qu-bIO">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Tomato Filled" translatesAutoresizingMaskIntoConstraints="NO" id="DYO-Z3-wNR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="9pv-A4-QxB" id="qem-Wb-Pf5"/>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="9Fg-y5-spS"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="leading" constant="1" id="1qe-dp-KMQ"/>
                             <constraint firstAttribute="centerX" secondItem="Kxv-ph-lBJ" secondAttribute="centerX" id="58z-0s-qWT"/>
                             <constraint firstAttribute="centerX" secondItem="pQ0-r5-ZH3" secondAttribute="centerX" id="7YH-9C-SNO"/>
+                            <constraint firstItem="oPp-UK-blI" firstAttribute="trailing" secondItem="Kxv-ph-lBJ" secondAttribute="trailing" id="QJd-XR-cWx"/>
+                            <constraint firstAttribute="centerX" secondItem="oPp-UK-blI" secondAttribute="centerX" id="Syi-bx-8Zd"/>
                             <constraint firstAttribute="centerX" secondItem="9rf-X6-5pN" secondAttribute="centerX" id="XEG-Kt-u2G"/>
                             <constraint firstAttribute="centerY" secondItem="9rf-X6-5pN" secondAttribute="centerY" id="Xuh-gR-ZUV"/>
+                            <constraint firstItem="oPp-UK-blI" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="bottom" constant="20" id="fF5-Cd-fCw"/>
+                            <constraint firstItem="oPp-UK-blI" firstAttribute="leading" secondItem="Kxv-ph-lBJ" secondAttribute="leading" id="kYj-ji-0tG"/>
+                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="leading" id="mJu-MH-RU4"/>
                             <constraint firstItem="9rf-X6-5pN" firstAttribute="top" secondItem="Kxv-ph-lBJ" secondAttribute="bottom" constant="20" id="oNW-hv-QGu"/>
                             <constraint firstItem="Kxv-ph-lBJ" firstAttribute="top" secondItem="pQ0-r5-ZH3" secondAttribute="bottom" constant="20" id="pgl-mw-eK0"/>
                             <constraint firstItem="Kxv-ph-lBJ" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="bottom" constant="8" id="tu8-U6-8o3"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="88" id="wEa-ap-gaW"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" constant="-1" id="wti-A2-zIV"/>
+                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="wti-A2-zIV"/>
                             <constraint firstItem="9rf-X6-5pN" firstAttribute="top" secondItem="pQ0-r5-ZH3" secondAttribute="bottom" constant="8" id="zBP-82-qjy"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="1qe-dp-KMQ"/>
                                 <exclude reference="tu8-U6-8o3"/>
                                 <exclude reference="Xuh-gR-ZUV"/>
                                 <exclude reference="zBP-82-qjy"/>
@@ -104,6 +162,7 @@
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="buttonContainer" destination="9rf-X6-5pN" id="yX4-hR-sFR"/>
+                        <outlet property="collectionView" destination="oPp-UK-blI" id="Gjh-SA-4K9"/>
                         <outlet property="pauseButton" destination="mK0-Fu-s2u" id="QaV-ql-531"/>
                         <outlet property="startButton" destination="Kxv-ph-lBJ" id="cjz-pf-sBF"/>
                         <outlet property="stopButton" destination="A71-Pa-qZN" id="RR1-xu-5ih"/>
@@ -174,6 +233,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Tomato Empty" width="44" height="44"/>
+        <image name="Tomato Filled" width="44" height="44"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>

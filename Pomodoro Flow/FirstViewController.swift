@@ -15,7 +15,18 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var buttonContainer: UIView!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+
     var timerEnabled = false
+    let animationDuration = 0.3
+    
+    var completedPomodoros = 3
+    let targetPomodoros = 7
+    
+    struct CollectionViewIdentifiers {
+        static let emptyCell = "EmptyCell"
+        static let filledCell = "FilledCell"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +54,7 @@ class FirstViewController: UIViewController {
         let newAlpha: CGFloat = 1 * (timerEnabled ? 0 : 1)
         let newValue = !self.startButton.hidden
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animateWithDuration(animationDuration) {
             self.startButton.alpha = newAlpha
         }
     }
@@ -51,10 +62,30 @@ class FirstViewController: UIViewController {
     func toggleButtonContainer() {
         let deltaY: CGFloat = 54 * (timerEnabled ? -1 : 1)
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animateWithDuration(animationDuration) {
             self.buttonContainer.frame.origin.y += deltaY
             self.buttonContainer.hidden = !self.buttonContainer.hidden
         }
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension FirstViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return targetPomodoros
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell: UICollectionViewCell
+
+        if indexPath.row < completedPomodoros {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell, forIndexPath: indexPath) as! UICollectionViewCell
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell, forIndexPath: indexPath) as! UICollectionViewCell
+        }
+        
+        return cell
     }
 }
 
