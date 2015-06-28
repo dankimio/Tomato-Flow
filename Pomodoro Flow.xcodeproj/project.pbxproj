@@ -14,6 +14,8 @@
 		3753473E1B3AFF010089AB7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3753473D1B3AFF010089AB7F /* Images.xcassets */; };
 		375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753473F1B3AFF010089AB7F /* LaunchScreen.xib */; };
 		3753474D1B3AFF010089AB7F /* Pomodoro_FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753474C1B3AFF010089AB7F /* Pomodoro_FlowTests.swift */; };
+		375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */; };
+		375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850271B3B5B4A005628A0 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		375347461B3AFF010089AB7F /* Pomodoro FlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pomodoro FlowTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3753474B1B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3753474C1B3AFF010089AB7F /* Pomodoro_FlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro_FlowTests.swift; sourceTree = "<group>"; };
+		375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyRoundedButton.swift; sourceTree = "<group>"; };
+		375850271B3B5B4A005628A0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				3753473D1B3AFF010089AB7F /* Images.xcassets */,
 				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
 				375347321B3AFF010089AB7F /* Supporting Files */,
+				375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */,
+				375850271B3B5B4A005628A0 /* RoundedButton.swift */,
 			);
 			path = "Pomodoro Flow";
 			sourceTree = "<group>";
@@ -216,8 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				375347391B3AFF010089AB7F /* SecondViewController.swift in Sources */,
+				375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */,
 				375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */,
 				375347371B3AFF010089AB7F /* FirstViewController.swift in Sources */,
+				375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +421,7 @@
 				375347521B3AFF010089AB7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		375347531B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Pomodoro FlowTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +430,7 @@
 				375347551B3AFF010089AB7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
