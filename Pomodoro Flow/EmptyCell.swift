@@ -9,9 +9,4 @@
 import UIKit
 
 class EmptyCell: UICollectionViewCell {
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        println("Hello!")
-    }
 }

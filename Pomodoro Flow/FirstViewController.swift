@@ -20,8 +20,9 @@ class FirstViewController: UIViewController {
     var timerEnabled = false
     let animationDuration = 0.3
     
-    var completedPomodoros = 3
-    let targetPomodoros = 7
+    var completedPomodoros = 4
+    let targetPomodoros = 14
+    let itemsPerSection = 7
     
     struct CollectionViewIdentifiers {
         static let emptyCell = "EmptyCell"
@@ -67,16 +68,27 @@ class FirstViewController: UIViewController {
             self.buttonContainer.hidden = !self.buttonContainer.hidden
         }
     }
+    
+    private func numberOfSections() -> Int {
+        return Int(ceil(Double(targetPomodoros) / Double(itemsPerSection)))
+    }
 }
 
 // MARK: - UICollectionViewDataSource
-extension FirstViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension FirstViewController: UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return numberOfSections()
+    }
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return targetPomodoros
+        if targetPomodoros - section * itemsPerSection >= itemsPerSection {
+            return itemsPerSection
+        } else {
+            return targetPomodoros % itemsPerSection
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
         let cell: UICollectionViewCell
 
         if indexPath.row < completedPomodoros {
@@ -86,6 +98,25 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         
         return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension FirstViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        // Number of cells in the last section
+        let cellsInSection = targetPomodoros % itemsPerSection
+        
+        // Set insets on last row only and skip if section is full
+        if section != numberOfSections() - 1 || cellsInSection == 0 {
+            return UIEdgeInsetsMake(0, 0, 12, 0)
+        }
+
+        // Cell width + cell spacing
+        let cellWidth = 30 + 14
+        var inset = (collectionView.frame.width - CGFloat(cellsInSection * cellWidth)) / 2.0
+        
+        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 }
 
