@@ -20,7 +20,7 @@ class FirstViewController: UIViewController {
     var timerEnabled = false
     let animationDuration = 0.3
     
-    var completedPomodoros = 4
+    var completedPomodoros = 9
     let targetPomodoros = 14
     let itemsPerSection = 7
     
@@ -72,6 +72,18 @@ class FirstViewController: UIViewController {
     private func numberOfSections() -> Int {
         return Int(ceil(Double(targetPomodoros) / Double(itemsPerSection)))
     }
+    
+    private func lastSectionIndex() -> Int {
+        if numberOfSections() == 0 {
+            return 0
+        }
+        
+        return numberOfSections() - 1
+    }
+    
+    private func numberOfRowsInLastSection() -> Int {
+        return targetPomodoros % itemsPerSection
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -90,14 +102,12 @@ extension FirstViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell
-
-        if indexPath.row < completedPomodoros {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell, forIndexPath: indexPath) as! UICollectionViewCell
-        } else {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell, forIndexPath: indexPath) as! UICollectionViewCell
-        }
         
-        return cell
+        if itemsPerSection * indexPath.section + indexPath.row < completedPomodoros {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell, forIndexPath: indexPath) as! UICollectionViewCell
+        } else {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell, forIndexPath: indexPath) as! UICollectionViewCell
+        }
     }
 }
 
@@ -108,7 +118,7 @@ extension FirstViewController: UICollectionViewDelegateFlowLayout {
         let cellsInSection = targetPomodoros % itemsPerSection
         
         // Set insets on last row only and skip if section is full
-        if section != numberOfSections() - 1 || cellsInSection == 0 {
+        if section != lastSectionIndex() || cellsInSection == 0 {
             return UIEdgeInsetsMake(0, 0, 12, 0)
         }
 
