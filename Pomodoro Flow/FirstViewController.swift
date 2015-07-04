@@ -22,7 +22,7 @@ class FirstViewController: UIViewController {
     
     var completedPomodoros = 9
     let targetPomodoros = 14
-    let itemsPerSection = 7
+    let rowsPerSection = 7
     
     struct CollectionViewIdentifiers {
         static let emptyCell = "EmptyCell"
@@ -70,7 +70,7 @@ class FirstViewController: UIViewController {
     }
     
     private func numberOfSections() -> Int {
-        return Int(ceil(Double(targetPomodoros) / Double(itemsPerSection)))
+        return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
     }
     
     private func lastSectionIndex() -> Int {
@@ -82,7 +82,7 @@ class FirstViewController: UIViewController {
     }
     
     private func numberOfRowsInLastSection() -> Int {
-        return targetPomodoros % itemsPerSection
+        return targetPomodoros % rowsPerSection
     }
 }
 
@@ -93,17 +93,17 @@ extension FirstViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if targetPomodoros - section * itemsPerSection >= itemsPerSection {
-            return itemsPerSection
+        if targetPomodoros - section * rowsPerSection >= rowsPerSection {
+            return rowsPerSection
         } else {
-            return targetPomodoros % itemsPerSection
+            return targetPomodoros % rowsPerSection
         }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell
         
-        if itemsPerSection * indexPath.section + indexPath.row < completedPomodoros {
+        if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
             return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell, forIndexPath: indexPath) as! UICollectionViewCell
         } else {
             return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell, forIndexPath: indexPath) as! UICollectionViewCell
@@ -115,7 +115,7 @@ extension FirstViewController: UICollectionViewDataSource {
 extension FirstViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         // Number of cells in the last section
-        let cellsInSection = targetPomodoros % itemsPerSection
+        let cellsInSection = targetPomodoros % rowsPerSection
         
         // Set insets on last row only and skip if section is full
         if section != lastSectionIndex() || cellsInSection == 0 {
