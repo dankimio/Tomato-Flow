@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373799481B49DB6E0025260A /* SettingsViewController.swift */; };
 		375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347341B3AFF010089AB7F /* AppDelegate.swift */; };
 		375347371B3AFF010089AB7F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347361B3AFF010089AB7F /* FirstViewController.swift */; };
 		375347391B3AFF010089AB7F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347381B3AFF010089AB7F /* SecondViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		373799481B49DB6E0025260A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Flow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		375347331B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */,
 				375850271B3B5B4A005628A0 /* RoundedButton.swift */,
 				378192041B40682D0016375D /* EmptyCell.swift */,
+				373799481B49DB6E0025260A /* SettingsViewController.swift */,
 			);
 			path = "Pomodoro Flow";
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			files = (
 				375347391B3AFF010089AB7F /* SecondViewController.swift in Sources */,
 				375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */,
+				373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */,
 				375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */,
 				375347371B3AFF010089AB7F /* FirstViewController.swift in Sources */,
 				375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */,

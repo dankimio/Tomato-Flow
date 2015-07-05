@@ -21,7 +21,7 @@ class FirstViewController: UIViewController {
     let animationDuration = 0.3
     
     var completedPomodoros = 9
-    let targetPomodoros = 14
+    let targetPomodoros = 11
     let rowsPerSection = 7
     
     struct CollectionViewIdentifiers {
