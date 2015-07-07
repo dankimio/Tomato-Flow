@@ -19,18 +19,35 @@ class FirstViewController: UIViewController {
 
     var timerEnabled = false
     let animationDuration = 0.3
+    let rowsPerSection = 7
     
     var completedPomodoros = 9
-    let targetPomodoros = 11
-    let rowsPerSection = 7
+    var targetPomodoros: Int
+    
+    let settings = SettingsManager.sharedManager
     
     struct CollectionViewIdentifiers {
         static let emptyCell = "EmptyCell"
         static let filledCell = "FilledCell"
     }
     
+    required init(coder aDecoder: NSCoder) {
+        targetPomodoros = settings.targetPomodoros
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Observe settings to update views
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "refreshPomodoros", name: "targetPomodorosUpdated", object: nil)
+    }
+    
+    func refreshPomodoros() {
+        targetPomodoros = settings.targetPomodoros
+        collectionView.reloadData()
     }
 
     @IBAction func pause(sender: RoundedButton) {
@@ -96,7 +113,7 @@ extension FirstViewController: UICollectionViewDataSource {
         if targetPomodoros - section * rowsPerSection >= rowsPerSection {
             return rowsPerSection
         } else {
-            return targetPomodoros % rowsPerSection
+            return numberOfRowsInLastSection()
         }
     }
     
@@ -114,17 +131,14 @@ extension FirstViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension FirstViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        // Number of cells in the last section
-        let cellsInSection = targetPomodoros % rowsPerSection
-        
         // Set insets on last row only and skip if section is full
-        if section != lastSectionIndex() || cellsInSection == 0 {
+        if section != lastSectionIndex() || numberOfRowsInLastSection() == 0 {
             return UIEdgeInsetsMake(0, 0, 12, 0)
         }
 
         // Cell width + cell spacing
         let cellWidth = 30 + 14
-        var inset = (collectionView.frame.width - CGFloat(cellsInSection * cellWidth)) / 2.0
+        var inset = (collectionView.frame.width - CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
         
         return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }

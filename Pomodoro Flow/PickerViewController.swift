@@ -51,7 +51,7 @@ class PickerViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
+        // Configure the cell
         cell.textLabel?.text = "\(options[indexPath.row]) \(specifier)"
         
         let currentValue = options[indexPath.row]
@@ -106,6 +106,8 @@ class PickerViewController: UITableViewController {
             settings.longBreakLength = selectedValue
         case .TargetPomodoros:
             settings.targetPomodoros = selectedValue
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("targetPomodorosUpdated", object: self)
         }
     }
 

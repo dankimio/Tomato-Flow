@@ -26,15 +26,14 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSettings()
+        setupSwitches()
+        setupLabels()
     }
 
-    private func setupSettings() {
+    private func setupSwitches() {
         tickingSoundSwitch.on = settings.tickingSound
         startBreaksSwitch.on = settings.startBreaks
         startPomodorosSwitch.on = settings.startPomodoros
-        
-        setupLabels()
     }
     
     private func setupLabels() {
