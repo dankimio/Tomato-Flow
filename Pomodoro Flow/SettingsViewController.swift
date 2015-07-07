@@ -21,7 +21,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     @IBOutlet weak var targetPomodorosLabel: UILabel!
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
-    private let settings = SettingsManager()
+    private let settings = SettingsManager.sharedManager
 
     override func viewDidLoad() {
         super.viewDidLoad()

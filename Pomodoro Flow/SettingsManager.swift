@@ -22,6 +22,10 @@ class SettingsManager {
         static let startPomodoros = "Settings.StartPomodoros"
     }
     
+    static let sharedManager = SettingsManager()
+    
+    private init() {}
+    
     // MARK: - General settings
     
     var pomodoroLength: Int {
