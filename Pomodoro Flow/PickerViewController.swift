@@ -88,6 +88,7 @@ class PickerViewController: UITableViewController {
         updateSettings()
     }
 
+    // Back button pressed
     override func willMoveToParentViewController(parent: UIViewController?) {
         if parent == nil {
             delegate?.pickerDidFinishPicking(self)
@@ -106,8 +107,6 @@ class PickerViewController: UITableViewController {
             settings.longBreakLength = selectedValue
         case .TargetPomodoros:
             settings.targetPomodoros = selectedValue
-            let nc = NSNotificationCenter.defaultCenter()
-            nc.postNotificationName("targetPomodorosUpdated", object: self)
         }
     }
 

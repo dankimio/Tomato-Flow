@@ -10,6 +10,7 @@ import Foundation
 
 class SettingsManager {
     private let userDefaults = NSUserDefaults.standardUserDefaults()
+    private let notificationCenter = NSNotificationCenter.defaultCenter()
     
     private struct Settings {
         static let pomodoroLength = "Settings.PomodoroLength"
@@ -45,7 +46,10 @@ class SettingsManager {
     
     var targetPomodoros: Int {
         get { return userDefaults.objectForKey(Settings.targetPomodoros) as? Int ?? 5 }
-        set { userDefaults.setInteger(newValue, forKey: Settings.targetPomodoros) }
+        set {
+            userDefaults.setInteger(newValue, forKey: Settings.targetPomodoros)
+            notificationCenter.postNotificationName("targetPomodorosUpdated", object: self)
+        }
     }
     
     // MARK: - Notification settings
