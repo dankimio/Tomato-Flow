@@ -17,22 +17,39 @@ class FirstViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var timerEnabled = false
-    let animationDuration = 0.3
+    // Timer
+    private var timerEnabled = false
     
-    var completedPomodoros = 9
-    let targetPomodoros = 14
-    let rowsPerSection = 7
+    // Configuration
+    private let rowsPerSection = 7
+    private let animationDuration = 0.3
+    private let settings = SettingsManager.sharedManager
     
-    struct CollectionViewIdentifiers {
+    private struct CollectionViewIdentifiers {
         static let emptyCell = "EmptyCell"
         static let filledCell = "FilledCell"
     }
     
+    // Pomodoros view
+    private var completedPomodoros = 9
+    private var targetPomodoros: Int
+    
+    // MARK: - Initialization
+    required init(coder aDecoder: NSCoder) {
+        targetPomodoros = settings.targetPomodoros
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Observe settings to update views
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "refreshPomodoros", name: "targetPomodorosUpdated", object: nil)
     }
-
+    
+    // MARK: - Actions
     @IBAction func pause(sender: RoundedButton) {
     }
 
@@ -46,12 +63,18 @@ class FirstViewController: UIViewController {
         toggleButtons()
     }
     
-    func toggleButtons() {
+    // MARK: - Helper methods
+    func refreshPomodoros() {
+        targetPomodoros = settings.targetPomodoros
+        collectionView.reloadData()
+    }
+
+    private func toggleButtons() {
         toggleStartButton()
         toggleButtonContainer()
     }
     
-    func toggleStartButton() {
+    private func toggleStartButton() {
         let newAlpha: CGFloat = 1 * (timerEnabled ? 0 : 1)
         let newValue = !self.startButton.hidden
         
@@ -60,7 +83,7 @@ class FirstViewController: UIViewController {
         }
     }
     
-    func toggleButtonContainer() {
+    private func toggleButtonContainer() {
         let deltaY: CGFloat = 54 * (timerEnabled ? -1 : 1)
         
         UIView.animateWithDuration(animationDuration) {
@@ -96,37 +119,38 @@ extension FirstViewController: UICollectionViewDataSource {
         if targetPomodoros - section * rowsPerSection >= rowsPerSection {
             return rowsPerSection
         } else {
-            return targetPomodoros % rowsPerSection
+            return numberOfRowsInLastSection()
         }
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell: UICollectionViewCell
-        
-        if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
-            return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell, forIndexPath: indexPath) as! UICollectionViewCell
-        } else {
-            return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell, forIndexPath: indexPath) as! UICollectionViewCell
-        }
+    func collectionView(collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+            let cell: UICollectionViewCell
+            
+            if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
+                return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell,
+                    forIndexPath: indexPath) as! UICollectionViewCell
+            } else {
+                return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell,
+                    forIndexPath: indexPath) as! UICollectionViewCell
+            }
     }
 }
 
 // MARK: - UICollectionViewDelegate
 extension FirstViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        // Number of cells in the last section
-        let cellsInSection = targetPomodoros % rowsPerSection
-        
-        // Set insets on last row only and skip if section is full
-        if section != lastSectionIndex() || cellsInSection == 0 {
-            return UIEdgeInsetsMake(0, 0, 12, 0)
-        }
-
-        // Cell width + cell spacing
-        let cellWidth = 30 + 14
-        var inset = (collectionView.frame.width - CGFloat(cellsInSection * cellWidth)) / 2.0
-        
-        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+            // Set insets on last row only and skip if section is full
+            if section != lastSectionIndex() || numberOfRowsInLastSection() == 0 {
+                return UIEdgeInsetsMake(0, 0, 12, 0)
+            }
+            
+            // Cell width + cell spacing
+            let cellWidth = 30 + 14
+            var inset = (collectionView.frame.width - CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
+            
+            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 }
 
