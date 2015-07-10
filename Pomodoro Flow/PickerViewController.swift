@@ -88,9 +88,11 @@ class PickerViewController: UITableViewController {
         updateSettings()
     }
 
-    // Back button pressed
-    override func willMoveToParentViewController(parent: UIViewController?) {
-        if parent == nil {
+    // Navigating back
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParentViewController() {
             delegate?.pickerDidFinishPicking(self)
         }
     }
@@ -109,15 +111,5 @@ class PickerViewController: UITableViewController {
             settings.targetPomodoros = selectedValue
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -29,6 +29,15 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
         setupSwitches()
         setupLabels()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let selectedIndexPath = tableView.indexPathForSelectedRow
+        if let indexPath = selectedIndexPath {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
 
     private func setupSwitches() {
         tickingSoundSwitch.on = settings.tickingSound
@@ -86,15 +95,5 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     func pickerDidFinishPicking(picker: PickerViewController) {
         setupLabels()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
