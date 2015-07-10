@@ -44,17 +44,17 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     }
     
     @IBAction func toggleTickingSound(sender: UISwitch) {
-        println("Ticking sound: \(sender.on)")
+        print("Ticking sound: \(sender.on)")
         settings.tickingSound = sender.on
     }
 
     @IBAction func toggleStartBreaks(sender: UISwitch) {
-        println("Automatically start breaks: \(sender.on)")
+        print("Automatically start breaks: \(sender.on)")
         settings.startBreaks = sender.on
     }
     
     @IBAction func toggleStartPomodoros(sender: UISwitch) {
-        println("Automatically start pomodoros: \(sender.on)")
+        print("Automatically start pomodoros: \(sender.on)")
         settings.startPomodoros = sender.on
     }
     

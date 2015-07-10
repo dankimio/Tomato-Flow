@@ -39,7 +39,7 @@ class PickerViewController: UITableViewController {
         case .TargetPomodoros: options = PickerOptions.targetPomodoros
         }
         
-        selectedIndexPath = NSIndexPath(forRow: find(options, selectedValue)!, inSection: 0)
+        selectedIndexPath = NSIndexPath(forRow: options.indexOf(selectedValue)!, inSection: 0)
     }
 
     // MARK: - Table view data source
@@ -49,7 +49,7 @@ class PickerViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell", forIndexPath: indexPath)
 
         // Configure the cell
         cell.textLabel?.text = "\(options[indexPath.row]) \(specifier)"
@@ -77,7 +77,7 @@ class PickerViewController: UITableViewController {
             newCell.accessoryType = .Checkmark
         }
         
-        find(options, selectedValue)
+        options.indexOf(selectedValue)
         
         if let oldCell = tableView.cellForRowAtIndexPath(selectedIndexPath!) {
             oldCell.accessoryType = .None

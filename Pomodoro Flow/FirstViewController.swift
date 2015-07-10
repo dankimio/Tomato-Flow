@@ -35,7 +35,7 @@ class FirstViewController: UIViewController {
     private var targetPomodoros: Int
     
     // MARK: - Initialization
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         targetPomodoros = settings.targetPomodoros
         
         super.init(coder: aDecoder)
@@ -76,7 +76,6 @@ class FirstViewController: UIViewController {
     
     private func toggleStartButton() {
         let newAlpha: CGFloat = 1 * (timerEnabled ? 0 : 1)
-        let newValue = !self.startButton.hidden
         
         UIView.animateWithDuration(animationDuration) {
             self.startButton.alpha = newAlpha
@@ -125,14 +124,12 @@ extension FirstViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let cell: UICollectionViewCell
-            
             if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
                 return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell,
-                    forIndexPath: indexPath) as! UICollectionViewCell
+                    forIndexPath: indexPath)
             } else {
                 return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell,
-                    forIndexPath: indexPath) as! UICollectionViewCell
+                    forIndexPath: indexPath)
             }
     }
 }
@@ -148,7 +145,7 @@ extension FirstViewController: UICollectionViewDelegateFlowLayout {
             
             // Cell width + cell spacing
             let cellWidth = 30 + 14
-            var inset = (collectionView.frame.width - CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
+            let inset = (collectionView.frame.width - CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
             
             return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
