@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  TimerViewController.swift
 //  Pomodoro Flow
 //
 //  Created by Dan K. on 2015-06-24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class TimerViewController: UIViewController {
 
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -109,7 +109,7 @@ class FirstViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension FirstViewController: UICollectionViewDataSource {
+extension TimerViewController: UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return numberOfSections()
     }
@@ -135,7 +135,7 @@ extension FirstViewController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
-extension FirstViewController: UICollectionViewDelegateFlowLayout {
+extension TimerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
             // Set insets on last row only and skip if section is full
