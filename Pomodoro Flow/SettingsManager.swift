@@ -68,4 +68,10 @@ class SettingsManager {
         get { return userDefaults.boolForKey(Settings.startPomodoros) }
         set { userDefaults.setBool(newValue, forKey: Settings.startPomodoros) }
     }
+    
+    // MARK: - Helper methods
+    
+    var pomodoroLengthInterval: Double {
+        return Double(pomodoroLength * 60)
+    }
 }
