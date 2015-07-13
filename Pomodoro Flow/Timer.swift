@@ -17,17 +17,9 @@ protocol TimerDelegate: class {
 }
 
 class Timer {
-    private static var sharedInstance: Timer?
-    
-    class func sharedTimer(delegate: TimerDelegate) -> Timer {
-        if sharedInstance == nil {
-            sharedInstance = Timer(delegate: delegate)
-        }
-        
-        return sharedInstance!
-    }
-    
+
     var paused = false
+    var stopped = true
 
     var currentTime: Double {
         didSet {
@@ -42,10 +34,16 @@ class Timer {
 
     private var pausedTime: Double {
         get { return userDefaults.doubleForKey("pausedTime") }
-        set { userDefaults.setDouble(newValue, forKey: "pausedTime") }
+        set {
+            if newValue == 0 {
+                userDefaults.removeObjectForKey("pausedTime")
+            } else {
+                userDefaults.setDouble(newValue, forKey: "pausedTime")
+            }
+        }
     }
     
-    private init(delegate: TimerDelegate) {
+    init(delegate: TimerDelegate) {
         self.delegate = delegate
 
         if let notification = UIApplication.sharedApplication().scheduledLocalNotifications?.first,
@@ -55,14 +53,22 @@ class Timer {
         } else if let pausedTime = userDefaults.objectForKey("pausedTime") as? Double {
             currentTime = pausedTime
             paused = true
+            stopped = false
         } else {
             currentTime = settings.pomodoroLengthInterval
         }
     }
     
+    deinit {
+        invalidateTimer()
+        
+        print("Timer deinitialized")
+    }
+    
     func start() {
         fireTimer()
         schedulePomodoroNotification(settings.pomodoroLengthInterval)
+        stopped = false
         
         delegate.timerDidStart()
         
@@ -71,35 +77,51 @@ class Timer {
     
     func togglePause() {
         if paused {
-            paused = false
-            
-            // Resume timer
-            fireTimer()
-            schedulePomodoroNotification(pausedTime)
-            
-            delegate.timerDidUnpause()
+            unpause()
         } else {
-            paused = true
-            pausedTime = currentTime
-            
-            // Pause timer
-            invalidateTimer()
-            cancelNotification()
-            
-            delegate.timerDidPause()
+            pause()
         }
+    }
+    
+    private func pause() {
+        paused = true
+        pausedTime = currentTime
+
+        invalidateTimer()
+        cancelNotification()
         
+        delegate.timerDidPause()
         print("Timer paused")
     }
     
+    private func unpause() {
+        paused = false
+
+        fireTimer()
+        schedulePomodoroNotification(pausedTime)
+        
+        delegate.timerDidUnpause()
+        print("Timer unpaused")
+    }
+    
     func stop() {
+        paused = false
+        pausedTime = 0
+
         invalidateTimer()
         cancelNotification()
         currentTime = settings.pomodoroLengthInterval
+        stopped = true
         
         delegate.timerDidStop()
         
         print("Timer stopped")
+    }
+    
+    func reloadSettings() {
+        if stopped {
+            currentTime = settings.pomodoroLengthInterval
+        }
     }
     
     private func fireTimer() {

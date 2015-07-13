@@ -45,7 +45,21 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        timer = Timer.sharedTimer(self)
+        // Observe settings to update views
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: "refreshPomodoros", name: "targetPomodorosUpdated", object: nil)
+        nc.addObserver(self, selector: "didBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+//        nc.addObserver(self, selector: "didEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        
+//        print(UIApplication.sharedApplication().scheduledLocalNotifications)
+//        UIApplication.sharedApplication().cancelAllLocalNotifications()
+//        NSUserDefaults.standardUserDefaults().removeObjectForKey("pausedTime")
+//        NSUserDefaults.standardUserDefaults().removeObjectForKey("paused")
+
+    }
+    
+    func didBecomeActive() {
+        timer = Timer(delegate: self)
         formatTime(timer.currentTime)
         
         if timer.paused {
@@ -53,15 +67,7 @@ class TimerViewController: UIViewController {
             timerDidPause()
         }
         
-        // Observe settings to update views
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "refreshPomodoros", name: "targetPomodorosUpdated", object: nil)
-        
-//        print(UIApplication.sharedApplication().scheduledLocalNotifications)
-//        UIApplication.sharedApplication().cancelAllLocalNotifications()
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("pausedTime")
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("paused")
-
+        timer.reloadSettings()
     }
     
     // MARK: - Actions
