@@ -49,7 +49,7 @@ class Timer {
         if let notification = UIApplication.sharedApplication().scheduledLocalNotifications?.first,
             fireDate = notification.fireDate {
                 currentTime = fireDate.timeIntervalSince1970 - NSDate().timeIntervalSince1970
-                start()
+                start(false)
         } else if let pausedTime = userDefaults.objectForKey("pausedTime") as? Double {
             currentTime = pausedTime
             paused = true
@@ -65,9 +65,13 @@ class Timer {
         print("Timer deinitialized")
     }
     
-    func start() {
+    func start(scheduleNotification: Bool = true) {
         fireTimer()
-        schedulePomodoroNotification(settings.pomodoroLengthInterval)
+        
+        if scheduleNotification {
+            schedulePomodoroNotification(settings.pomodoroLengthInterval)
+        }
+        
         stopped = false
         
         delegate.timerDidStart()

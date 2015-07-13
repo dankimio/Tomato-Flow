@@ -51,7 +51,7 @@ class TimerViewController: UIViewController {
         nc.addObserver(self, selector: "didBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
 //        nc.addObserver(self, selector: "didEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
         
-//        print(UIApplication.sharedApplication().scheduledLocalNotifications)
+//        print(UIApplication.sharedApplication().scheduledLocalNotifications?.count)
 //        UIApplication.sharedApplication().cancelAllLocalNotifications()
 //        NSUserDefaults.standardUserDefaults().removeObjectForKey("pausedTime")
 //        NSUserDefaults.standardUserDefaults().removeObjectForKey("paused")
