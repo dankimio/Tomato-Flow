@@ -151,12 +151,14 @@ class Timer {
     
     private func schedulePomodoroNotification(interval: NSTimeInterval) {
         let notification = UILocalNotification()
-        notification.fireDate = NSDate(timeIntervalSinceNow: interval)
+        notification.fireDate = NSDate(timeIntervalSinceNow: 10) // 'interval'
         notification.alertTitle = "Pomodoro Finished!"
         notification.alertBody = "Time to take a break"
+        notification.applicationIconBadgeNumber = 1
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
         
-        print("Pomodoro notification scheduled")
+        print(NSDate(timeIntervalSinceNow: 0))
+        print("Pomodoro notification scheduled for \(notification.fireDate)")
     }
     
     private func scheduleShortBreak(interval: NSTimeInterval) {

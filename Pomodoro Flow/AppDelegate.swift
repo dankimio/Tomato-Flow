@@ -16,7 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        print("didFinishLaunching")
+        application.applicationIconBadgeNumber = 0
+        
+        let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        print("Notification received")
+            
+        application.applicationIconBadgeNumber = 0
+        let alert = UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
+        alert.show()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("resetTimer", object: nil)
     }
 
     func applicationWillResignActive(application: UIApplication) {

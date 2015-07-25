@@ -48,14 +48,20 @@ class TimerViewController: UIViewController {
         // Observe settings to update views
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "refreshPomodoros", name: "targetPomodorosUpdated", object: nil)
+        nc.addObserver(self, selector: "resetTimer", name: "resetTimer", object: nil)
         nc.addObserver(self, selector: "didBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
-//        nc.addObserver(self, selector: "didEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
         
 //        print(UIApplication.sharedApplication().scheduledLocalNotifications?.count)
 //        UIApplication.sharedApplication().cancelAllLocalNotifications()
 //        NSUserDefaults.standardUserDefaults().removeObjectForKey("pausedTime")
 //        NSUserDefaults.standardUserDefaults().removeObjectForKey("paused")
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        timer?.reloadSettings()
     }
     
     func didBecomeActive() {
@@ -68,6 +74,12 @@ class TimerViewController: UIViewController {
         }
         
         timer.reloadSettings()
+    }
+    
+    func resetTimer() {
+        timer.stop()
+        
+        print("Timer was reset")
     }
     
     // MARK: - Actions

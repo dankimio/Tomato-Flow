@@ -23,7 +23,7 @@ class PickerViewController: UITableViewController {
     var delegate: PickerViewControllerDelegate?
     
     private struct PickerOptions {
-        static let pomodoroLength = [25, 30, 35, 40]
+        static let pomodoroLength = [1, 25, 30, 35, 40]
         static let shortBreakLength = [5, 10, 15, 20]
         static let longBreakLength = [10, 15, 20, 25, 30]
         static let targetPomodoros = (2...21).map { $0 }
