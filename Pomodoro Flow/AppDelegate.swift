@@ -29,8 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Notification received")
             
         application.applicationIconBadgeNumber = 0
-        let alert = UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: self, cancelButtonTitle: "OK")
-        alert.show()
+        let alertController = UIAlertController(title: notification.alertTitle, message: notification.alertBody, preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(ok)
+        window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
         
         NSNotificationCenter.defaultCenter().postNotificationName("resetTimer", object: nil)
     }
@@ -56,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 
