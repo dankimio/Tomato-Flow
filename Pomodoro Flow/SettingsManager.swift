@@ -46,7 +46,7 @@ class SettingsManager {
     }
     
     var targetPomodoros: Int {
-        get { return userDefaults.objectForKey(Settings.targetPomodoros) as? Int ?? 5 * 60 }
+        get { return userDefaults.objectForKey(Settings.targetPomodoros) as? Int ?? 5 }
         set {
             userDefaults.setInteger(newValue, forKey: Settings.targetPomodoros)
             notificationCenter.postNotificationName("targetPomodorosUpdated", object: self)
