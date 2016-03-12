@@ -26,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication,
             didReceiveLocalNotification notification: UILocalNotification) {
         
-        print("Notification received")
-        
+        print("didReceiveLocalNotification")
         timerViewController.presentAlertFromNotification(notification)
     }
 

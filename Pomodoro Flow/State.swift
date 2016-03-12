@@ -9,5 +9,5 @@
 import Foundation
 
 enum State {
-    case Default, Break, LongBreak
+    case Default, ShortBreak, LongBreak
 }

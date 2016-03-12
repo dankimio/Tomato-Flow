@@ -19,7 +19,8 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     // Scheduler
-    private var scheduler: Scheduler
+    private let scheduler: Scheduler
+    private let pomodoro = Pomodoro.sharedInstance
     
     // Time
     private var timer: NSTimer?
@@ -77,27 +78,28 @@ class TimerViewController: UIViewController {
     func willEnterForeground() {
         print("willEnterForeground called from controller")
         
-        if let pausedTime = scheduler.pausedTime {
-            currentTime = pausedTime
-        } else if let fireDate = scheduler.fireDate {
-            print("fireDate: \(fireDate)")
-            currentTime = fireDate.timeIntervalSinceDate(NSDate())
-            print("currentTime: \(currentTime)")
-        } else {
-            currentTime = Double(settings.pomodoroLength)
-        }
-        
+        setCurrentTime()
         updateTimerLabel()
     }
     
     func secondPassed() {
         if currentTime > 0 {
             currentTime = currentTime - 1.0
-        } else {
-            stop()
+            updateTimerLabel()
+            return
         }
         
-        updateTimerLabel()
+        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosDone)")
+        
+        if pomodoro.state == .Default {
+            pomodoro.completePomodoro()
+        } else {
+            pomodoro.completeBreak()
+        }
+        
+        stop()
+        
+        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosDone)")
     }
     
     // MARK: - Actions
@@ -170,8 +172,22 @@ class TimerViewController: UIViewController {
         timerLabel.text = String(format: "%02d:%02d", time / 60, time % 60)
     }
     
+    private func setCurrentTime() {
+        if let pausedTime = scheduler.pausedTime {
+            currentTime = pausedTime
+        } else if let fireDate = scheduler.fireDate {
+            currentTime = fireDate.timeIntervalSinceDate(NSDate())
+        } else {
+            resetCurrentTime()
+        }
+    }
+    
     private func resetCurrentTime() {
-        currentTime = Double(settings.pomodoroLength)
+        switch pomodoro.state {
+        case .Default: currentTime = Double(settings.pomodoroLength)
+        case .ShortBreak: currentTime = Double(settings.shortBreakLength)
+        case .LongBreak: currentTime = Double(settings.longBreakLength)
+        }
     }
     
     private func fireTimer() {
@@ -179,7 +195,7 @@ class TimerViewController: UIViewController {
             target: self, selector: "secondPassed", userInfo: nil, repeats: true)
     }
     
-    func refreshPomodoros() {
+    private func refreshPomodoros() {
         targetPomodoros = settings.targetPomodoros
         collectionView.reloadData()
     }

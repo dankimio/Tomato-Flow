@@ -21,6 +21,7 @@ class Scheduler {
 
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private let settings = SettingsManager.sharedManager
+    private let pomodoro = Pomodoro.sharedInstance
 
     // Interval for rescheduling timers
     var pausedTime: Double? {
@@ -55,10 +56,13 @@ class Scheduler {
     }
     
     func start() {
-        schedulePomodoro()
+        switch pomodoro.state {
+        case .Default: schedulePomodoro()
+        case .ShortBreak: scheduleShortBreak()
+        case .LongBreak: scheduleLongBreak()
+        }
         
         delegate?.schedulerDidStart()
-        
         print("Scheduler started")
     }
     
@@ -73,7 +77,12 @@ class Scheduler {
     func unpause() {
         guard let interval = pausedTime else { return }
     
-        scheduleNotification(interval, title: "Pomodoro finished!", body: "Time to take a break.")
+        switch pomodoro.state {
+        case .Default: schedulePomodoro(interval)
+        case .ShortBreak: scheduleShortBreak(interval)
+        case .LongBreak: scheduleLongBreak(interval)
+        }
+
         pausedTime = nil
         
         delegate?.schedulerDidUnpause()
@@ -100,21 +109,21 @@ class Scheduler {
         print("Notification canceled")
     }
     
-    private func schedulePomodoro() {
+    private func schedulePomodoro(interval: NSTimeInterval? = nil) {
 //        let interval = NSTimeInterval(settings.pomodoroLength)
-        let interval = NSTimeInterval(10)
+        let interval = interval ?? NSTimeInterval(10)
         scheduleNotification(interval, title: "Pomodoro finished", body: "Time to take a break!")
         print("Pomodoro scheduled")
     }
     
-    private func scheduleShortBreak() {
-        let interval = NSTimeInterval(settings.shortBreakLength)
+    private func scheduleShortBreak(interval: NSTimeInterval? = nil) {
+        let interval = interval ?? NSTimeInterval(settings.shortBreakLength)
         scheduleNotification(interval, title: "Break finished", body: "Time to get back to work!")
         print("Short break scheduled")
     }
     
-    private func scheduleLongBreak() {
-        let interval = NSTimeInterval(settings.longBreakLength)
+    private func scheduleLongBreak(interval: NSTimeInterval? = nil) {
+        let interval = interval ?? NSTimeInterval(settings.longBreakLength)
         scheduleNotification(interval, title: "Long break is over", body: "Time to get back to work!")
         print("Long break scheduled")
     }

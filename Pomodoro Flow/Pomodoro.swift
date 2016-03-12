@@ -31,7 +31,7 @@ class Pomodoro {
     
     func completePomodoro() {
         pomodorosDone += 1
-        state = (pomodorosDone % 4 == 0 ? .LongBreak : .Break)
+        state = (pomodorosDone % 4 == 0 ? .LongBreak : .ShortBreak)
     }
     
     func completeBreak() {
