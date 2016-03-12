@@ -45,9 +45,9 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     }
     
     private func setupLabels() {
-        pomodoroLengthLabel.text = "\(settings.pomodoroLength) minutes"
-        shortBreakLengthLabel.text = "\(settings.shortBreakLength) minutes"
-        longBreakLengthLabel.text = "\(settings.longBreakLength) minutes"
+        pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
+        shortBreakLengthLabel.text = "\(settings.shortBreakLength / 60) minutes"
+        longBreakLengthLabel.text = "\(settings.longBreakLength / 60) minutes"
         targetPomodorosLabel.text = "\(settings.targetPomodoros) pomodoros"
     }
     
@@ -68,26 +68,24 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let picker = segue.destinationViewController as? PickerViewController {
-            if let identifier = segue.identifier {
-                switch identifier {
-                case "PomodoroLengthPicker":
-                    picker.selectedValue = settings.pomodoroLength
-                    picker.type = PickerType.PomodoroLength
-                case "ShortBreakLengthPicker":
-                    picker.selectedValue = settings.shortBreakLength
-                    picker.type = PickerType.ShortBreakLength
-                case "LongBreakLengthPicker":
-                    picker.selectedValue = settings.longBreakLength
-                    picker.type = PickerType.LongBreakLength
-                case "TargetPomodorosPicker":
-                    picker.specifier = "pomodoros"
-                    picker.selectedValue = settings.targetPomodoros
-                    picker.type = PickerType.TargetPomodoros
-                default:
-                    break
-                }
-                picker.delegate = self
+            switch segue.identifier! {
+            case "PomodoroLengthPicker":
+                picker.selectedValue = settings.pomodoroLength
+                picker.type = PickerType.PomodoroLength
+            case "ShortBreakLengthPicker":
+                picker.selectedValue = settings.shortBreakLength
+                picker.type = PickerType.ShortBreakLength
+            case "LongBreakLengthPicker":
+                picker.selectedValue = settings.longBreakLength
+                picker.type = PickerType.LongBreakLength
+            case "TargetPomodorosPicker":
+                picker.specifier = "pomodoros"
+                picker.selectedValue = settings.targetPomodoros
+                picker.type = PickerType.TargetPomodoros
+            default:
+                break
             }
+            picker.delegate = self
         }
     }
     

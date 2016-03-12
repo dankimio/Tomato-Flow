@@ -23,9 +23,9 @@ class PickerViewController: UITableViewController {
     var delegate: PickerViewControllerDelegate?
     
     private struct PickerOptions {
-        static let pomodoroLength = [1, 25, 30, 35, 40]
-        static let shortBreakLength = [5, 10, 15, 20]
-        static let longBreakLength = [10, 15, 20, 25, 30]
+        static let pomodoroLength = [1, 25, 30, 35, 40].map { $0 * 60 }
+        static let shortBreakLength = [5, 10, 15, 20].map { $0 * 60 }
+        static let longBreakLength = [10, 15, 20, 25, 30].map { $0 * 60 }
         static let targetPomodoros = (2...14).map { $0 }
     }
     
@@ -39,7 +39,9 @@ class PickerViewController: UITableViewController {
         case .TargetPomodoros: options = PickerOptions.targetPomodoros
         }
         
-        selectedIndexPath = NSIndexPath(forRow: options.indexOf(selectedValue)!, inSection: 0)
+        if let index = options.indexOf(selectedValue) where type != .TargetPomodoros {
+            selectedIndexPath = NSIndexPath(forRow: index, inSection: 0)
+        }
     }
     
     // MARK: - Table view data source
@@ -48,11 +50,15 @@ class PickerViewController: UITableViewController {
         return options.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView,
+            cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell", forIndexPath: indexPath)
         
         // Configure the cell
-        cell.textLabel?.text = "\(options[indexPath.row]) \(specifier)"
+        let value = options[indexPath.row]
+        let formattedValue = (type == PickerType.TargetPomodoros ? value : value / 60)
+        cell.textLabel?.text = "\(formattedValue) \(specifier)"
         
         let currentValue = options[indexPath.row]
         
@@ -69,15 +75,19 @@ class PickerViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        // Return if new value is equal to selected value
         if options[indexPath.row] == selectedValue {
             return
         }
         
+        // Put a checkmark on the new selection
         if let newCell = tableView.cellForRowAtIndexPath(indexPath) {
             newCell.accessoryType = .Checkmark
         }
         
-        if let oldCell = tableView.cellForRowAtIndexPath(selectedIndexPath!) {
+        // Remove a checkmark from the old cell
+        if let previousIndexPath = selectedIndexPath,
+                oldCell = tableView.cellForRowAtIndexPath(previousIndexPath) {
             oldCell.accessoryType = .None
         }
         
