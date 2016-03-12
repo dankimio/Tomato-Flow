@@ -19,7 +19,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     // Scheduler
-    private var scheduler: Scheduler!
+    private var scheduler: Scheduler
     
     // Time
     private var timer: NSTimer?
@@ -43,10 +43,9 @@ class TimerViewController: UIViewController {
     // MARK: - Initialization
     required init?(coder aDecoder: NSCoder) {
         targetPomodoros = settings.targetPomodoros
+        scheduler = Scheduler()
         
         super.init(coder: aDecoder)
-        
-        scheduler = Scheduler()
         
         if let pausedTime = scheduler.pausedTime {
             currentTime = pausedTime
@@ -59,6 +58,11 @@ class TimerViewController: UIViewController {
         super.viewWillAppear(animated)
         
         updateTimerLabel()
+        
+        if scheduler.pausedTime != nil {
+            animateStarted()
+            animatePaused()
+        }
     }
     
     func secondPassed() {
@@ -96,14 +100,14 @@ class TimerViewController: UIViewController {
         scheduler.pause(currentTime)
         running = false
         timer?.invalidate()
-        pauseButton.setTitle("Resume", forState: .Normal)
+        animatePaused()
     }
     
     func unpause() {
         scheduler.unpause()
         running = true
         fireTimer()
-        pauseButton.setTitle("Pause", forState: .Normal)
+        animateUnpaused()
     }
     
     // MARK: - Helpers
@@ -161,6 +165,14 @@ class TimerViewController: UIViewController {
             self.buttonContainer.alpha = 0.0
         }
         
+        pauseButton.setTitle("Pause", forState: .Normal)
+    }
+    
+    private func animatePaused() {
+        pauseButton.setTitle("Resume", forState: .Normal)
+    }
+    
+    private func animateUnpaused() {
         pauseButton.setTitle("Pause", forState: .Normal)
     }
 
