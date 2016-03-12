@@ -18,8 +18,12 @@ class TimerViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
 
-    // Timer
-    private var timer: Timer!
+    // Scheduler
+    private var scheduler: Scheduler!
+    
+    // Time
+    private var timer: NSTimer!
+    private var currentTime: Double!
     
     // Configuration
     private let rowsPerSection = 7
@@ -40,66 +44,71 @@ class TimerViewController: UIViewController {
         targetPomodoros = settings.targetPomodoros
         
         super.init(coder: aDecoder)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
-        // Observe settings to update views
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "refreshPomodoros", name: "targetPomodorosUpdated", object: nil)
-        nc.addObserver(self, selector: "resetTimer", name: "resetTimer", object: nil)
-        nc.addObserver(self, selector: "didBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        timer = NSTimer(timeInterval: 1,
+            target: self, selector: "secondPassed", userInfo: nil, repeats: true)
         
-//        print(UIApplication.sharedApplication().scheduledLocalNotifications?.count)
-//        UIApplication.sharedApplication().cancelAllLocalNotifications()
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("pausedTime")
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("paused")
-
+        scheduler = Scheduler()
+//        scheduler.delegate = self
+        
+        if let pausedTime = scheduler.pausedTime {
+            currentTime = pausedTime
+        } else {
+            currentTime = Double(settings.pomodoroLength)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        timer?.reloadSettings()
+        updateTimerLabel()
     }
     
-    func didBecomeActive() {
-        timer = Timer(delegate: self)
-        formatTime(timer.currentTime)
-        
-        if timer.paused {
-            timerDidStart()
-            timerDidPause()
-        }
-        
-        timer.reloadSettings()
-    }
-    
-    func resetTimer() {
-        timer.stop()
-        
-        print("Timer was reset")
+    func secondPassed() {
+        print("Second passed")
+        currentTime = currentTime - 1.0
+        updateTimerLabel()
     }
     
     // MARK: - Actions
     @IBAction func togglePaused(sender: EmptyRoundedButton) {
-        timer.togglePause()
+        if scheduler.paused {
+            scheduler.unpause()
+            pauseButton.setTitle("Pause", forState: .Normal)
+        } else {
+            scheduler.pause(currentTime)
+            pauseButton.setTitle("Resume", forState: .Normal)
+        }
+        timer.invalidate()
     }
 
     @IBAction func start(sender: RoundedButton) {
-        timer.start()
+        scheduler.start()
+        animateStarted()
+        fireTimer()
     }
     
     @IBAction func stop(sender: RoundedButton) {
-        timer.stop()
+        scheduler.stop()
+        animateStopped()
+        timer.invalidate()
+        resetCurrentTime()
+        updateTimerLabel()
     }
     
-    // MARK: - Helper methods
+    // MARK: - Helpers
     
-    private func formatTime(time: Double) {
-        let intTime = Int(time)
-        timerLabel.text = String(format: "%02d:%02d", intTime / 60, intTime % 60)
+    private func updateTimerLabel() {
+        let time = Int(currentTime)
+        timerLabel.text = String(format: "%02d:%02d", time / 60, time % 60)
+    }
+    
+    private func resetCurrentTime() {
+        currentTime = Double(settings.pomodoroLength)
+    }
+    
+    private func fireTimer() {
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
     }
     
     func refreshPomodoros() {
@@ -122,58 +131,8 @@ class TimerViewController: UIViewController {
     private func numberOfRowsInLastSection() -> Int {
         return targetPomodoros % rowsPerSection
     }
-}
-
-// MARK: - UICollectionViewDataSource
-extension TimerViewController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return numberOfSections()
-    }
-
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if targetPomodoros - section * rowsPerSection >= rowsPerSection {
-            return rowsPerSection
-        } else {
-            return numberOfRowsInLastSection()
-        }
-    }
     
-    func collectionView(collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
-                return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell,
-                    forIndexPath: indexPath)
-            } else {
-                return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell,
-                    forIndexPath: indexPath)
-            }
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-extension TimerViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            // Set insets on last row only and skip if section is full
-            if section != lastSectionIndex() || numberOfRowsInLastSection() == 0 {
-                return UIEdgeInsetsMake(0, 0, 12, 0)
-            }
-            
-            // Cell width + cell spacing
-            let cellWidth = 30 + 14
-            let inset = (collectionView.frame.width - CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
-            
-            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-    }
-}
-
-// MARK: - TimerDelegate
-extension TimerViewController: TimerDelegate {
-    func timerUpdated() {
-        formatTime(timer.currentTime)
-    }
-    
-    func timerDidStart() {
+    private func animateStarted() {
         let deltaY: CGFloat = 54
         buttonContainer.frame.origin.y += deltaY
         buttonContainer.hidden = false
@@ -185,7 +144,7 @@ extension TimerViewController: TimerDelegate {
         }
     }
     
-    func timerDidStop() {
+    private func animateStopped() {
         UIView.animateWithDuration(animationDuration) {
             self.startButton.alpha = 1.0
             self.buttonContainer.alpha = 0.0
@@ -193,13 +152,86 @@ extension TimerViewController: TimerDelegate {
         
         pauseButton.setTitle("Pause", forState: .Normal)
     }
-    
-    func timerDidPause() {
-        pauseButton.setTitle("Resume", forState: .Normal)
+}
+
+// MARK: - UICollectionViewDataSource
+extension TimerViewController: UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return numberOfSections()
+    }
+
+    func collectionView(collectionView: UICollectionView,
+            numberOfItemsInSection section: Int) -> Int {
+        
+        if targetPomodoros - section * rowsPerSection >= rowsPerSection {
+            return rowsPerSection
+        } else {
+            return numberOfRowsInLastSection()
+        }
     }
     
-    func timerDidUnpause() {
-        pauseButton.setTitle("Pause", forState: .Normal)
+    func collectionView(collectionView: UICollectionView,
+            cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell,
+                forIndexPath: indexPath)
+        } else {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.emptyCell,
+                forIndexPath: indexPath)
+        }
     }
 }
+
+// MARK: - UICollectionViewDelegate
+extension TimerViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView,
+            layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        
+        // Set insets on last row only and skip if section is full
+        if section != lastSectionIndex() || numberOfRowsInLastSection() == 0 {
+            return UIEdgeInsetsMake(0, 0, 12, 0)
+        }
+        
+        // Cell width + cell spacing
+        let cellWidth = 30 + 14
+        let inset = (collectionView.frame.width - CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
+        
+        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+    }
+}
+
+// MARK: - SchedulerDelegate
+//extension TimerViewController: SchedulerDelegate {
+//    
+//    func schedulerDidStart() {
+//        let deltaY: CGFloat = 54
+//        buttonContainer.frame.origin.y += deltaY
+//        buttonContainer.hidden = false
+//        
+//        UIView.animateWithDuration(animationDuration) {
+//            self.startButton.alpha = 0.0
+//            self.buttonContainer.alpha = 1.0
+//            self.buttonContainer.frame.origin.y += -deltaY
+//        }
+//    }
+//    
+//    func schedulerDidStop() {
+//        UIView.animateWithDuration(animationDuration) {
+//            self.startButton.alpha = 1.0
+//            self.buttonContainer.alpha = 0.0
+//        }
+//        
+//        pauseButton.setTitle("Pause", forState: .Normal)
+//    }
+//    
+//    func schedulerDidPause() {
+//        pauseButton.setTitle("Resume", forState: .Normal)
+//    }
+//    
+//    func schedulerDidUnpause() {
+//        pauseButton.setTitle("Pause", forState: .Normal)
+//    }
+//
+//}
 
