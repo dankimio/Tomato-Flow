@@ -9,6 +9,7 @@
 import Foundation
 
 class SettingsManager {
+
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private let notificationCenter = NSNotificationCenter.defaultCenter()
     

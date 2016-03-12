@@ -49,7 +49,6 @@ class TimerViewController: UIViewController {
             target: self, selector: "secondPassed", userInfo: nil, repeats: true)
         
         scheduler = Scheduler()
-//        scheduler.delegate = self
         
         if let pausedTime = scheduler.pausedTime {
             currentTime = pausedTime
@@ -65,21 +64,28 @@ class TimerViewController: UIViewController {
     }
     
     func secondPassed() {
-        print("Second passed")
         currentTime = currentTime - 1.0
         updateTimerLabel()
+        
+//        print("Second passed")
     }
     
     // MARK: - Actions
+
     @IBAction func togglePaused(sender: EmptyRoundedButton) {
+        print("togglePaused called")
+
         if scheduler.paused {
+            print("In scheduler.paused")
             scheduler.unpause()
+            timer.fire()
             pauseButton.setTitle("Pause", forState: .Normal)
         } else {
+            print("In else scheduler.paused")
             scheduler.pause(currentTime)
+            timer.invalidate()
             pauseButton.setTitle("Resume", forState: .Normal)
         }
-        timer.invalidate()
     }
 
     @IBAction func start(sender: RoundedButton) {
@@ -152,6 +158,7 @@ class TimerViewController: UIViewController {
         
         pauseButton.setTitle("Pause", forState: .Normal)
     }
+
 }
 
 // MARK: - UICollectionViewDataSource
@@ -234,4 +241,3 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
 //    }
 //
 //}
-
