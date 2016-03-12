@@ -20,7 +20,7 @@
 		3753474D1B3AFF010089AB7F /* Pomodoro_FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753474C1B3AFF010089AB7F /* Pomodoro_FlowTests.swift */; };
 		375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */; };
 		375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850271B3B5B4A005628A0 /* RoundedButton.swift */; };
-		376795701B52DDDD007E6CBC /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Timer.swift */; };
+		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +41,7 @@
 		3737994E1B4C153B0025260A /* PickerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerType.swift; sourceTree = "<group>"; };
 		3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Flow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		375347331B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		375347361B3AFF010089AB7F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		375347381B3AFF010089AB7F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3753473B1B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		3753474C1B3AFF010089AB7F /* Pomodoro_FlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro_FlowTests.swift; sourceTree = "<group>"; };
 		375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyRoundedButton.swift; sourceTree = "<group>"; };
 		375850271B3B5B4A005628A0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		3767956F1B52DDDD007E6CBC /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		378192041B40682D0016375D /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +158,7 @@
 			children = (
 				3737994A1B4ABA160025260A /* SettingsManager.swift */,
 				3737994E1B4C153B0025260A /* PickerType.swift */,
-				3767956F1B52DDDD007E6CBC /* Timer.swift */,
+				3767956F1B52DDDD007E6CBC /* Scheduler.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -275,7 +275,7 @@
 				3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */,
 				375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */,
 				375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */,
-				376795701B52DDDD007E6CBC /* Timer.swift in Sources */,
+				376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */,
 				378192051B40682D0016375D /* EmptyCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
