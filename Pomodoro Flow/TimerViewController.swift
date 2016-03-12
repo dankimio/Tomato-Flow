@@ -22,8 +22,9 @@ class TimerViewController: UIViewController {
     private var scheduler: Scheduler!
     
     // Time
-    private var timer: NSTimer!
+    private var timer: NSTimer?
     private var currentTime: Double!
+    private var running = false
     
     // Configuration
     private let rowsPerSection = 7
@@ -45,9 +46,6 @@ class TimerViewController: UIViewController {
         
         super.init(coder: aDecoder)
         
-        timer = NSTimer(timeInterval: 1,
-            target: self, selector: "secondPassed", userInfo: nil, repeats: true)
-        
         scheduler = Scheduler()
         
         if let pausedTime = scheduler.pausedTime {
@@ -66,8 +64,6 @@ class TimerViewController: UIViewController {
     func secondPassed() {
         currentTime = currentTime - 1.0
         updateTimerLabel()
-        
-//        print("Second passed")
     }
     
     // MARK: - Actions
@@ -75,31 +71,39 @@ class TimerViewController: UIViewController {
     @IBAction func togglePaused(sender: EmptyRoundedButton) {
         print("togglePaused called")
 
-        if scheduler.paused {
-            print("In scheduler.paused")
-            scheduler.unpause()
-            timer.fire()
-            pauseButton.setTitle("Pause", forState: .Normal)
-        } else {
-            print("In else scheduler.paused")
-            scheduler.pause(currentTime)
-            timer.invalidate()
-            pauseButton.setTitle("Resume", forState: .Normal)
-        }
+        scheduler.paused ? unpause() :pause()
     }
 
     @IBAction func start(sender: RoundedButton) {
         scheduler.start()
+        running = true
         animateStarted()
         fireTimer()
     }
     
     @IBAction func stop(sender: RoundedButton) {
         scheduler.stop()
+        running = false
         animateStopped()
-        timer.invalidate()
+        timer?.invalidate()
         resetCurrentTime()
         updateTimerLabel()
+    }
+    
+    func pause() {
+        guard running else { return }
+
+        scheduler.pause(currentTime)
+        running = false
+        timer?.invalidate()
+        pauseButton.setTitle("Resume", forState: .Normal)
+    }
+    
+    func unpause() {
+        scheduler.unpause()
+        running = true
+        fireTimer()
+        pauseButton.setTitle("Pause", forState: .Normal)
     }
     
     // MARK: - Helpers
@@ -114,7 +118,8 @@ class TimerViewController: UIViewController {
     }
     
     private func fireTimer() {
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1,
+            target: self, selector: "secondPassed", userInfo: nil, repeats: true)
     }
     
     func refreshPomodoros() {
@@ -207,37 +212,3 @@ extension TimerViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
     }
 }
-
-// MARK: - SchedulerDelegate
-//extension TimerViewController: SchedulerDelegate {
-//    
-//    func schedulerDidStart() {
-//        let deltaY: CGFloat = 54
-//        buttonContainer.frame.origin.y += deltaY
-//        buttonContainer.hidden = false
-//        
-//        UIView.animateWithDuration(animationDuration) {
-//            self.startButton.alpha = 0.0
-//            self.buttonContainer.alpha = 1.0
-//            self.buttonContainer.frame.origin.y += -deltaY
-//        }
-//    }
-//    
-//    func schedulerDidStop() {
-//        UIView.animateWithDuration(animationDuration) {
-//            self.startButton.alpha = 1.0
-//            self.buttonContainer.alpha = 0.0
-//        }
-//        
-//        pauseButton.setTitle("Pause", forState: .Normal)
-//    }
-//    
-//    func schedulerDidPause() {
-//        pauseButton.setTitle("Resume", forState: .Normal)
-//    }
-//    
-//    func schedulerDidUnpause() {
-//        pauseButton.setTitle("Pause", forState: .Normal)
-//    }
-//
-//}

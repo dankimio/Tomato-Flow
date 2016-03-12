@@ -68,7 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate.
         // Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        let tabBarController = window!.rootViewController as! UITabBarController
+        let timerViewController = tabBarController.viewControllers!.first as! TimerViewController
+        timerViewController.pause()
     }
+    
+    // MARK: - Helpers
     
     private func registerNotifications() {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
