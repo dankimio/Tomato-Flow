@@ -30,22 +30,22 @@ class SettingsManager {
     // MARK: - General settings
     
     var pomodoroLength: Int {
-        get { return userDefaults.objectForKey(Settings.pomodoroLength) as? Int ?? 25 }
+        get { return userDefaults.objectForKey(Settings.pomodoroLength) as? Int ?? 25 * 60 }
         set { userDefaults.setInteger(newValue, forKey: Settings.pomodoroLength) }
     }
     
     var shortBreakLength: Int {
-        get { return userDefaults.objectForKey(Settings.shortBreakLength) as? Int ?? 5 }
+        get { return userDefaults.objectForKey(Settings.shortBreakLength) as? Int ?? 5 * 60 }
         set { userDefaults.setInteger(newValue, forKey: Settings.shortBreakLength) }
     }
     
     var longBreakLength: Int {
-        get { return userDefaults.objectForKey(Settings.longBreakLength) as? Int ?? 20 }
+        get { return userDefaults.objectForKey(Settings.longBreakLength) as? Int ?? 20 * 60 }
         set { userDefaults.setInteger(newValue, forKey: Settings.longBreakLength) }
     }
     
     var targetPomodoros: Int {
-        get { return userDefaults.objectForKey(Settings.targetPomodoros) as? Int ?? 5 }
+        get { return userDefaults.objectForKey(Settings.targetPomodoros) as? Int ?? 5 * 60 }
         set {
             userDefaults.setInteger(newValue, forKey: Settings.targetPomodoros)
             notificationCenter.postNotificationName("targetPomodorosUpdated", object: self)
@@ -68,10 +68,5 @@ class SettingsManager {
         get { return userDefaults.boolForKey(Settings.startPomodoros) }
         set { userDefaults.setBool(newValue, forKey: Settings.startPomodoros) }
     }
-    
-    // MARK: - Helper methods
-    
-    var pomodoroLengthInterval: Double {
-        return Double(pomodoroLength * 60)
-    }
+
 }
