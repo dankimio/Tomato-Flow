@@ -8,7 +8,11 @@
 
 import Foundation
 
+// Singleton object to retrieve and retain app settings
 class SettingsManager {
+    
+    static let sharedManager = SettingsManager()
+    private init() {}
 
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -23,10 +27,6 @@ class SettingsManager {
         static let startBreaks = "Settings.StartBreaks"
         static let startPomodoros = "Settings.StartPomodoros"
     }
-    
-    static let sharedManager = SettingsManager()
-    
-    private init() {}
     
     // MARK: - General settings
     

@@ -27,14 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didReceiveLocalNotification notification: UILocalNotification) {
         
         print("Notification received")
-            
-//        let alertController = UIAlertController(title: notification.alertTitle,
-//            message: notification.alertBody, preferredStyle: .Alert)
-//        let ok = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//        alertController.addAction(ok)
-//        window?.rootViewController?.presentViewController(alertController,
-//            animated: true, completion: nil)
-//        NSNotificationCenter.defaultCenter().postNotificationName("resetTimer", object: nil)
+        
+        timerViewController.presentAlertFromNotification(notification)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -69,12 +63,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate.
         // Save data if appropriate. See also applicationDidEnterBackground:.
         
-        let tabBarController = window!.rootViewController as! UITabBarController
-        let timerViewController = tabBarController.viewControllers!.first as! TimerViewController
+        print("applicationWillTerminate")
         timerViewController.pause()
     }
     
     // MARK: - Helpers
+    
+    private var timerViewController: TimerViewController {
+        let tabBarController = window!.rootViewController as! UITabBarController
+        return tabBarController.viewControllers!.first as! TimerViewController
+    }
     
     private func registerNotifications() {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],

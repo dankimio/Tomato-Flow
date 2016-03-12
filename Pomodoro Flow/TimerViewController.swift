@@ -41,23 +41,32 @@ class TimerViewController: UIViewController {
     private var targetPomodoros: Int
     
     // MARK: - Initialization
+    
     required init?(coder aDecoder: NSCoder) {
         targetPomodoros = settings.targetPomodoros
         scheduler = Scheduler()
         
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        if let pausedTime = scheduler.pausedTime {
-            currentTime = pausedTime
-        } else {
-            currentTime = Double(settings.pomodoroLength)
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "willEnterForeground",
+            name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateTimerLabel()
+        print("viewWillAppear")
+        
+        willEnterForeground()
         
         if scheduler.pausedTime != nil {
             animateStarted()
@@ -65,27 +74,54 @@ class TimerViewController: UIViewController {
         }
     }
     
+    func willEnterForeground() {
+        print("willEnterForeground called from controller")
+        
+        if let pausedTime = scheduler.pausedTime {
+            currentTime = pausedTime
+        } else if let fireDate = scheduler.fireDate {
+            print("fireDate: \(fireDate)")
+            currentTime = fireDate.timeIntervalSinceDate(NSDate())
+            print("currentTime: \(currentTime)")
+        } else {
+            currentTime = Double(settings.pomodoroLength)
+        }
+        
+        updateTimerLabel()
+    }
+    
     func secondPassed() {
-        currentTime = currentTime - 1.0
+        if currentTime > 0 {
+            currentTime = currentTime - 1.0
+        } else {
+            stop()
+        }
+        
         updateTimerLabel()
     }
     
     // MARK: - Actions
 
     @IBAction func togglePaused(sender: EmptyRoundedButton) {
-        print("togglePaused called")
-
         scheduler.paused ? unpause() :pause()
     }
 
     @IBAction func start(sender: RoundedButton) {
+        start()
+    }
+    
+    @IBAction func stop(sender: RoundedButton) {
+        stop()
+    }
+    
+    func start() {
         scheduler.start()
         running = true
         animateStarted()
         fireTimer()
     }
     
-    @IBAction func stop(sender: RoundedButton) {
+    func stop() {
         scheduler.stop()
         running = false
         animateStopped()
@@ -108,6 +144,23 @@ class TimerViewController: UIViewController {
         running = true
         fireTimer()
         animateUnpaused()
+    }
+    
+    func presentAlertFromNotification(notification: UILocalNotification) {
+        let alertController = UIAlertController(title: notification.alertTitle,
+            message: notification.alertBody, preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action in
+            print("Cancel")
+        }
+        let okAction = UIAlertAction(title: "Go", style: .Default) { action in
+            print("OK")
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Helpers
