@@ -28,7 +28,7 @@ class PickerViewController: UITableViewController {
         static let longBreakLength = [10, 15, 20, 25, 30]
         static let targetPomodoros = (2...21).map { $0 }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,16 +41,16 @@ class PickerViewController: UITableViewController {
         
         selectedIndexPath = NSIndexPath(forRow: options.indexOf(selectedValue)!, inSection: 0)
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell", forIndexPath: indexPath)
-
+        
         // Configure the cell
         cell.textLabel?.text = "\(options[indexPath.row]) \(specifier)"
         
@@ -62,7 +62,7 @@ class PickerViewController: UITableViewController {
         } else {
             cell.accessoryType = .None
         }
-
+        
         return cell
     }
     
@@ -77,8 +77,6 @@ class PickerViewController: UITableViewController {
             newCell.accessoryType = .Checkmark
         }
         
-        options.indexOf(selectedValue)
-        
         if let oldCell = tableView.cellForRowAtIndexPath(selectedIndexPath!) {
             oldCell.accessoryType = .None
         }
@@ -87,7 +85,7 @@ class PickerViewController: UITableViewController {
         selectedValue = options[indexPath.row]
         updateSettings()
     }
-
+    
     // Navigating back
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -111,5 +109,5 @@ class PickerViewController: UITableViewController {
             settings.targetPomodoros = selectedValue
         }
     }
-
+    
 }

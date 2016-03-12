@@ -32,10 +32,9 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let selectedIndexPath = tableView.indexPathForSelectedRow
-        if let indexPath = selectedIndexPath {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
     }
 
