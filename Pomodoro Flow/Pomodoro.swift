@@ -20,7 +20,7 @@ class Pomodoro {
     
     private init() {}
     
-    var pomodorosDone: Int {
+    var pomodorosCompleted: Int {
         get {
             return userDefaults.integerForKey(currentDateKey)
         }
@@ -30,8 +30,8 @@ class Pomodoro {
     }
     
     func completePomodoro() {
-        pomodorosDone += 1
-        state = (pomodorosDone % 4 == 0 ? .LongBreak : .ShortBreak)
+        pomodorosCompleted += 1
+        state = (pomodorosCompleted % 4 == 0 ? .LongBreak : .ShortBreak)
     }
     
     func completeBreak() {

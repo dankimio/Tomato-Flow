@@ -38,13 +38,14 @@ class TimerViewController: UIViewController {
     }
     
     // Pomodoros view
-    private var completedPomodoros = 9
+    private var pomodorosCompleted: Int!
     private var targetPomodoros: Int
     
     // MARK: - Initialization
     
     required init?(coder aDecoder: NSCoder) {
         targetPomodoros = settings.targetPomodoros
+        pomodorosCompleted = pomodoro.pomodorosCompleted
         scheduler = Scheduler()
         
         super.init(coder: aDecoder)
@@ -65,14 +66,7 @@ class TimerViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("viewWillAppear")
-        
         willEnterForeground()
-        
-        if scheduler.pausedTime != nil {
-            animateStarted()
-            animatePaused()
-        }
     }
     
     func willEnterForeground() {
@@ -80,6 +74,14 @@ class TimerViewController: UIViewController {
         
         setCurrentTime()
         updateTimerLabel()
+        
+        if scheduler.pausedTime != nil {
+            animateStarted()
+            animatePaused()
+        }
+        
+        targetPomodoros = settings.targetPomodoros
+        collectionView.reloadData()
     }
     
     func secondPassed() {
@@ -89,7 +91,7 @@ class TimerViewController: UIViewController {
             return
         }
         
-        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosDone)")
+        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
         
         if pomodoro.state == .Default {
             pomodoro.completePomodoro()
@@ -99,7 +101,7 @@ class TimerViewController: UIViewController {
         
         stop()
         
-        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosDone)")
+        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
     }
     
     // MARK: - Actions
@@ -175,11 +177,15 @@ class TimerViewController: UIViewController {
     private func setCurrentTime() {
         if let pausedTime = scheduler.pausedTime {
             currentTime = pausedTime
-        } else if let fireDate = scheduler.fireDate {
-            currentTime = fireDate.timeIntervalSinceDate(NSDate())
-        } else {
-            resetCurrentTime()
+            return
         }
+        
+        if let fireDate = scheduler.fireDate {
+            currentTime = fireDate.timeIntervalSinceDate(NSDate())
+            return
+        }
+
+        resetCurrentTime()
     }
     
     private func resetCurrentTime() {
@@ -266,7 +272,7 @@ extension TimerViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView,
             cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if rowsPerSection * indexPath.section + indexPath.row < completedPomodoros {
+        if rowsPerSection * indexPath.section + indexPath.row < pomodorosCompleted {
             return collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewIdentifiers.filledCell,
                 forIndexPath: indexPath)
         } else {
