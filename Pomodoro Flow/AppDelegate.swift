@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         registerNotifications()
+        configureTabBarColor()
 
         return true
     }
@@ -82,6 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func resetBadgeNumber() {
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    }
+    
+    private func configureTabBarColor() {
+        UITabBar.appearance().tintColor = UIColor(
+            red: 240/255.0, green: 90/255.0, blue: 90/255.0, alpha: 1)
     }
 
 }

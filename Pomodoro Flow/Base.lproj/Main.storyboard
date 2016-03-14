@@ -511,4 +511,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="A62-yt-Ffs"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.94117647059999998" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
