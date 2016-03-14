@@ -10,11 +10,6 @@ import UIKit
 
 class SettingsViewController: UITableViewController, PickerViewControllerDelegate {
 
-    @IBOutlet weak var tickingSoundSwitch: UISwitch!
-    @IBOutlet weak var startBreaksSwitch: UISwitch!
-    @IBOutlet weak var startPomodorosSwitch: UISwitch!
-    
-    
     @IBOutlet weak var pomodoroLengthLabel: UILabel!
     @IBOutlet weak var shortBreakLengthLabel: UILabel!
     @IBOutlet weak var longBreakLengthLabel: UILabel!
@@ -26,7 +21,6 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSwitches()
         setupLabels()
     }
     
@@ -37,12 +31,6 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
     }
-
-    private func setupSwitches() {
-        tickingSoundSwitch.on = settings.tickingSound
-        startBreaksSwitch.on = settings.startBreaks
-        startPomodorosSwitch.on = settings.startPomodoros
-    }
     
     private func setupLabels() {
         pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
@@ -50,22 +38,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
         longBreakLengthLabel.text = "\(settings.longBreakLength / 60) minutes"
         targetPomodorosLabel.text = "\(settings.targetPomodoros) pomodoros"
     }
-    
-    @IBAction func toggleTickingSound(sender: UISwitch) {
-        print("Ticking sound: \(sender.on)")
-        settings.tickingSound = sender.on
-    }
 
-    @IBAction func toggleStartBreaks(sender: UISwitch) {
-        print("Automatically start breaks: \(sender.on)")
-        settings.startBreaks = sender.on
-    }
-    
-    @IBAction func toggleStartPomodoros(sender: UISwitch) {
-        print("Automatically start pomodoros: \(sender.on)")
-        settings.startPomodoros = sender.on
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let picker = segue.destinationViewController as? PickerViewController {
             switch segue.identifier! {

@@ -22,10 +22,6 @@ class SettingsManager {
         static let shortBreakLength = "Settings.ShortBreakLength"
         static let longBreakLength = "Settings.LongBreakLength"
         static let targetPomodoros = "Settings.TargetPomodoros"
-        
-        static let tickingSound = "Settings.TickingSound"
-        static let startBreaks = "Settings.StartBreaks"
-        static let startPomodoros = "Settings.StartPomodoros"
     }
     
     // MARK: - General settings
@@ -51,23 +47,6 @@ class SettingsManager {
             userDefaults.setInteger(newValue, forKey: Settings.targetPomodoros)
             notificationCenter.postNotificationName("targetPomodorosUpdated", object: self)
         }
-    }
-    
-    // MARK: - Notification settings
-    
-    var tickingSound: Bool {
-        get { return userDefaults.boolForKey(Settings.tickingSound) }
-        set { userDefaults.setBool(newValue, forKey: Settings.tickingSound) }
-    }
-    
-    var startBreaks: Bool {
-        get { return userDefaults.boolForKey(Settings.startBreaks) }
-        set { userDefaults.setBool(newValue, forKey: Settings.startBreaks) }
-    }
-    
-    var startPomodoros: Bool {
-        get { return userDefaults.boolForKey(Settings.startPomodoros) }
-        set { userDefaults.setBool(newValue, forKey: Settings.startPomodoros) }
     }
 
 }
