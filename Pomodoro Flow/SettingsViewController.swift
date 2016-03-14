@@ -14,16 +14,16 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     @IBOutlet weak var shortBreakLengthLabel: UILabel!
     @IBOutlet weak var longBreakLengthLabel: UILabel!
     @IBOutlet weak var targetPomodorosLabel: UILabel!
-    
+
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private let settings = SettingsManager.sharedManager
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupLabels()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -31,7 +31,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
     }
-    
+
     private func setupLabels() {
         pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
         shortBreakLengthLabel.text = "\(settings.shortBreakLength / 60) minutes"
@@ -61,7 +61,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
             picker.delegate = self
         }
     }
-    
+
     func pickerDidFinishPicking(picker: PickerViewController) {
         setupLabels()
     }

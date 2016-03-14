@@ -16,15 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     func application(application: UIApplication,
             didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+
         registerNotifications()
-        
+
         return true
     }
-    
+
     func application(application: UIApplication,
             didReceiveLocalNotification notification: UILocalNotification) {
-        
+
         print("didReceiveLocalNotification")
         timerViewController.presentAlertFromNotification(notification)
     }
@@ -55,31 +55,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while
         // the application was inactive. If the application was previously in the background,
         // optionally refresh the user interface.
-        
+
         resetBadgeNumber()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate.
         // Save data if appropriate. See also applicationDidEnterBackground:.
-        
+
         print("applicationWillTerminate")
         timerViewController.pause()
     }
-    
+
     // MARK: - Helpers
-    
+
     private var timerViewController: TimerViewController {
         let tabBarController = window!.rootViewController as! UITabBarController
         return tabBarController.viewControllers!.first as! TimerViewController
     }
-    
+
     private func registerNotifications() {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
             categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     }
-    
+
     private func resetBadgeNumber() {
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
