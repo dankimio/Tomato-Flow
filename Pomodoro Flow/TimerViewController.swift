@@ -154,14 +154,7 @@ class TimerViewController: UIViewController {
         let alertController = UIAlertController(title: notification.alertTitle,
             message: notification.alertBody, preferredStyle: .Alert)
         
-        let cancelAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action in
-            print("Cancel")
-        }
-        let okAction = UIAlertAction(title: "Go", style: .Default) { action in
-            print("OK")
-        }
-        
-        alertController.addAction(cancelAction)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { action in print("OK") }
         alertController.addAction(okAction)
         
         presentViewController(alertController, animated: true, completion: nil)
