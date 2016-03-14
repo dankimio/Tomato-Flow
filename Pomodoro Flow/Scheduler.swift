@@ -37,6 +37,7 @@ class Scheduler {
         }
     }
     
+    // Date representing fire date of scheduled notification
     var fireDate: NSDate? {
         get {
             return userDefaults.objectForKey("FireDate") as? NSDate
@@ -110,8 +111,7 @@ class Scheduler {
     }
     
     private func schedulePomodoro(interval: NSTimeInterval? = nil) {
-//        let interval = NSTimeInterval(settings.pomodoroLength)
-        let interval = interval ?? NSTimeInterval(10)
+        let interval = interval ?? NSTimeInterval(settings.pomodoroLength)
         scheduleNotification(interval, title: "Pomodoro finished", body: "Time to take a break!")
         print("Pomodoro scheduled")
     }
@@ -130,11 +130,11 @@ class Scheduler {
     
     private func scheduleNotification(interval: NSTimeInterval, title: String, body: String) {
         let notification = UILocalNotification()
-        // FIXME: Set fire date to parameter value
-        notification.fireDate = NSDate(timeIntervalSinceNow: 10)
+        notification.fireDate = NSDate(timeIntervalSinceNow: interval)
         notification.alertTitle = title
         notification.alertBody = body
         notification.applicationIconBadgeNumber = 1
+        notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
         
         fireDate = notification.fireDate
