@@ -80,8 +80,7 @@ class TimerViewController: UIViewController {
             animatePaused()
         }
         
-        targetPomodoros = settings.targetPomodoros
-        collectionView.reloadData()
+        reloadData()
     }
     
     func secondPassed() {
@@ -95,6 +94,7 @@ class TimerViewController: UIViewController {
         
         if pomodoro.state == .Default {
             pomodoro.completePomodoro()
+            reloadData()
         } else {
             pomodoro.completeBreak()
         }
@@ -168,6 +168,12 @@ class TimerViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func reloadData() {
+        targetPomodoros = settings.targetPomodoros
+        pomodorosCompleted = pomodoro.pomodorosCompleted
+        collectionView.reloadData()
+    }
     
     private func updateTimerLabel() {
         let time = Int(currentTime)
