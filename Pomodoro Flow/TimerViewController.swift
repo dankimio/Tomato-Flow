@@ -193,6 +193,14 @@ class TimerViewController: UIViewController {
         case .ShortBreak: currentTime = Double(settings.shortBreakLength)
         case .LongBreak: currentTime = Double(settings.longBreakLength)
         }
+        resetTimerLabelColor()
+    }
+    
+    private func resetTimerLabelColor() {
+        switch pomodoro.state {
+        case .Default: timerLabel.textColor = UIColor.accentColor
+        case .ShortBreak, .LongBreak: timerLabel.textColor = UIColor.breakColor
+        }
     }
 
     private func fireTimer() {
