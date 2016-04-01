@@ -221,6 +221,11 @@
 					3753472E1B3AFF010089AB7F = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = Z9SY9LHRWJ;
+						SystemCapabilities = {
+							com.apple.Wallet = {
+								enabled = 0;
+							};
+						};
 					};
 					375347451B3AFF010089AB7F = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -416,7 +421,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pomodoro Flow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.itsdn.Pomodoro-Flow";
+				PRODUCT_BUNDLE_IDENTIFIER = co.itsdn.PomodoroFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -430,7 +435,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pomodoro Flow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.itsdn.Pomodoro-Flow";
+				PRODUCT_BUNDLE_IDENTIFIER = co.itsdn.PomodoroFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
