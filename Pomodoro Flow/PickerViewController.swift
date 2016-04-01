@@ -51,7 +51,7 @@ class PickerViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView,
-            cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+                            cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("PickerCell",
             forIndexPath: indexPath)
@@ -74,7 +74,7 @@ class PickerViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView,
-            didSelectRowAtIndexPath indexPath: NSIndexPath) {
+                            didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 

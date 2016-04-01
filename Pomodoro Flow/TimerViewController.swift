@@ -57,10 +57,12 @@ class TimerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "willEnterForeground",
-            name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
+        NSNotificationCenter
+            .defaultCenter()
+            .addObserver(self,
+                         selector: #selector(willEnterForeground),
+                         name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -149,14 +151,15 @@ class TimerViewController: UIViewController {
         fireTimer()
         animateUnpaused()
     }
-
+    
     func presentAlertFromNotification(notification: UILocalNotification) {
         let alertController = UIAlertController(title: notification.alertTitle,
-            message: notification.alertBody, preferredStyle: .Alert)
-
+                                                message: notification.alertBody,
+                                                preferredStyle: .Alert)
+        
         let okAction = UIAlertAction(title: "OK", style: .Default) { action in print("OK") }
         alertController.addAction(okAction)
-
+        
         presentViewController(alertController, animated: true, completion: nil)
     }
 
@@ -205,7 +208,7 @@ class TimerViewController: UIViewController {
 
     private func fireTimer() {
         timer = NSTimer.scheduledTimerWithTimeInterval(1,
-            target: self, selector: "secondPassed", userInfo: nil, repeats: true)
+            target: self, selector: #selector(secondPassed), userInfo: nil, repeats: true)
     }
 
     private func refreshPomodoros() {
@@ -277,7 +280,7 @@ extension TimerViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView,
-            cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         if rowsPerSection * indexPath.section + indexPath.row < pomodorosCompleted {
             return collectionView.dequeueReusableCellWithReuseIdentifier(
@@ -294,8 +297,8 @@ extension TimerViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension TimerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView,
-            layout collectionViewLayout: UICollectionViewLayout,
-            insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 
         // Set insets on last row only and skip if section is full
         if section != lastSectionIndex() || numberOfRowsInLastSection() == 0 {
