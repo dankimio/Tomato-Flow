@@ -14,9 +14,21 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     @IBOutlet weak var shortBreakLengthLabel: UILabel!
     @IBOutlet weak var longBreakLengthLabel: UILabel!
     @IBOutlet weak var targetPomodorosLabel: UILabel!
+    
+    // About section
+    @IBOutlet weak var twitterCell: UITableViewCell!
+    @IBOutlet weak var homepageCell: UITableViewCell!
+    @IBOutlet weak var appStoreCell: UITableViewCell!
 
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private let settings = SettingsManager.sharedManager
+    
+    private struct About {
+        static let twitterURL = "https://twitter.com/itsdnco"
+        static let homepageURL = "http://itsdn.co"
+        static let appStoreURL =
+            "https://itunes.apple.com/us/app/pomodoro-flow/id1095742214?ls=1&mt=8"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +76,32 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
 
     func pickerDidFinishPicking(picker: PickerViewController) {
         setupLabels()
+    }
+    
+    // MARK: - Table view delegate
+
+    override func tableView(tableView: UITableView,
+                            didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        switch cell {
+        case twitterCell: openURL(About.twitterURL)
+        case homepageCell: openURL(About.homepageURL)
+        case appStoreCell: openURL(About.appStoreURL)
+        default: return
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    private func openURL(url: String) {
+        let application = UIApplication.sharedApplication()
+        
+        if let url = NSURL(string: url) {
+            application.openURL(url)
+        }
     }
 
 }
