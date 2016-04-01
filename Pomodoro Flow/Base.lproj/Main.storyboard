@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Timer-->
@@ -194,7 +194,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Scheduler" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Timer" image="Timer" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="buttonContainer" destination="9rf-X6-5pN" id="yX4-hR-sFR"/>
                         <outlet property="collectionView" destination="oPp-UK-blI" id="Gjh-SA-4K9"/>
@@ -425,10 +425,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>
+                        <outlet property="appStoreCell" destination="wZG-bi-LfQ" id="FyY-3i-bMW"/>
+                        <outlet property="homepageCell" destination="FtD-Y9-f84" id="fhJ-Dw-RpE"/>
                         <outlet property="longBreakLengthLabel" destination="KhF-uX-BYJ" id="Asl-Ir-H1m"/>
                         <outlet property="pomodoroLengthLabel" destination="xoL-CF-oVG" id="6Kc-9d-FKC"/>
                         <outlet property="shortBreakLengthLabel" destination="BhF-H5-ZXU" id="iT6-iq-bbi"/>
                         <outlet property="targetPomodorosLabel" destination="ZWb-wv-O09" id="8gN-Wk-svb"/>
+                        <outlet property="twitterCell" destination="LYH-wb-72s" id="cR3-SS-y2y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bnn-7f-a5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -486,7 +489,7 @@
         <scene sceneID="8vf-UE-Nuw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dr4-Ed-R2Y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="second" id="7CE-2J-eUX"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="7CE-2J-eUX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3yf-yo-0cl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -503,10 +506,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Settings" width="30" height="30"/>
+        <image name="Timer" width="30" height="30"/>
         <image name="Tomato Empty" width="44" height="44"/>
         <image name="Tomato Filled" width="44" height="44"/>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="A62-yt-Ffs"/>
