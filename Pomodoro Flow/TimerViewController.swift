@@ -28,7 +28,7 @@ class TimerViewController: UIViewController {
     private var running = false
 
     // Configuration
-    private let rowsPerSection = 7
+//    private let rowsPerSection = 7
     private let animationDuration = 0.3
     private let settings = SettingsManager.sharedManager
 
@@ -215,23 +215,7 @@ class TimerViewController: UIViewController {
         targetPomodoros = settings.targetPomodoros
         collectionView.reloadData()
     }
-
-    private func numberOfSections() -> Int {
-        return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
-    }
-
-    private func lastSectionIndex() -> Int {
-        if numberOfSections() == 0 {
-            return 0
-        }
-
-        return numberOfSections() - 1
-    }
-
-    private func numberOfRowsInLastSection() -> Int {
-        return targetPomodoros % rowsPerSection
-    }
-
+    
     private func animateStarted() {
         let deltaY: CGFloat = 54
         buttonContainer.frame.origin.y += deltaY
@@ -263,53 +247,81 @@ class TimerViewController: UIViewController {
 
 }
 
-// MARK: - UICollectionViewDataSource
-extension TimerViewController: UICollectionViewDataSource {
+extension TimerViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    // MARK: UICollectionViewDataSource
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return numberOfSections()
+        return numberOfSections
     }
-
+    
     func collectionView(collectionView: UICollectionView,
-            numberOfItemsInSection section: Int) -> Int {
+                        numberOfItemsInSection section: Int) -> Int {
 
-        if targetPomodoros - section * rowsPerSection >= rowsPerSection {
-            return rowsPerSection
-        } else {
-            return numberOfRowsInLastSection()
-        }
+        return numberOfRows(inSection: section)
     }
 
     func collectionView(collectionView: UICollectionView,
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        if rowsPerSection * indexPath.section + indexPath.row < pomodorosCompleted {
-            return collectionView.dequeueReusableCellWithReuseIdentifier(
-                CollectionViewIdentifiers.filledCell,
-                forIndexPath: indexPath)
-        } else {
-            return collectionView.dequeueReusableCellWithReuseIdentifier(
-                CollectionViewIdentifiers.emptyCell,
-                forIndexPath: indexPath)
-        }
-    }
-}
+        let index = rowsPerSection * indexPath.section + indexPath.row
+        let identifier = (index < pomodorosCompleted) ?
+            CollectionViewIdentifiers.filledCell : CollectionViewIdentifiers.emptyCell
 
-// MARK: - UICollectionViewDelegate
-extension TimerViewController: UICollectionViewDelegateFlowLayout {
+        return collectionView.dequeueReusableCellWithReuseIdentifier(identifier,
+                                                                     forIndexPath: indexPath)
+    }
+    
+    // MARK: UICollectionViewDelegate
+    
     func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+                               insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 
-        // Set insets on last row only and skip if section is full
-        if section != lastSectionIndex() || numberOfRowsInLastSection() == 0 {
-            return UIEdgeInsetsMake(0, 0, 12, 0)
-        }
-
-        // Cell width + cell spacing
-        let cellWidth = 30 + 14
-        let inset = (collectionView.frame.width -
-            CGFloat(numberOfRowsInLastSection() * cellWidth)) / 2.0
-
-        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        let bottomInset: CGFloat = 12
+        return UIEdgeInsetsMake(0, 0, bottomInset, 0)
     }
+    
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    // MARK: Helpers
+    
+    private var rowsPerSection: Int {
+        let cellWidth: CGFloat = 30.0
+        let margin: CGFloat = 10.0
+        return Int(collectionView.frame.width / (cellWidth + margin))
+    }
+    
+    private func numberOfRows(inSection section: Int) -> Int {
+        if section == lastSectionIndex {
+            return numberOfRowsInLastSection
+        } else {
+            return rowsPerSection
+        }
+    }
+    
+    private var numberOfRowsInLastSection: Int {
+        if targetPomodoros % rowsPerSection == 0 {
+            return rowsPerSection
+        } else {
+            return targetPomodoros % rowsPerSection
+        }
+    }
+    
+    private var numberOfSections: Int {
+        return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
+    }
+    
+    private var lastSectionIndex: Int {
+        if numberOfSections == 0 {
+            return 0
+        }
+        
+        return numberOfSections - 1
+    }
+
 }
