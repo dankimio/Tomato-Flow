@@ -14,7 +14,16 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var buttonContainer: UIView!
-    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var timerLabel: UILabel! {
+        didSet {
+            // Numbers are monospaced by default in iOS 8 and earlier
+            if #available(iOS 9.0, *) {
+                timerLabel.font = UIFont.monospacedDigitSystemFontOfSize(124.0,
+                                                                         weight: UIFontWeightUltraLight)
+            }
+        }
+    }
 
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -28,7 +37,6 @@ class TimerViewController: UIViewController {
     private var running = false
 
     // Configuration
-//    private let rowsPerSection = 7
     private let animationDuration = 0.3
     private let settings = SettingsManager.sharedManager
 
