@@ -191,10 +191,11 @@ class TimerViewController: UIViewController {
         }
 
         if let fireDate = scheduler.fireDate {
-            currentTime = fireDate.timeIntervalSinceDate(NSDate())
+            let newTime = fireDate.timeIntervalSinceNow
+            currentTime = (newTime > 0 ? newTime : 0)
             return
         }
-
+        
         resetCurrentTime()
     }
 
