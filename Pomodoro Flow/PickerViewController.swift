@@ -109,7 +109,7 @@ class PickerViewController: UITableViewController {
     }
 
     private func updateSettings() {
-        let settings = SettingsManager.sharedManager
+        let settings = Settings.sharedInstance
 
         switch type! {
         case .PomodoroLength:

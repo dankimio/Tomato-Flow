@@ -14,13 +14,11 @@ class Pomodoro {
     static let sharedInstance = Pomodoro()
 
     let userDefaults = NSUserDefaults.standardUserDefaults()
-    let settings = SettingsManager.sharedManager
-
-    var state: State = .Default
+    let settings = Settings.sharedInstance
 
     private init() {}
 
-    var pomodorosCompleted: Int {
+    var pomodorosCount: Int {
         get {
             return userDefaults.integerForKey(currentDateKey)
         }
@@ -28,14 +26,38 @@ class Pomodoro {
             userDefaults.setInteger(newValue, forKey: currentDateKey)
         }
     }
-
-    func completePomodoro() {
-        pomodorosCompleted += 1
-        state = (pomodorosCompleted % 4 == 0 ? .LongBreak : .ShortBreak)
+    
+    // Interval for rescheduling timers
+    var pausedTime: Int? {
+        get {
+            return userDefaults.objectForKey("PausedTime") as? Int
+        }
+        set {
+            if let value = newValue where value != 0 {
+                userDefaults.setInteger(value, forKey: "PausedTime")
+            } else {
+                userDefaults.removeObjectForKey("PausedTime")
+            }
+        }
     }
-
-    func completeBreak() {
-        state = .Default
+    
+    // Date representing fire date of scheduled notification
+    var fireDate: NSDate? {
+        get {
+            return userDefaults.objectForKey("FireDate") as? NSDate
+        }
+        set {
+            if let value = newValue {
+                userDefaults.setObject(value, forKey: "FireDate")
+            } else {
+                userDefaults.removeObjectForKey("FireDate")
+            }
+        }
+    }
+    
+    // Return paused if paused time present
+    var paused: Bool {
+        return pausedTime != nil
     }
 
     private var currentDateKey: String {

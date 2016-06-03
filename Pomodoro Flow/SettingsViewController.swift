@@ -21,7 +21,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     @IBOutlet weak var appStoreCell: UITableViewCell!
 
     private let userDefaults = NSUserDefaults.standardUserDefaults()
-    private let settings = SettingsManager.sharedManager
+    private let settings = Settings.sharedInstance
     
     private struct About {
         static let twitterURL = "https://twitter.com/itsdnco"

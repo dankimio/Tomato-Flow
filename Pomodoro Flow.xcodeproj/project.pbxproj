@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		29BFBDA1B289C93A36E9EF12 /* Pods_Pomodoro_Flow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097A8E7D1D25EEE2B52FFEFE /* Pods_Pomodoro_Flow.framework */; };
 		373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373799481B49DB6E0025260A /* SettingsViewController.swift */; };
-		3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994A1B4ABA160025260A /* SettingsManager.swift */; };
+		3737994B1B4ABA160025260A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994A1B4ABA160025260A /* Settings.swift */; };
 		3737994D1B4B01250025260A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994C1B4B01250025260A /* PickerViewController.swift */; };
 		3737994F1B4C153B0025260A /* PickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994E1B4C153B0025260A /* PickerType.swift */; };
 		373BD3DB1C9B095A001C9790 /* UIColor+PomodoroFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373BD3DA1C9B095A001C9790 /* UIColor+PomodoroFlow.swift */; };
@@ -23,6 +23,7 @@
 		375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850271B3B5B4A005628A0 /* RoundedButton.swift */; };
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
+		37D94EE91CE6EBD60002D441 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D94EE81CE6EBD60002D441 /* TimerViewModel.swift */; };
 		37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */; };
 		37EFAC091C94C83200D1DC76 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* State.swift */; };
 		83D62E97E9F295B27C41B853 /* Pods_Pomodoro_FlowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F62B83C60C20456A013C69B /* Pods_Pomodoro_FlowTests.framework */; };
@@ -41,7 +42,7 @@
 /* Begin PBXFileReference section */
 		097A8E7D1D25EEE2B52FFEFE /* Pods_Pomodoro_Flow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pomodoro_Flow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		373799481B49DB6E0025260A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		3737994A1B4ABA160025260A /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		3737994A1B4ABA160025260A /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3737994C1B4B01250025260A /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		3737994E1B4C153B0025260A /* PickerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerType.swift; sourceTree = "<group>"; };
 		373BD3DA1C9B095A001C9790 /* UIColor+PomodoroFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+PomodoroFlow.swift"; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 		375850271B3B5B4A005628A0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		378192041B40682D0016375D /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
+		37D94EE81CE6EBD60002D441 /* TimerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		37EFAC081C94C83200D1DC76 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		5B43FE0B827FE99F5F87EAB3 /* Pods-Pomodoro Flow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pomodoro Flow.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pomodoro Flow/Pods-Pomodoro Flow.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				375347361B3AFF010089AB7F /* TimerViewController.swift */,
 				373799481B49DB6E0025260A /* SettingsViewController.swift */,
 				3737994C1B4B01250025260A /* PickerViewController.swift */,
+				37D94EE81CE6EBD60002D441 /* TimerViewModel.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -172,7 +175,7 @@
 		37FE4A8D1B5289D200280C97 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3737994A1B4ABA160025260A /* SettingsManager.swift */,
+				3737994A1B4ABA160025260A /* Settings.swift */,
 				3737994E1B4C153B0025260A /* PickerType.swift */,
 				3767956F1B52DDDD007E6CBC /* Scheduler.swift */,
 				37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */,
@@ -408,6 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D94EE91CE6EBD60002D441 /* TimerViewModel.swift in Sources */,
 				3737994F1B4C153B0025260A /* PickerType.swift in Sources */,
 				375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */,
 				373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */,
@@ -415,7 +419,7 @@
 				3737994D1B4B01250025260A /* PickerViewController.swift in Sources */,
 				37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */,
 				375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */,
-				3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */,
+				3737994B1B4ABA160025260A /* Settings.swift in Sources */,
 				375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */,
 				37EFAC091C94C83200D1DC76 /* State.swift in Sources */,
 				375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */,

@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Save data if appropriate. See also applicationDidEnterBackground:.
 
         print("applicationWillTerminate")
-        timerViewController.pause()
+        timerViewController.pause(self)
     }
 
     // MARK: - Helpers

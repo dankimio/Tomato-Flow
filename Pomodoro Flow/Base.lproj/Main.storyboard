@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -131,19 +131,47 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="togglePaused:" destination="9pv-A4-QxB" eventType="touchUpInside" id="NBh-1a-eFs"/>
+                                            <action selector="pause:" destination="9pv-A4-QxB" eventType="touchUpInside" id="0QX-oK-HUh"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdg-dx-ZNx" customClass="EmptyRoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
+                                        <rect key="frame" x="164" y="0.0" width="144" height="34"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="132" id="jli-DK-JoU"/>
+                                        </constraints>
+                                        <state key="normal" title="Unpause">
+                                            <color key="titleColor" red="0.94117647059999998" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="jli-DK-JoU"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="unpause:" destination="9pv-A4-QxB" eventType="touchUpInside" id="pfs-1V-Btj"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="zdg-dx-ZNx" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="38O-iI-1gi"/>
+                                    <constraint firstItem="zdg-dx-ZNx" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="leading" constant="20" id="DIa-bl-FwE"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="Dss-R9-ZwY"/>
                                     <constraint firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="EYY-Vc-fxe"/>
+                                    <constraint firstItem="zdg-dx-ZNx" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="top" id="FVF-f8-J7F"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="top" id="JDC-NW-rh1"/>
                                     <constraint firstItem="A71-Pa-qZN" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="top" id="LtD-fL-MBg"/>
                                     <constraint firstItem="A71-Pa-qZN" firstAttribute="width" secondItem="mK0-Fu-s2u" secondAttribute="width" id="NCM-g0-X1T"/>
                                     <constraint firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="PHh-Tm-eqj"/>
+                                    <constraint firstItem="zdg-dx-ZNx" firstAttribute="width" secondItem="A71-Pa-qZN" secondAttribute="width" id="Rk0-FZ-xeN"/>
                                     <constraint firstAttribute="bottom" secondItem="mK0-Fu-s2u" secondAttribute="bottom" id="WQW-tj-VdO"/>
+                                    <constraint firstAttribute="trailing" secondItem="zdg-dx-ZNx" secondAttribute="trailing" id="a3q-n1-NFa"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="aw5-aO-r1s"/>
+                                    <constraint firstAttribute="bottom" secondItem="zdg-dx-ZNx" secondAttribute="bottom" id="cOe-SO-M7X"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="fO3-TJ-qb9"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="width" secondItem="9rf-X6-5pN" secondAttribute="width" id="hDz-1z-yAz"/>
                                     <constraint firstItem="A71-Pa-qZN" firstAttribute="leading" secondItem="9rf-X6-5pN" secondAttribute="leading" id="kGr-ZU-LWZ"/>
@@ -155,6 +183,7 @@
                                         <exclude reference="PHh-Tm-eqj"/>
                                         <exclude reference="fO3-TJ-qb9"/>
                                         <exclude reference="hDz-1z-yAz"/>
+                                        <exclude reference="DIa-bl-FwE"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -227,6 +256,7 @@
                         <outlet property="startButton" destination="Kxv-ph-lBJ" id="cjz-pf-sBF"/>
                         <outlet property="stopButton" destination="A71-Pa-qZN" id="RR1-xu-5ih"/>
                         <outlet property="timerLabel" destination="pQ0-r5-ZH3" id="pAw-xf-P5I"/>
+                        <outlet property="unpauseButton" destination="zdg-dx-ZNx" id="WW9-aq-I0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

@@ -7,20 +7,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class TimerViewController: UIViewController {
 
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var unpauseButton: UIButton!
     @IBOutlet weak var buttonContainer: UIView!
     
     @IBOutlet weak var timerLabel: UILabel! {
         didSet {
-            // Numbers are monospaced by default in iOS 8 and earlier
+            // Numbers are monospaced by default on iOS 8 and earlier
             if #available(iOS 9.0, *) {
-                timerLabel.font = UIFont.monospacedDigitSystemFontOfSize(124.0,
-                                                                         weight: UIFontWeightUltraLight)
+                timerLabel.font = UIFont
+                    .monospacedDigitSystemFontOfSize(124.0,
+                                                     weight: UIFontWeightUltraLight)
             }
         }
     }
@@ -28,36 +32,25 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     // Scheduler
-    private let scheduler: Scheduler
     private let pomodoro = Pomodoro.sharedInstance
 
     // Time
     private var timer: NSTimer?
     private var currentTime: Double!
-    private var running = false
 
     // Configuration
     private let animationDuration = 0.3
-    private let settings = SettingsManager.sharedManager
+    private let settings = Settings.sharedInstance
 
     private struct CollectionViewIdentifiers {
         static let emptyCell = "EmptyCell"
         static let filledCell = "FilledCell"
     }
 
-    // Pomodoros view
-    private var pomodorosCompleted: Int!
-    private var targetPomodoros: Int
-
     // MARK: - Initialization
-
-    required init?(coder aDecoder: NSCoder) {
-        targetPomodoros = settings.targetPomodoros
-        pomodorosCompleted = pomodoro.pomodorosCompleted
-        scheduler = Scheduler()
-
-        super.init(coder: aDecoder)
-    }
+    let viewModel = TimerViewModel()
+    
+    private let disposeBag = DisposeBag()
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -71,6 +64,28 @@ class TimerViewController: UIViewController {
             .addObserver(self,
                          selector: #selector(willEnterForeground),
                          name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
+        bindViewModel()
+    }
+    
+    private func bindViewModel() {
+        viewModel.timerLabel
+            .bindTo(timerLabel.rx_text)
+            .addDisposableTo(disposeBag)
+        
+        viewModel.timerLabelColor
+            .subscribeNext { self.timerLabel.textColor = $0 }
+            .addDisposableTo(disposeBag)
+        
+        viewModel.pomodorosCount
+            .asObservable()
+            .subscribeNext { _ in self.collectionView.reloadData() }
+            .addDisposableTo(disposeBag)
+        
+        viewModel.targetPomodorosCount
+            .asObservable()
+            .subscribeNext { _ in self.collectionView.reloadData() }
+            .addDisposableTo(disposeBag)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -81,82 +96,29 @@ class TimerViewController: UIViewController {
 
     func willEnterForeground() {
         print("willEnterForeground called from controller")
-
-        setCurrentTime()
-        updateTimerLabel()
-
-        if scheduler.pausedTime != nil {
-            animateStarted()
-            animatePaused()
-        }
-
-        reloadData()
-    }
-
-    func secondPassed() {
-        if currentTime > 0 {
-            currentTime = currentTime - 1.0
-            updateTimerLabel()
-            return
-        }
-
-        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
-
-        if pomodoro.state == .Default {
-            pomodoro.completePomodoro()
-            reloadData()
-        } else {
-            pomodoro.completeBreak()
-        }
-
-        stop()
-
-        print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
     }
 
     // MARK: - Actions
 
-    @IBAction func togglePaused(sender: EmptyRoundedButton) {
-        scheduler.paused ? unpause() :pause()
-    }
-
     @IBAction func start(sender: RoundedButton) {
-        start()
+        viewModel.start()
+        animateStarted()
     }
 
     @IBAction func stop(sender: RoundedButton) {
-        stop()
-    }
-
-    func start() {
-        scheduler.start()
-        running = true
-        animateStarted()
-        fireTimer()
-    }
-
-    func stop() {
-        scheduler.stop()
-        running = false
+        viewModel.stop()
         animateStopped()
-        timer?.invalidate()
-        resetCurrentTime()
-        updateTimerLabel()
     }
-
-    func pause() {
-        guard running else { return }
-
-        scheduler.pause(currentTime)
-        running = false
-        timer?.invalidate()
+    
+    @IBAction func pause(sender: EmptyRoundedButton) {
+        viewModel.pause()
+        togglePauseButton()
         animatePaused()
     }
 
-    func unpause() {
-        scheduler.unpause()
-        running = true
-        fireTimer()
+    @IBAction func unpause(sender: EmptyRoundedButton) {
+        viewModel.unpause()
+        togglePauseButton()
         animateUnpaused()
     }
     
@@ -172,59 +134,12 @@ class TimerViewController: UIViewController {
     }
 
     // MARK: - Helpers
-
-    private func reloadData() {
-        targetPomodoros = settings.targetPomodoros
-        pomodorosCompleted = pomodoro.pomodorosCompleted
-        collectionView.reloadData()
-    }
-
-    private func updateTimerLabel() {
-        let time = Int(currentTime)
-        timerLabel.text = String(format: "%02d:%02d", time / 60, time % 60)
-    }
-
-    private func setCurrentTime() {
-        if let pausedTime = scheduler.pausedTime {
-            currentTime = pausedTime
-            return
-        }
-
-        if let fireDate = scheduler.fireDate {
-            let newTime = fireDate.timeIntervalSinceNow
-            currentTime = (newTime > 0 ? newTime : 0)
-            return
-        }
-        
-        resetCurrentTime()
-    }
-
-    private func resetCurrentTime() {
-        switch pomodoro.state {
-        case .Default: currentTime = Double(settings.pomodoroLength)
-        case .ShortBreak: currentTime = Double(settings.shortBreakLength)
-        case .LongBreak: currentTime = Double(settings.longBreakLength)
-        }
-        resetTimerLabelColor()
-    }
     
-    private func resetTimerLabelColor() {
-        switch pomodoro.state {
-        case .Default: timerLabel.textColor = UIColor.accentColor
-        case .ShortBreak, .LongBreak: timerLabel.textColor = UIColor.breakColor
-        }
+    private func togglePauseButton() {
+        pauseButton.hidden = !pauseButton.hidden
+        unpauseButton.hidden = !unpauseButton.hidden
     }
 
-    private func fireTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1,
-            target: self, selector: #selector(secondPassed), userInfo: nil, repeats: true)
-    }
-
-    private func refreshPomodoros() {
-        targetPomodoros = settings.targetPomodoros
-        collectionView.reloadData()
-    }
-    
     private func animateStarted() {
         let deltaY: CGFloat = 54
         buttonContainer.frame.origin.y += deltaY
@@ -274,7 +189,7 @@ extension TimerViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let index = rowsPerSection * indexPath.section + indexPath.row
-        let identifier = (index < pomodorosCompleted) ?
+        let identifier = (index < viewModel.pomodorosCount.value) ?
             CollectionViewIdentifiers.filledCell : CollectionViewIdentifiers.emptyCell
 
         return collectionView.dequeueReusableCellWithReuseIdentifier(identifier,
@@ -314,15 +229,15 @@ extension TimerViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     private var numberOfRowsInLastSection: Int {
-        if targetPomodoros % rowsPerSection == 0 {
+        if viewModel.targetPomodorosCount.value % rowsPerSection == 0 {
             return rowsPerSection
         } else {
-            return targetPomodoros % rowsPerSection
+            return viewModel.targetPomodorosCount.value % rowsPerSection
         }
     }
     
     private var numberOfSections: Int {
-        return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
+        return Int(ceil(Double(viewModel.targetPomodorosCount.value) / Double(rowsPerSection)))
     }
     
     private var lastSectionIndex: Int {
