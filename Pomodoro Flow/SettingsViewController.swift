@@ -33,7 +33,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupLabels()
+        setUpLabels()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +44,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
         }
     }
 
-    fileprivate func setupLabels() {
+    fileprivate func setUpLabels() {
         pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
         shortBreakLengthLabel.text = "\(settings.shortBreakLength / 60) minutes"
         longBreakLengthLabel.text = "\(settings.longBreakLength / 60) minutes"
@@ -75,7 +75,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     }
 
     func pickerDidFinishPicking(_ picker: PickerViewController) {
-        setupLabels()
+        setUpLabels()
     }
     
     // MARK: - Table view delegate
