@@ -26,7 +26,6 @@
 		37D94EE91CE6EBD60002D441 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D94EE81CE6EBD60002D441 /* TimerViewModel.swift */; };
 		37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */; };
 		37EFAC091C94C83200D1DC76 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* State.swift */; };
-		83D62E97E9F295B27C41B853 /* Pods_Pomodoro_FlowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F62B83C60C20456A013C69B /* Pods_Pomodoro_FlowTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,10 +63,8 @@
 		37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		37EFAC081C94C83200D1DC76 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		5B43FE0B827FE99F5F87EAB3 /* Pods-Pomodoro Flow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pomodoro Flow.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pomodoro Flow/Pods-Pomodoro Flow.release.xcconfig"; sourceTree = "<group>"; };
-		5D55EDB9BFE347548800CD35 /* Pods-Pomodoro FlowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pomodoro FlowTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pomodoro FlowTests/Pods-Pomodoro FlowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F62B83C60C20456A013C69B /* Pods_Pomodoro_FlowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pomodoro_FlowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B894F05DDC9ACDD98D2AC2 /* Pods-Pomodoro Flow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pomodoro Flow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pomodoro Flow/Pods-Pomodoro Flow.debug.xcconfig"; sourceTree = "<group>"; };
-		C130A80E0B30E4C700919529 /* Pods-Pomodoro FlowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pomodoro FlowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pomodoro FlowTests/Pods-Pomodoro FlowTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83D62E97E9F295B27C41B853 /* Pods_Pomodoro_FlowTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,8 +194,6 @@
 			children = (
 				B1B894F05DDC9ACDD98D2AC2 /* Pods-Pomodoro Flow.debug.xcconfig */,
 				5B43FE0B827FE99F5F87EAB3 /* Pods-Pomodoro Flow.release.xcconfig */,
-				5D55EDB9BFE347548800CD35 /* Pods-Pomodoro FlowTests.debug.xcconfig */,
-				C130A80E0B30E4C700919529 /* Pods-Pomodoro FlowTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -211,12 +205,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 375347501B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Pomodoro Flow" */;
 			buildPhases = (
-				39AB0E80F44E8F4D12F1CB50 /* 📦 Check Pods Manifest.lock */,
+				39AB0E80F44E8F4D12F1CB50 /* [CP] Check Pods Manifest.lock */,
 				3753472B1B3AFF010089AB7F /* Sources */,
 				3753472C1B3AFF010089AB7F /* Frameworks */,
 				3753472D1B3AFF010089AB7F /* Resources */,
-				E3122E6D8A52E8E226F44431 /* 📦 Embed Pods Frameworks */,
-				67909DA09B3EA8444E4A1678 /* 📦 Copy Pods Resources */,
+				E3122E6D8A52E8E226F44431 /* [CP] Embed Pods Frameworks */,
+				67909DA09B3EA8444E4A1678 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,12 +225,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 375347531B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Pomodoro FlowTests" */;
 			buildPhases = (
-				B5A219F70D0764506D424506 /* 📦 Check Pods Manifest.lock */,
 				375347421B3AFF010089AB7F /* Sources */,
 				375347431B3AFF010089AB7F /* Frameworks */,
 				375347441B3AFF010089AB7F /* Resources */,
-				BD3D24BB8CC03DE5C88BA6D0 /* 📦 Embed Pods Frameworks */,
-				3E3B3A8D8F30359096EDFB13 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -314,44 +305,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		39AB0E80F44E8F4D12F1CB50 /* 📦 Check Pods Manifest.lock */ = {
+		39AB0E80F44E8F4D12F1CB50 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3E3B3A8D8F30359096EDFB13 /* 📦 Copy Pods Resources */ = {
+		67909DA09B3EA8444E4A1678 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pomodoro FlowTests/Pods-Pomodoro FlowTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		67909DA09B3EA8444E4A1678 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,44 +335,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pomodoro Flow/Pods-Pomodoro Flow-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B5A219F70D0764506D424506 /* 📦 Check Pods Manifest.lock */ = {
+		E3122E6D8A52E8E226F44431 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BD3D24BB8CC03DE5C88BA6D0 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pomodoro FlowTests/Pods-Pomodoro FlowTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E3122E6D8A52E8E226F44431 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,7 +526,6 @@
 		};
 		375347541B3AFF010089AB7F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D55EDB9BFE347548800CD35 /* Pods-Pomodoro FlowTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -598,7 +543,6 @@
 		};
 		375347551B3AFF010089AB7F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C130A80E0B30E4C700919529 /* Pods-Pomodoro FlowTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Pomodoro FlowTests/Info.plist";
