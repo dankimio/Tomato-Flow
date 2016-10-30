@@ -13,44 +13,44 @@ class Pomodoro {
 
     static let sharedInstance = Pomodoro()
 
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     let settings = Settings.sharedInstance
 
-    private init() {}
+    fileprivate init() {}
 
     var pomodorosCount: Int {
         get {
-            return userDefaults.integerForKey(currentDateKey)
+            return userDefaults.integer(forKey: currentDateKey)
         }
         set {
-            userDefaults.setInteger(newValue, forKey: currentDateKey)
+            userDefaults.set(newValue, forKey: currentDateKey)
         }
     }
     
     // Interval for rescheduling timers
     var pausedTime: Int? {
         get {
-            return userDefaults.objectForKey("PausedTime") as? Int
+            return userDefaults.object(forKey: "PausedTime") as? Int
         }
         set {
-            if let value = newValue where value != 0 {
-                userDefaults.setInteger(value, forKey: "PausedTime")
+            if let value = newValue, value != 0 {
+                userDefaults.set(value, forKey: "PausedTime")
             } else {
-                userDefaults.removeObjectForKey("PausedTime")
+                userDefaults.removeObject(forKey: "PausedTime")
             }
         }
     }
     
     // Date representing fire date of scheduled notification
-    var fireDate: NSDate? {
+    var fireDate: Date? {
         get {
-            return userDefaults.objectForKey("FireDate") as? NSDate
+            return userDefaults.object(forKey: "FireDate") as? Date
         }
         set {
             if let value = newValue {
-                userDefaults.setObject(value, forKey: "FireDate")
+                userDefaults.set(value, forKey: "FireDate")
             } else {
-                userDefaults.removeObjectForKey("FireDate")
+                userDefaults.removeObject(forKey: "FireDate")
             }
         }
     }
@@ -60,10 +60,10 @@ class Pomodoro {
         return pausedTime != nil
     }
 
-    private var currentDateKey: String {
-        let dateFormatter = NSDateFormatter()
+    fileprivate var currentDateKey: String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.stringFromDate(NSDate())
+        return dateFormatter.string(from: Date())
     }
 
 }

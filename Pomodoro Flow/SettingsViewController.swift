@@ -20,10 +20,10 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     @IBOutlet weak var homepageCell: UITableViewCell!
     @IBOutlet weak var appStoreCell: UITableViewCell!
 
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
-    private let settings = Settings.sharedInstance
+    fileprivate let userDefaults = UserDefaults.standard
+    fileprivate let settings = Settings.sharedInstance
     
-    private struct About {
+    fileprivate struct About {
         static let twitterURL = "https://twitter.com/itsdnco"
         static let homepageURL = "http://itsdn.co"
         static let appStoreURL =
@@ -36,37 +36,37 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
         setupLabels()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+            tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
     }
 
-    private func setupLabels() {
+    fileprivate func setupLabels() {
         pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
         shortBreakLengthLabel.text = "\(settings.shortBreakLength / 60) minutes"
         longBreakLengthLabel.text = "\(settings.longBreakLength / 60) minutes"
         targetPomodorosLabel.text = "\(settings.targetPomodoros) pomodoros"
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let picker = segue.destinationViewController as? PickerViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let picker = segue.destination as? PickerViewController {
             switch segue.identifier! {
             case "PomodoroLengthPicker":
                 picker.selectedValue = settings.pomodoroLength
-                picker.type = PickerType.PomodoroLength
+                picker.type = PickerType.pomodoroLength
             case "ShortBreakLengthPicker":
                 picker.selectedValue = settings.shortBreakLength
-                picker.type = PickerType.ShortBreakLength
+                picker.type = PickerType.shortBreakLength
             case "LongBreakLengthPicker":
                 picker.selectedValue = settings.longBreakLength
-                picker.type = PickerType.LongBreakLength
+                picker.type = PickerType.longBreakLength
             case "TargetPomodorosPicker":
                 picker.specifier = "pomodoros"
                 picker.selectedValue = settings.targetPomodoros
-                picker.type = PickerType.TargetPomodoros
+                picker.type = PickerType.targetPomodoros
             default:
                 break
             }
@@ -74,18 +74,18 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
         }
     }
 
-    func pickerDidFinishPicking(picker: PickerViewController) {
+    func pickerDidFinishPicking(_ picker: PickerViewController) {
         setupLabels()
     }
     
     // MARK: - Table view delegate
 
-    override func tableView(tableView: UITableView,
-                            didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        let cell = tableView.cellForRow(at: indexPath)!
         switch cell {
         case twitterCell: openURL(About.twitterURL)
         case homepageCell: openURL(About.homepageURL)
@@ -96,10 +96,10 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     
     // MARK: - Helpers
     
-    private func openURL(url: String) {
-        let application = UIApplication.sharedApplication()
+    fileprivate func openURL(_ url: String) {
+        let application = UIApplication.shared
         
-        if let url = NSURL(string: url) {
+        if let url = URL(string: url) {
             application.openURL(url)
         }
     }

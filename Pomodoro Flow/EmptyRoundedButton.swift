@@ -18,20 +18,20 @@ class EmptyRoundedButton: UIButton {
         // Default params
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = defaultColor.CGColor
+        layer.borderColor = defaultColor.cgColor
     }
 
     func highlight() {
-        layer.backgroundColor = defaultColor.CGColor
+        layer.backgroundColor = defaultColor.cgColor
     }
 
     func removeHighlight() {
-        layer.backgroundColor = UIColor.clearColor().CGColor
+        layer.backgroundColor = UIColor.clear.cgColor
     }
 
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
-            if highlighted {
+            if isHighlighted {
                 highlight()
             } else {
                 removeHighlight()

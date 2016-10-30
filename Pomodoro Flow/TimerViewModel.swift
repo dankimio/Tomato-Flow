@@ -18,15 +18,15 @@ class TimerViewModel {
     var targetPomodorosCount = Variable(0)
     var paused = Variable(false)
     
-    private var currentTime = Variable(0)
-    private var state = Variable(State.Default)
+    fileprivate var currentTime = Variable(0)
+    fileprivate var state = Variable(State.default)
     
-    private let pomodoro = Pomodoro.sharedInstance
-    private let settings = Settings.sharedInstance
-    private let scheduler = Scheduler.sharedInstance
+    fileprivate let pomodoro = Pomodoro.sharedInstance
+    fileprivate let settings = Settings.sharedInstance
+    fileprivate let scheduler = Scheduler.sharedInstance
     
-    private let disposeBag = DisposeBag()
-    private var timer: NSTimer?
+    fileprivate let disposeBag = DisposeBag()
+    fileprivate var timer: Timer?
     
     init() {
         if let pausedTime = pomodoro.pausedTime {
@@ -44,9 +44,9 @@ class TimerViewModel {
     
     func start() {
         switch state.value {
-        case .Default: scheduler.schedulePomodoro()
-        case .ShortBreak: scheduler.scheduleShortBreak()
-        case .LongBreak: scheduler.scheduleLongBreak()
+        case .default: scheduler.schedulePomodoro()
+        case .shortBreak: scheduler.scheduleShortBreak()
+        case .longBreak: scheduler.scheduleLongBreak()
         }
 
         fireTimer()
@@ -60,9 +60,9 @@ class TimerViewModel {
 
     func unpause() {
         switch state.value {
-        case .Default: scheduler.schedulePomodoro(pomodoro.pausedTime)
-        case .ShortBreak: scheduler.scheduleShortBreak(pomodoro.pausedTime)
-        case .LongBreak: scheduler.scheduleLongBreak(pomodoro.pausedTime)
+        case .default: scheduler.schedulePomodoro(pomodoro.pausedTime)
+        case .shortBreak: scheduler.scheduleShortBreak(pomodoro.pausedTime)
+        case .longBreak: scheduler.scheduleLongBreak(pomodoro.pausedTime)
         }
         
         fireTimer()
@@ -78,48 +78,48 @@ class TimerViewModel {
         currentTime.value -= 1
     }
     
-    private func setup() {
+    fileprivate func setup() {
         timerLabel = currentTime
             .asObservable()
             .map { String(format: "%02d:%02d", $0 / 60, $0 % 60) }
         
         timerLabelColor = state
             .asObservable()
-            .map { $0 == State.Default ? UIColor.primaryColor : UIColor.breakColor }
+            .map { $0 == State.default ? UIColor.primaryColor : UIColor.breakColor }
         
         state
             .asObservable()
-            .subscribeNext { state in
-                if state == .ShortBreak || state == .LongBreak {
+            .subscribe(onNext: { state in
+                if state == .shortBreak || state == .longBreak {
                     self.pomodorosCount.value += 1
                 }
-            }
+            })
             .addDisposableTo(disposeBag)
         
         currentTime
             .asObservable()
-            .subscribeNext { time in
+            .subscribe(onNext: { time in
                 if time <= 0 {
                     self.nextState()
                 }
-            }
+            })
             .addDisposableTo(disposeBag)
         
         pomodorosCount
             .asObservable()
-            .subscribeNext { self.pomodoro.pomodorosCount = $0 }
+            .subscribe(onNext: { self.pomodoro.pomodorosCount = $0 })
             .addDisposableTo(disposeBag)
     }
     
-    private func nextState() {
+    fileprivate func nextState() {
         switch self.state.value {
-        case .Default: self.state.value = (pomodorosCount.value % 4 == 0 ? .LongBreak : .ShortBreak)
-        case .ShortBreak, .LongBreak: self.state.value = .Default
+        case .default: self.state.value = (pomodorosCount.value % 4 == 0 ? .longBreak : .shortBreak)
+        case .shortBreak, .longBreak: self.state.value = .default
         }
     }
     
-    private func fireTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1,
+    fileprivate func fireTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1,
                                                        target: self,
                                                        selector: #selector(tick),
                                                        userInfo: nil,
