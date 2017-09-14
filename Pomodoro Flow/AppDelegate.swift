@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     // Override point for customization after application launch.
-    func application(application: UIApplication,
-            didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication,
+            didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         registerNotifications()
         configureTabBarColor()
@@ -23,14 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(application: UIApplication,
-            didReceiveLocalNotification notification: UILocalNotification) {
+    func application(_ application: UIApplication,
+            didReceive notification: UILocalNotification) {
 
         print("didReceiveLocalNotification")
         timerViewController.presentAlertFromNotification(notification)
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state.
         // This can occur for certain types of temporary interruptions
         // (such as an incoming phone call or SMS message) or when the user quits the application
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers,
         // and store enough application state information to restore your application
         // to its current state in case it is terminated later.
@@ -47,12 +47,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // instead of applicationWillTerminate: when the user quits.
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state;
         // here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while
         // the application was inactive. If the application was previously in the background,
         // optionally refresh the user interface.
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         resetBadgeNumber()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate.
         // Save data if appropriate. See also applicationDidEnterBackground:.
 
@@ -70,22 +70,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Helpers
 
-    private var timerViewController: TimerViewController {
+    fileprivate var timerViewController: TimerViewController {
         let tabBarController = window!.rootViewController as! UITabBarController
         return tabBarController.viewControllers!.first as! TimerViewController
     }
 
-    private func registerNotifications() {
-        let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
+    fileprivate func registerNotifications() {
+        let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
             categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        UIApplication.shared.registerUserNotificationSettings(notificationSettings)
     }
 
-    private func resetBadgeNumber() {
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    fileprivate func resetBadgeNumber() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
-    private func configureTabBarColor() {
+    fileprivate func configureTabBarColor() {
         UITabBar.appearance().tintColor = UIColor(
             red: 240/255.0, green: 90/255.0, blue: 90/255.0, alpha: 1)
     }

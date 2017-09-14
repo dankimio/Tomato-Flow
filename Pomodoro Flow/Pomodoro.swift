@@ -13,35 +13,35 @@ class Pomodoro {
 
     static let sharedInstance = Pomodoro()
 
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     let settings = SettingsManager.sharedManager
 
-    var state: State = .Default
+    var state: State = .default
 
-    private init() {}
+    fileprivate init() {}
 
     var pomodorosCompleted: Int {
         get {
-            return userDefaults.integerForKey(currentDateKey)
+            return userDefaults.integer(forKey: currentDateKey)
         }
         set {
-            userDefaults.setInteger(newValue, forKey: currentDateKey)
+            userDefaults.set(newValue, forKey: currentDateKey)
         }
     }
 
     func completePomodoro() {
         pomodorosCompleted += 1
-        state = (pomodorosCompleted % 4 == 0 ? .LongBreak : .ShortBreak)
+        state = (pomodorosCompleted % 4 == 0 ? .longBreak : .shortBreak)
     }
 
     func completeBreak() {
-        state = .Default
+        state = .default
     }
 
-    private var currentDateKey: String {
-        let dateFormatter = NSDateFormatter()
+    fileprivate var currentDateKey: String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.stringFromDate(NSDate())
+        return dateFormatter.string(from: Date())
     }
 
 }

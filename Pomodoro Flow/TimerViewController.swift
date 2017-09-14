@@ -19,7 +19,7 @@ class TimerViewController: UIViewController {
         didSet {
             // Numbers are monospaced by default in iOS 8 and earlier
             if #available(iOS 9.0, *) {
-                timerLabel.font = UIFont.monospacedDigitSystemFontOfSize(124.0,
+                timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 124.0,
                                                                          weight: UIFontWeightUltraLight)
             }
         }
@@ -28,26 +28,26 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     // Scheduler
-    private let scheduler: Scheduler
-    private let pomodoro = Pomodoro.sharedInstance
+    fileprivate let scheduler: Scheduler
+    fileprivate let pomodoro = Pomodoro.sharedInstance
 
     // Time
-    private var timer: NSTimer?
-    private var currentTime: Double!
-    private var running = false
+    fileprivate var timer: Timer?
+    fileprivate var currentTime: Double!
+    fileprivate var running = false
 
     // Configuration
-    private let animationDuration = 0.3
-    private let settings = SettingsManager.sharedManager
+    fileprivate let animationDuration = 0.3
+    fileprivate let settings = SettingsManager.sharedManager
 
-    private struct CollectionViewIdentifiers {
+    fileprivate struct CollectionViewIdentifiers {
         static let emptyCell = "EmptyCell"
         static let filledCell = "FilledCell"
     }
 
     // Pomodoros view
-    private var pomodorosCompleted: Int!
-    private var targetPomodoros: Int
+    fileprivate var pomodorosCompleted: Int!
+    fileprivate var targetPomodoros: Int
 
     // MARK: - Initialization
 
@@ -60,20 +60,19 @@ class TimerViewController: UIViewController {
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter
-            .defaultCenter()
+        NotificationCenter.default
             .addObserver(self,
                          selector: #selector(willEnterForeground),
-                         name: UIApplicationWillEnterForegroundNotification, object: nil)
+                         name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         willEnterForeground()
@@ -102,7 +101,7 @@ class TimerViewController: UIViewController {
 
         print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
 
-        if pomodoro.state == .Default {
+        if pomodoro.state == .default {
             pomodoro.completePomodoro()
             reloadData()
         } else {
@@ -116,15 +115,15 @@ class TimerViewController: UIViewController {
 
     // MARK: - Actions
 
-    @IBAction func togglePaused(sender: EmptyRoundedButton) {
+    @IBAction func togglePaused(_ sender: EmptyRoundedButton) {
         scheduler.paused ? unpause() :pause()
     }
 
-    @IBAction func start(sender: RoundedButton) {
+    @IBAction func start(_ sender: RoundedButton) {
         start()
     }
 
-    @IBAction func stop(sender: RoundedButton) {
+    @IBAction func stop(_ sender: RoundedButton) {
         stop()
     }
 
@@ -160,31 +159,31 @@ class TimerViewController: UIViewController {
         animateUnpaused()
     }
     
-    func presentAlertFromNotification(notification: UILocalNotification) {
+    func presentAlertFromNotification(_ notification: UILocalNotification) {
         let alertController = UIAlertController(title: notification.alertTitle,
                                                 message: notification.alertBody,
-                                                preferredStyle: .Alert)
+                                                preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .Default) { action in print("OK") }
+        let okAction = UIAlertAction(title: "OK", style: .default) { action in print("OK") }
         alertController.addAction(okAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - Helpers
 
-    private func reloadData() {
+    fileprivate func reloadData() {
         targetPomodoros = settings.targetPomodoros
         pomodorosCompleted = pomodoro.pomodorosCompleted
         collectionView.reloadData()
     }
 
-    private func updateTimerLabel() {
+    fileprivate func updateTimerLabel() {
         let time = Int(currentTime)
         timerLabel.text = String(format: "%02d:%02d", time / 60, time % 60)
     }
 
-    private func setCurrentTime() {
+    fileprivate func setCurrentTime() {
         if let pausedTime = scheduler.pausedTime {
             currentTime = pausedTime
             return
@@ -199,59 +198,59 @@ class TimerViewController: UIViewController {
         resetCurrentTime()
     }
 
-    private func resetCurrentTime() {
+    fileprivate func resetCurrentTime() {
         switch pomodoro.state {
-        case .Default: currentTime = Double(settings.pomodoroLength)
-        case .ShortBreak: currentTime = Double(settings.shortBreakLength)
-        case .LongBreak: currentTime = Double(settings.longBreakLength)
+        case .default: currentTime = Double(settings.pomodoroLength)
+        case .shortBreak: currentTime = Double(settings.shortBreakLength)
+        case .longBreak: currentTime = Double(settings.longBreakLength)
         }
         resetTimerLabelColor()
     }
     
-    private func resetTimerLabelColor() {
+    fileprivate func resetTimerLabelColor() {
         switch pomodoro.state {
-        case .Default: timerLabel.textColor = UIColor.accentColor
-        case .ShortBreak, .LongBreak: timerLabel.textColor = UIColor.breakColor
+        case .default: timerLabel.textColor = UIColor.accentColor
+        case .shortBreak, .longBreak: timerLabel.textColor = UIColor.breakColor
         }
     }
 
-    private func fireTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1,
+    fileprivate func fireTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1,
             target: self, selector: #selector(secondPassed), userInfo: nil, repeats: true)
     }
 
-    private func refreshPomodoros() {
+    fileprivate func refreshPomodoros() {
         targetPomodoros = settings.targetPomodoros
         collectionView.reloadData()
     }
     
-    private func animateStarted() {
+    fileprivate func animateStarted() {
         let deltaY: CGFloat = 54
         buttonContainer.frame.origin.y += deltaY
-        buttonContainer.hidden = false
+        buttonContainer.isHidden = false
 
-        UIView.animateWithDuration(animationDuration) {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.startButton.alpha = 0.0
             self.buttonContainer.alpha = 1.0
             self.buttonContainer.frame.origin.y += -deltaY
-        }
+        }) 
     }
 
-    private func animateStopped() {
-        UIView.animateWithDuration(animationDuration) {
+    fileprivate func animateStopped() {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.startButton.alpha = 1.0
             self.buttonContainer.alpha = 0.0
-        }
+        }) 
 
-        pauseButton.setTitle("Pause", forState: .Normal)
+        pauseButton.setTitle("Pause", for: UIControlState())
     }
 
-    private func animatePaused() {
-        pauseButton.setTitle("Resume", forState: .Normal)
+    fileprivate func animatePaused() {
+        pauseButton.setTitle("Resume", for: UIControlState())
     }
 
-    private func animateUnpaused() {
-        pauseButton.setTitle("Pause", forState: .Normal)
+    fileprivate func animateUnpaused() {
+        pauseButton.setTitle("Pause", for: UIControlState())
     }
 
 }
@@ -260,52 +259,52 @@ extension TimerViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     // MARK: UICollectionViewDataSource
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return numberOfSections
     }
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
 
         return numberOfRows(inSection: section)
     }
 
-    func collectionView(collectionView: UICollectionView,
-                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let index = rowsPerSection * indexPath.section + indexPath.row
         let identifier = (index < pomodorosCompleted) ?
             CollectionViewIdentifiers.filledCell : CollectionViewIdentifiers.emptyCell
 
-        return collectionView.dequeueReusableCellWithReuseIdentifier(identifier,
-                                                                     forIndexPath: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
+                                                                     for: indexPath)
     }
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                               insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+                               insetForSectionAt section: Int) -> UIEdgeInsets {
 
         let bottomInset: CGFloat = 12
         return UIEdgeInsetsMake(0, 0, bottomInset, 0)
     }
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                               minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+                               minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10.0
     }
     
     // MARK: Helpers
     
-    private var rowsPerSection: Int {
+    fileprivate var rowsPerSection: Int {
         let cellWidth: CGFloat = 30.0
         let margin: CGFloat = 10.0
         return Int(collectionView.frame.width / (cellWidth + margin))
     }
     
-    private func numberOfRows(inSection section: Int) -> Int {
+    fileprivate func numberOfRows(inSection section: Int) -> Int {
         if section == lastSectionIndex {
             return numberOfRowsInLastSection
         } else {
@@ -313,7 +312,7 @@ extension TimerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
     
-    private var numberOfRowsInLastSection: Int {
+    fileprivate var numberOfRowsInLastSection: Int {
         if targetPomodoros % rowsPerSection == 0 {
             return rowsPerSection
         } else {
@@ -321,11 +320,11 @@ extension TimerViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
     
-    private var numberOfSections: Int {
+    fileprivate var numberOfSections: Int {
         return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
     }
     
-    private var lastSectionIndex: Int {
+    fileprivate var lastSectionIndex: Int {
         if numberOfSections == 0 {
             return 0
         }

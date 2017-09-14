@@ -12,12 +12,12 @@ import Foundation
 class SettingsManager {
 
     static let sharedManager = SettingsManager()
-    private init() {}
+    fileprivate init() {}
 
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
-    private let notificationCenter = NSNotificationCenter.defaultCenter()
+    fileprivate let userDefaults = UserDefaults.standard
+    fileprivate let notificationCenter = NotificationCenter.default
 
-    private struct Settings {
+    fileprivate struct Settings {
         static let pomodoroLength = "Settings.PomodoroLength"
         static let shortBreakLength = "Settings.ShortBreakLength"
         static let longBreakLength = "Settings.LongBreakLength"
@@ -27,25 +27,25 @@ class SettingsManager {
     // MARK: - General settings
 
     var pomodoroLength: Int {
-        get { return userDefaults.objectForKey(Settings.pomodoroLength) as? Int ?? 25 * 60 }
-        set { userDefaults.setInteger(newValue, forKey: Settings.pomodoroLength) }
+        get { return userDefaults.object(forKey: Settings.pomodoroLength) as? Int ?? 25 * 60 }
+        set { userDefaults.set(newValue, forKey: Settings.pomodoroLength) }
     }
 
     var shortBreakLength: Int {
-        get { return userDefaults.objectForKey(Settings.shortBreakLength) as? Int ?? 5 * 60 }
-        set { userDefaults.setInteger(newValue, forKey: Settings.shortBreakLength) }
+        get { return userDefaults.object(forKey: Settings.shortBreakLength) as? Int ?? 5 * 60 }
+        set { userDefaults.set(newValue, forKey: Settings.shortBreakLength) }
     }
 
     var longBreakLength: Int {
-        get { return userDefaults.objectForKey(Settings.longBreakLength) as? Int ?? 20 * 60 }
-        set { userDefaults.setInteger(newValue, forKey: Settings.longBreakLength) }
+        get { return userDefaults.object(forKey: Settings.longBreakLength) as? Int ?? 20 * 60 }
+        set { userDefaults.set(newValue, forKey: Settings.longBreakLength) }
     }
 
     var targetPomodoros: Int {
-        get { return userDefaults.objectForKey(Settings.targetPomodoros) as? Int ?? 5 }
+        get { return userDefaults.object(forKey: Settings.targetPomodoros) as? Int ?? 5 }
         set {
-            userDefaults.setInteger(newValue, forKey: Settings.targetPomodoros)
-            notificationCenter.postNotificationName("targetPomodorosUpdated", object: self)
+            userDefaults.set(newValue, forKey: Settings.targetPomodoros)
+            notificationCenter.post(name: Notification.Name(rawValue: "targetPomodorosUpdated"), object: self)
         }
     }
 

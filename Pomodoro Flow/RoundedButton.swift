@@ -17,15 +17,15 @@ class RoundedButton: UIButton {
         super.init(coder: aDecoder)
 
         layer.cornerRadius = 5
-        layer.backgroundColor = defaultColor.CGColor
+        layer.backgroundColor = defaultColor.cgColor
     }
 
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
-            if highlighted {
-                layer.backgroundColor = highlightedColor.CGColor
+            if isHighlighted {
+                layer.backgroundColor = highlightedColor.cgColor
             } else {
-                layer.backgroundColor = defaultColor.CGColor
+                layer.backgroundColor = defaultColor.cgColor
             }
         }
     }

@@ -9,8 +9,8 @@
 import Foundation
 
 enum PickerType {
-    case PomodoroLength
-    case ShortBreakLength
-    case LongBreakLength
-    case TargetPomodoros
+    case pomodoroLength
+    case shortBreakLength
+    case longBreakLength
+    case targetPomodoros
 }
