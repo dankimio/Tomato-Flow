@@ -24,8 +24,8 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     fileprivate let settings = SettingsManager.sharedManager
     
     fileprivate struct About {
-        static let twitterURL = "https://twitter.com/itsdnco"
-        static let homepageURL = "http://itsdn.co"
+        static let twitterURL = "https://twitter.com/dankimio"
+        static let homepageURL = "https://dankim.io"
         static let appStoreURL =
             "https://itunes.apple.com/us/app/pomodoro-flow/id1095742214?ls=1&mt=8"
     }
