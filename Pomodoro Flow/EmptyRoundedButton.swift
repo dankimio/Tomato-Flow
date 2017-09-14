@@ -16,7 +16,7 @@ class EmptyRoundedButton: UIButton {
         super.init(coder: aDecoder)
 
         // Default params
-        layer.cornerRadius = 5
+        layer.cornerRadius = 8
         layer.borderWidth = 1
         layer.borderColor = defaultColor.cgColor
     }
