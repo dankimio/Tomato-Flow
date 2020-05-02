@@ -20,7 +20,7 @@ class TimerViewController: UIViewController {
       // Numbers are monospaced by default in iOS 8 and earlier
       if #available(iOS 9.0, *) {
         timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 124.0,
-                                                           weight: UIFontWeightUltraLight)
+                                                           weight: UIFont.Weight.ultraLight)
       }
     }
   }
@@ -66,10 +66,7 @@ class TimerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    NotificationCenter.default
-      .addObserver(self,
-                   selector: #selector(willEnterForeground),
-                   name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+   
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +75,7 @@ class TimerViewController: UIViewController {
     willEnterForeground()
   }
 
-  func willEnterForeground() {
+    @objc func willEnterForeground() {
     print("willEnterForeground called from controller")
 
     setCurrentTime()
@@ -92,7 +89,7 @@ class TimerViewController: UIViewController {
     reloadData()
   }
 
-  func secondPassed() {
+    @objc func secondPassed() {
     if currentTime > 0 {
       currentTime = currentTime - 1.0
       updateTimerLabel()
@@ -242,15 +239,15 @@ class TimerViewController: UIViewController {
       self.buttonContainer.alpha = 0.0
     })
 
-    pauseButton.setTitle("Pause", for: UIControlState())
+    pauseButton.setTitle("Pause", for: UIControl.State())
   }
 
   fileprivate func animatePaused() {
-    pauseButton.setTitle("Resume", for: UIControlState())
+    pauseButton.setTitle("Resume", for: UIControl.State())
   }
 
   fileprivate func animateUnpaused() {
-    pauseButton.setTitle("Pause", for: UIControlState())
+    pauseButton.setTitle("Pause", for: UIControl.State())
   }
 
 }
@@ -287,7 +284,7 @@ extension TimerViewController: UICollectionViewDataSource, UICollectionViewDeleg
                       insetForSectionAt section: Int) -> UIEdgeInsets {
 
     let bottomInset: CGFloat = 12
-    return UIEdgeInsetsMake(0, 0, bottomInset, 0)
+    return UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
   }
 
   func collectionView(_ collectionView: UICollectionView,
