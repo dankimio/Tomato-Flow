@@ -17,11 +17,10 @@ class TimerViewController: UIViewController {
 
   @IBOutlet weak var timerLabel: UILabel! {
     didSet {
-      // Numbers are monospaced by default in iOS 8 and earlier
-      if #available(iOS 9.0, *) {
-        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 124.0,
-                                                           weight: UIFont.Weight.ultraLight)
-      }
+      timerLabel.font = UIFont.monospacedDigitSystemFont(
+        ofSize: 124.0,
+        weight: UIFont.Weight.thin
+      )
     }
   }
 
