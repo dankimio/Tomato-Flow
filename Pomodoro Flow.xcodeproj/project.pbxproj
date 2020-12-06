@@ -236,10 +236,9 @@
 			};
 			buildConfigurationList = 3753472A1B3AFF010089AB7F /* Build configuration list for PBXProject "Pomodoro Flow" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
