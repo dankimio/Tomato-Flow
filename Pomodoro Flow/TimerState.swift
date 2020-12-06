@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum State {
-  case `default`, shortBreak, longBreak
+enum TimerState {
+  case initial, shortBreak, longBreak
 }

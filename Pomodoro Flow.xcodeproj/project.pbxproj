@@ -23,7 +23,7 @@
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
 		37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */; };
-		37EFAC091C94C83200D1DC76 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* State.swift */; };
+		37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* TimerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		378192041B40682D0016375D /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
-		37EFAC081C94C83200D1DC76 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		37EFAC081C94C83200D1DC76 /* TimerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +164,7 @@
 				3737994E1B4C153B0025260A /* PickerType.swift */,
 				3767956F1B52DDDD007E6CBC /* Scheduler.swift */,
 				37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */,
-				37EFAC081C94C83200D1DC76 /* State.swift */,
+				37EFAC081C94C83200D1DC76 /* TimerState.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 				375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */,
 				3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */,
 				375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */,
-				37EFAC091C94C83200D1DC76 /* State.swift in Sources */,
+				37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */,
 				375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */,
 				376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */,
 				378192051B40682D0016375D /* EmptyCell.swift in Sources */,

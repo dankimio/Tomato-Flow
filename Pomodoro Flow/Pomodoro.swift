@@ -16,7 +16,7 @@ class Pomodoro {
   let userDefaults = UserDefaults.standard
   let settings = SettingsManager.sharedManager
 
-  var state: State = .default
+  var state: TimerState = .initial
 
   fileprivate init() {}
 
@@ -35,7 +35,7 @@ class Pomodoro {
   }
 
   func completeBreak() {
-    state = .default
+    state = .initial
   }
 
   fileprivate var currentDateKey: String {

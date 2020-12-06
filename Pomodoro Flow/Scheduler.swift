@@ -58,7 +58,7 @@ class Scheduler {
 
   func start() {
     switch pomodoro.state {
-    case .default: schedulePomodoro()
+    case .initial: schedulePomodoro()
     case .shortBreak: scheduleShortBreak()
     case .longBreak: scheduleLongBreak()
     }
@@ -79,7 +79,7 @@ class Scheduler {
     guard let interval = pausedTime else { return }
 
     switch pomodoro.state {
-    case .default: schedulePomodoro(interval)
+    case .initial: schedulePomodoro(interval)
     case .shortBreak: scheduleShortBreak(interval)
     case .longBreak: scheduleLongBreak(interval)
     }

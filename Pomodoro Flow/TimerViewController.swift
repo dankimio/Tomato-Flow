@@ -98,7 +98,7 @@ class TimerViewController: UIViewController {
 
     print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
 
-    if pomodoro.state == .default {
+    if pomodoro.state == .initial {
       pomodoro.completePomodoro()
       reloadData()
     } else {
@@ -197,7 +197,7 @@ class TimerViewController: UIViewController {
 
   fileprivate func resetCurrentTime() {
     switch pomodoro.state {
-    case .default: currentTime = Double(settings.pomodoroLength)
+    case .initial: currentTime = Double(settings.pomodoroLength)
     case .shortBreak: currentTime = Double(settings.shortBreakLength)
     case .longBreak: currentTime = Double(settings.longBreakLength)
     }
@@ -206,7 +206,7 @@ class TimerViewController: UIViewController {
 
   fileprivate func resetTimerLabelColor() {
     switch pomodoro.state {
-    case .default: timerLabel.textColor = UIColor.accentColor
+    case .initial: timerLabel.textColor = UIColor.accentColor
     case .shortBreak, .longBreak: timerLabel.textColor = UIColor.breakColor
     }
   }
