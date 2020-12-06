@@ -65,7 +65,8 @@ class TimerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-   
+    let notificationCenter = NotificationCenter.default
+    notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -74,8 +75,8 @@ class TimerViewController: UIViewController {
     willEnterForeground()
   }
 
-    @objc func willEnterForeground() {
-    print("willEnterForeground called from controller")
+  @objc func willEnterForeground() {
+    print("willEnterForeground")
 
     setCurrentTime()
     updateTimerLabel()
@@ -88,7 +89,7 @@ class TimerViewController: UIViewController {
     reloadData()
   }
 
-    @objc func secondPassed() {
+  @objc func secondPassed() {
     if currentTime > 0 {
       currentTime = currentTime - 1.0
       updateTimerLabel()
