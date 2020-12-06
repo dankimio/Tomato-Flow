@@ -63,6 +63,7 @@
 				375347311B3AFF010089AB7F /* Pomodoro Flow */,
 				375347301B3AFF010089AB7F /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
 		};
 		375347301B3AFF010089AB7F /* Products */ = {
