@@ -39,7 +39,7 @@ class PickerViewController: UITableViewController {
     case .targetPomodoros: options = PickerOptions.targetPomodoros
     }
 
-    if let index = options.index(of: selectedValue), type != .targetPomodoros {
+    if let index = options.firstIndex(of: selectedValue), type != .targetPomodoros {
       selectedIndexPath = IndexPath(row: index, section: 0)
     }
   }
