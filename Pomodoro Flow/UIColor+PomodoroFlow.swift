@@ -1,11 +1,3 @@
-//
-//  UIColor+PomodoroFlow.swift
-//  Pomodoro Flow
-//
-//  Created by Dan K. on 2016-03-17.
-//  Copyright © 2016 Dan K. All rights reserved.
-//
-
 import UIKit
 
 extension UIColor {
