@@ -8,7 +8,7 @@ class RoundedButton: UIButton {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
 
-    layer.cornerRadius = 10
+    layer.cornerRadius = 8
     layer.backgroundColor = defaultColor.cgColor
   }
 
