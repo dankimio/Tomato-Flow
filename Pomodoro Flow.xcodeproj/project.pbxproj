@@ -362,6 +362,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Z9SY9LHRWJ;
 				INFOPLIST_FILE = "Pomodoro Flow/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,6 +384,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Z9SY9LHRWJ;
 				INFOPLIST_FILE = "Pomodoro Flow/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
