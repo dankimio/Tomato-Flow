@@ -11,7 +11,7 @@ class TimerViewController: UIViewController {
     didSet {
       timerLabel.font = UIFont.monospacedDigitSystemFont(
         ofSize: 124.0,
-        weight: UIFont.Weight.thin
+        weight: UIFont.Weight.light
       )
     }
   }
