@@ -1,6 +1,6 @@
 # Tomato Flow
 
-Tomato Flow is a productivity timer inspired by Pomodoro technique.
+Tomato Flow is a customizable productivity timer that uses the popular time management technique to help you stay focused and get more done.
 
 ## Screenshots
 
