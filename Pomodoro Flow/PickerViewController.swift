@@ -1,6 +1,6 @@
 import UIKit
 
-protocol PickerViewControllerDelegate: class {
+protocol PickerViewControllerDelegate: AnyObject {
   func pickerDidFinishPicking(_ picker: PickerViewController)
 }
 
