@@ -88,10 +88,8 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
   // MARK: - Helpers
 
   fileprivate func openURL(_ url: String) {
-    let application = UIApplication.shared
-
     if let url = URL(string: url) {
-      application.openURL(url)
+      UIApplication.shared.open(url)
     }
   }
 
