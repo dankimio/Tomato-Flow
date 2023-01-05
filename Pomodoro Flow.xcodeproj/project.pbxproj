@@ -20,6 +20,7 @@
 		375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */; };
 		375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850271B3B5B4A005628A0 /* RoundedButton.swift */; };
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
+		3774E53A296799AF00BEAFBA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3774E539296799AF00BEAFBA /* SnapKit */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
 		37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */; };
 		37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* TimerState.swift */; };
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3774E53A296799AF00BEAFBA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,9 @@
 			dependencies = (
 			);
 			name = "Pomodoro Flow";
+			packageProductDependencies = (
+				3774E539296799AF00BEAFBA /* SnapKit */,
+			);
 			productName = "Pomodoro Flow";
 			productReference = 3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +186,9 @@
 				Base,
 			);
 			mainGroup = 375347261B3AFF010089AB7F;
+			packageReferences = (
+				3774E538296799AF00BEAFBA /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 375347301B3AFF010089AB7F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -419,6 +427,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3774E538296799AF00BEAFBA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3774E539296799AF00BEAFBA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3774E538296799AF00BEAFBA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 375347271B3AFF010089AB7F /* Project object */;
 }
