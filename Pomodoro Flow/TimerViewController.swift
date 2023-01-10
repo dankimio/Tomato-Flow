@@ -90,7 +90,7 @@ class TimerViewController: UIViewController {
       make.leading.equalToSuperview().offset(40)
       make.trailing.equalToSuperview().offset(-40)
       make.centerY.equalToSuperview().offset(-80)
-      make.height.equalTo(200)
+      make.height.equalTo(280)
     }
     
     stackView.addArrangedSubview(newTimerLabel)
