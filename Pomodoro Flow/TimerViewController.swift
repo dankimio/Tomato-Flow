@@ -56,6 +56,7 @@ class TimerViewController: UIViewController {
     let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
     newCollectionView.register(MyCell.self, forCellWithReuseIdentifier: "MyCell")
     newCollectionView.dataSource = self
+    newCollectionView.backgroundColor = .clear
 
     return newCollectionView
   }()
