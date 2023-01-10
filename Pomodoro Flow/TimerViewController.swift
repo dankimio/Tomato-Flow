@@ -66,7 +66,7 @@ class TimerViewController: UIViewController {
     return stopButton
   }()
   
-  private lazy var newCollectionView: UICollectionView = {
+  private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: 32, height: 32)
     let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -140,7 +140,7 @@ class TimerViewController: UIViewController {
     
     stackView.setCustomSpacing(48, after: buttonsContainer)
     
-    stackView.addArrangedSubview(newCollectionView)
+    stackView.addArrangedSubview(collectionView)
 
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -243,6 +243,7 @@ class TimerViewController: UIViewController {
   fileprivate func reloadData() {
     targetPomodoros = settings.targetPomodoros
     pomodorosCompleted = pomodoro.pomodorosCompleted
+    collectionView.reloadData()
   }
 
   fileprivate func updateTimerLabel() {
@@ -326,7 +327,7 @@ extension TimerViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
 
-    return 10
+    return targetPomodoros
   }
 
   func collectionView(_ collectionView: UICollectionView,
