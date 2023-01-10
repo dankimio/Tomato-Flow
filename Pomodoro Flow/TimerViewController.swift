@@ -2,15 +2,6 @@ import UIKit
 import SnapKit
 
 class TimerViewController: UIViewController {
-
-  @IBOutlet weak var timerLabel: UILabel! {
-    didSet {
-      timerLabel.font = UIFont.monospacedDigitSystemFont(
-        ofSize: 124.0,
-        weight: UIFont.Weight.light
-      )
-    }
-  }
   
   private lazy var stackView: UIStackView = {
     let stackView = UIStackView()
