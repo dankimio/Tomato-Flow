@@ -17,7 +17,6 @@
 		3753473C1B3AFF010089AB7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3753473A1B3AFF010089AB7F /* Main.storyboard */; };
 		3753473E1B3AFF010089AB7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3753473D1B3AFF010089AB7F /* Images.xcassets */; };
 		375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753473F1B3AFF010089AB7F /* LaunchScreen.xib */; };
-		375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375850271B3B5B4A005628A0 /* RoundedButton.swift */; };
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		3774E53A296799AF00BEAFBA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3774E539296799AF00BEAFBA /* SnapKit */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
@@ -40,7 +39,6 @@
 		3753473B1B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3753473D1B3AFF010089AB7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		375347401B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		375850271B3B5B4A005628A0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		378192041B40682D0016375D /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		37B6EEAC296DD71A00467643 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				3753473A1B3AFF010089AB7F /* Main.storyboard */,
-				375850271B3B5B4A005628A0 /* RoundedButton.swift */,
 				378192041B40682D0016375D /* EmptyCell.swift */,
 				37CBA529296DABDD0043596C /* MyCell.swift */,
 				37B6EEAC296DD71A00467643 /* Colors.swift */,
@@ -221,7 +218,6 @@
 			files = (
 				3737994F1B4C153B0025260A /* PickerType.swift in Sources */,
 				37B6EEAD296DD71A00467643 /* Colors.swift in Sources */,
-				375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */,
 				373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */,
 				373BD3DB1C9B095A001C9790 /* UIColor+PomodoroFlow.swift in Sources */,
 				3737994D1B4B01250025260A /* PickerViewController.swift in Sources */,
