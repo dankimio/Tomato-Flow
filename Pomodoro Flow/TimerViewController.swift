@@ -132,7 +132,11 @@ class TimerViewController: UIViewController {
       make.height.equalTo(50)
     }
     buttonsContainer.addArrangedSubview(newStartButton)
+    buttonsContainer.addArrangedSubview(newPauseButton)
+    buttonsContainer.addArrangedSubview(newStopButton)
+    
     stackView.addArrangedSubview(buttonsContainer)
+    
     stackView.setCustomSpacing(48, after: buttonsContainer)
     
     stackView.addArrangedSubview(newCollectionView)
