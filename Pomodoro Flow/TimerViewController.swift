@@ -12,13 +12,13 @@ class TimerViewController: UIViewController {
   }()
   
   // TODO: center
-  private lazy var newTimerLabel: UILabel = {
-    let newTimerLabel = UILabel()
-    newTimerLabel.text = "25:00"
-    newTimerLabel.font = UIFont.monospacedDigitSystemFont(
+  private lazy var timerLabel: UILabel = {
+    let timerLabel = UILabel()
+    timerLabel.text = "25:00"
+    timerLabel.font = UIFont.monospacedDigitSystemFont(
       ofSize: 108, weight: .medium
     )
-    return newTimerLabel
+    return timerLabel
   }()
 
   private lazy var buttonsContainer: UIStackView = {
@@ -114,7 +114,7 @@ class TimerViewController: UIViewController {
       make.height.equalTo(320)
     }
     
-    stackView.addArrangedSubview(newTimerLabel)
+    stackView.addArrangedSubview(timerLabel)
     
     newStartButton.addTarget(self, action: #selector(newStart), for: .touchUpInside)
     
