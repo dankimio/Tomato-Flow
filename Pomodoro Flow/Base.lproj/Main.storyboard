@@ -33,7 +33,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxv-ph-lBJ" customClass="RoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxv-ph-lBJ" customClass="RoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
                                 <rect key="frame" x="36" y="317.5" width="303" height="50"/>
                                 <color key="backgroundColor" red="0.91487574577331543" green="0.25728178024291992" blue="0.28367936611175537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
