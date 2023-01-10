@@ -22,6 +22,7 @@
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		3774E53A296799AF00BEAFBA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3774E539296799AF00BEAFBA /* SnapKit */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
+		37B6EEAD296DD71A00467643 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6EEAC296DD71A00467643 /* Colors.swift */; };
 		37CBA52A296DABDD0043596C /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBA529296DABDD0043596C /* MyCell.swift */; };
 		37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */; };
 		37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* TimerState.swift */; };
@@ -44,6 +45,7 @@
 		375850271B3B5B4A005628A0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		378192041B40682D0016375D /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
+		37B6EEAC296DD71A00467643 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		37CBA529296DABDD0043596C /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		37EFAC081C94C83200D1DC76 /* TimerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				375850271B3B5B4A005628A0 /* RoundedButton.swift */,
 				378192041B40682D0016375D /* EmptyCell.swift */,
 				37CBA529296DABDD0043596C /* MyCell.swift */,
+				37B6EEAC296DD71A00467643 /* Colors.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3737994F1B4C153B0025260A /* PickerType.swift in Sources */,
+				37B6EEAD296DD71A00467643 /* Colors.swift in Sources */,
 				375850281B3B5B4A005628A0 /* RoundedButton.swift in Sources */,
 				373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */,
 				373BD3DB1C9B095A001C9790 /* UIColor+PomodoroFlow.swift in Sources */,
