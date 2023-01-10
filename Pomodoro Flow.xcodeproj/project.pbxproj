@@ -11,7 +11,6 @@
 		3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994A1B4ABA160025260A /* SettingsManager.swift */; };
 		3737994D1B4B01250025260A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994C1B4B01250025260A /* PickerViewController.swift */; };
 		3737994F1B4C153B0025260A /* PickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994E1B4C153B0025260A /* PickerType.swift */; };
-		373BD3DB1C9B095A001C9790 /* UIColor+PomodoroFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373BD3DA1C9B095A001C9790 /* UIColor+PomodoroFlow.swift */; };
 		375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347341B3AFF010089AB7F /* AppDelegate.swift */; };
 		375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347361B3AFF010089AB7F /* TimerViewController.swift */; };
 		3753473C1B3AFF010089AB7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3753473A1B3AFF010089AB7F /* Main.storyboard */; };
@@ -31,7 +30,6 @@
 		3737994A1B4ABA160025260A /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		3737994C1B4B01250025260A /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		3737994E1B4C153B0025260A /* PickerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerType.swift; sourceTree = "<group>"; };
-		373BD3DA1C9B095A001C9790 /* UIColor+PomodoroFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+PomodoroFlow.swift"; sourceTree = "<group>"; };
 		3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Flow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		375347331B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -94,7 +92,6 @@
 				3753473D1B3AFF010089AB7F /* Images.xcassets */,
 				375347331B3AFF010089AB7F /* Info.plist */,
 				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
-				373BD3DA1C9B095A001C9790 /* UIColor+PomodoroFlow.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -219,7 +216,6 @@
 				3737994F1B4C153B0025260A /* PickerType.swift in Sources */,
 				37B6EEAD296DD71A00467643 /* Colors.swift in Sources */,
 				373799491B49DB6E0025260A /* SettingsViewController.swift in Sources */,
-				373BD3DB1C9B095A001C9790 /* UIColor+PomodoroFlow.swift in Sources */,
 				3737994D1B4B01250025260A /* PickerViewController.swift in Sources */,
 				37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */,
 				375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */,
