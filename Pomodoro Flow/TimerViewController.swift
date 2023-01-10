@@ -25,11 +25,12 @@ class TimerViewController: UIViewController {
     return stackView
   }()
   
+  // TODO: center
   private lazy var newTimerLabel: UILabel = {
     let newTimerLabel = UILabel()
     newTimerLabel.text = "25:00"
     newTimerLabel.font = UIFont.monospacedDigitSystemFont(
-      ofSize: 96, weight: .medium
+      ofSize: 108, weight: .medium
     )
     return newTimerLabel
   }()
@@ -86,10 +87,10 @@ class TimerViewController: UIViewController {
     view.addSubview(stackView)
     
     stackView.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(50)
       make.leading.equalToSuperview().offset(40)
       make.trailing.equalToSuperview().offset(-40)
-      make.bottom.equalToSuperview().offset(-100)
+      make.centerY.equalToSuperview().offset(-80)
+      make.height.equalTo(200)
     }
     
     stackView.addArrangedSubview(newTimerLabel)
