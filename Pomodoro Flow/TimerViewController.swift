@@ -11,7 +11,6 @@ class TimerViewController: UIViewController {
     return stackView
   }()
 
-  // TODO: center
   private lazy var timerLabel: UILabel = {
     let timerLabel = UILabel()
     timerLabel.text = "25:00"
