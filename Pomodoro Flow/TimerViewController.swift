@@ -54,6 +54,7 @@ class TimerViewController: UIViewController {
     let newPauseButton = UIButton()
     newPauseButton.setTitle("Pause", for: .normal)
     newPauseButton.setTitleColor(.red, for: .normal)
+    newPauseButton.isHidden = true
     return newPauseButton
   }()
 
@@ -61,6 +62,7 @@ class TimerViewController: UIViewController {
     let newStopButton = UIButton()
     newStopButton.setTitle("Stop", for: .normal)
     newStopButton.setTitleColor(.red, for: .normal)
+    newStopButton.isHidden = true
     return newStopButton
   }()
   
