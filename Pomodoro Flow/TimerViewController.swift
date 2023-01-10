@@ -339,8 +339,6 @@ extension TimerViewController: UICollectionViewDataSource {
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let identifier = (indexPath.row < pomodorosCompleted) ? "FilledCell" : "EmptyCell"
     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-    // let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath)
-    // return cell
   }
 
 }
