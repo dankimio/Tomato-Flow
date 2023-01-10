@@ -112,6 +112,33 @@ class TimerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    setUpSubviews()
+
+    let notificationCenter = NotificationCenter.default
+    notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    willEnterForeground()
+  }
+
+  @objc func willEnterForeground() {
+    print("willEnterForeground")
+
+    setCurrentTime()
+    updateTimerLabel()
+
+    if scheduler.pausedTime != nil {
+      animateStarted()
+      animatePaused()
+    }
+
+    reloadData()
+  }
+  
+  private func setUpSubviews() {
     view.addSubview(stackView)
 
     stackView.snp.makeConstraints { make in
@@ -142,29 +169,6 @@ class TimerViewController: UIViewController {
     stackView.setCustomSpacing(48, after: buttonsContainer)
 
     stackView.addArrangedSubview(collectionView)
-
-    let notificationCenter = NotificationCenter.default
-    notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
-    willEnterForeground()
-  }
-
-  @objc func willEnterForeground() {
-    print("willEnterForeground")
-
-    setCurrentTime()
-    updateTimerLabel()
-
-    if scheduler.pausedTime != nil {
-      animateStarted()
-      animatePaused()
-    }
-
-    reloadData()
   }
 
   @objc func tick() {
