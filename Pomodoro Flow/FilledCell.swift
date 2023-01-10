@@ -1,6 +1,6 @@
 import UIKit
 
-class MyCell: UICollectionViewCell {
+class FilledCell: UICollectionViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     

@@ -70,7 +70,7 @@ class TimerViewController: UIViewController {
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: 32, height: 32)
     let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
-    newCollectionView.register(MyCell.self, forCellWithReuseIdentifier: "MyCell")
+    newCollectionView.register(FilledCell.self, forCellWithReuseIdentifier: "MyCell")
     newCollectionView.dataSource = self
     newCollectionView.backgroundColor = .clear
 
