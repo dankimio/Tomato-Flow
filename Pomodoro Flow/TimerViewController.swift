@@ -46,7 +46,7 @@ class TimerViewController: UIViewController {
   private lazy var newStartButton: UIButton = {
     let newStartButton = UIButton(configuration: .filled())
     newStartButton.setTitle("Start", for: .normal)
-    newStartButton.isHidden = true
+    newStartButton.isHidden = false
     return newStartButton
   }()
   
@@ -57,14 +57,14 @@ class TimerViewController: UIViewController {
     newPauseButton.layer.cornerRadius = 6
     newPauseButton.layer.borderWidth = 2
     newPauseButton.layer.borderColor = Colors.primary.cgColor
-    newPauseButton.isHidden = false
+    newPauseButton.isHidden = true
     return newPauseButton
   }()
 
   private lazy var newStopButton: UIButton = {
     let newStopButton = UIButton(configuration: .filled())
     newStopButton.setTitle("Stop", for: .normal)
-    newStopButton.isHidden = false
+    newStopButton.isHidden = true
     return newStopButton
   }()
   
@@ -130,6 +130,8 @@ class TimerViewController: UIViewController {
     
     stackView.addArrangedSubview(newTimerLabel)
     
+    newStartButton.addTarget(self, action: #selector(newStart), for: .touchUpInside)
+    
     buttonsContainer.addArrangedSubview(newStartButton)
     buttonsContainer.addArrangedSubview(newPauseButton)
     buttonsContainer.addArrangedSubview(newStopButton)
@@ -189,6 +191,10 @@ class TimerViewController: UIViewController {
   }
 
   // MARK: - Actions
+  
+  @objc func newStart() {
+    print("newStart()")
+  }
 
   @IBAction func togglePaused(_ sender: EmptyRoundedButton) {
     scheduler.paused ? unpause() :pause()
