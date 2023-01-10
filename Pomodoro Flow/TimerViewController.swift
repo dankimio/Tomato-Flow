@@ -291,20 +291,20 @@ class TimerViewController: UIViewController {
 
   fileprivate func animateStarted() {
     let deltaY: CGFloat = 54
-    buttonContainer.frame.origin.y += deltaY
-    buttonContainer.isHidden = false
+    buttonsContainer.frame.origin.y += deltaY
+    buttonsContainer.isHidden = false
 
     UIView.animate(withDuration: animationDuration, animations: {
       self.startButton.alpha = 0.0
-      self.buttonContainer.alpha = 1.0
-      self.buttonContainer.frame.origin.y += -deltaY
+      self.buttonsContainer.alpha = 1.0
+      self.buttonsContainer.frame.origin.y += -deltaY
     })
   }
 
   fileprivate func animateStopped() {
     UIView.animate(withDuration: animationDuration, animations: {
       self.startButton.alpha = 1.0
-      self.buttonContainer.alpha = 0.0
+      self.buttonsContainer.alpha = 0.0
     })
 
     pauseButton.setTitle("Pause", for: UIControl.State())
