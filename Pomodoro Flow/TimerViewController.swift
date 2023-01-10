@@ -89,13 +89,12 @@ class TimerViewController: UIViewController {
     
     stackView.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(50)
-      make.leading.equalToSuperview().offset(20)
-      make.trailing.equalToSuperview().offset(-20)
+      make.leading.equalToSuperview().offset(40)
+      make.trailing.equalToSuperview().offset(-40)
       make.bottom.equalToSuperview().offset(-100)
     }
+    
     stackView.addArrangedSubview(newTimerLabel)
-    
-    
     stackView.addArrangedSubview(newCollectionView)
 
     let notificationCenter = NotificationCenter.default
