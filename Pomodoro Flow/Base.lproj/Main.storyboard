@@ -35,44 +35,9 @@
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-X6-5pN">
                                 <rect key="frame" x="36" y="317.5" width="303" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mK0-Fu-s2u" customClass="EmptyRoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
-                                        <rect key="frame" x="254" y="0.0" width="49" height="50"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="132" id="VNu-ne-yem"/>
-                                        </constraints>
-                                        <state key="normal" title="Pause">
-                                            <color key="titleColor" red="0.91487574577331543" green="0.25728178024291992" blue="0.28367936611175537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" red="0.97530043125152588" green="0.97527122497558594" blue="0.9752877950668335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="VNu-ne-yem"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="togglePaused:" destination="9pv-A4-QxB" eventType="touchUpInside" id="NBh-1a-eFs"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="EYY-Vc-fxe"/>
-                                    <constraint firstItem="mK0-Fu-s2u" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="top" id="JDC-NW-rh1"/>
-                                    <constraint firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="PHh-Tm-eqj"/>
-                                    <constraint firstAttribute="bottom" secondItem="mK0-Fu-s2u" secondAttribute="bottom" id="WQW-tj-VdO"/>
-                                    <constraint firstItem="mK0-Fu-s2u" firstAttribute="width" secondItem="9rf-X6-5pN" secondAttribute="width" id="hDz-1z-yAz"/>
                                     <constraint firstAttribute="height" constant="50" id="qYQ-5l-6FU"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="PHh-Tm-eqj"/>
-                                        <exclude reference="hDz-1z-yAz"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -103,7 +68,6 @@
                     <tabBarItem key="tabBarItem" title="Timer" image="Timer" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="buttonContainer" destination="9rf-X6-5pN" id="yX4-hR-sFR"/>
-                        <outlet property="pauseButton" destination="mK0-Fu-s2u" id="QaV-ql-531"/>
                         <outlet property="timerLabel" destination="pQ0-r5-ZH3" id="pAw-xf-P5I"/>
                     </connections>
                 </viewController>
