@@ -47,11 +47,11 @@ class TimerViewController: UIViewController {
     return pauseButton
   }()
 
-  private lazy var newStopButton: UIButton = {
-    let newStopButton = UIButton(configuration: .filled())
-    newStopButton.setTitle("Stop", for: .normal)
-    newStopButton.isHidden = true
-    return newStopButton
+  private lazy var stopButton: UIButton = {
+    let stopButton = UIButton(configuration: .filled())
+    stopButton.setTitle("Stop", for: .normal)
+    stopButton.isHidden = true
+    return stopButton
   }()
   
   private lazy var newCollectionView: UICollectionView = {
@@ -116,11 +116,15 @@ class TimerViewController: UIViewController {
     
     stackView.addArrangedSubview(timerLabel)
     
-    startButton.addTarget(self, action: #selector(newStart), for: .touchUpInside)
-    
+    startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
+    
+    pauseButton.addTarget(self, action: #selector(togglePaused), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(pauseButton)
-    buttonsContainer.addArrangedSubview(newStopButton)
+    
+    stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
+    buttonsContainer.addArrangedSubview(stopButton)
+    
     stackView.addArrangedSubview(buttonsContainer)
     
     buttonsContainer.snp.makeConstraints { make in
@@ -178,30 +182,18 @@ class TimerViewController: UIViewController {
 
   // MARK: - Actions
   
-  @objc func newStart() {
-    print("newStart()")
-  }
-
-  @IBAction func togglePaused(_ sender: EmptyRoundedButton) {
+  @objc func togglePaused() {
     scheduler.paused ? unpause() :pause()
   }
 
-  @IBAction func start(_ sender: RoundedButton) {
-    start()
-  }
-
-  @IBAction func stop(_ sender: RoundedButton) {
-    stop()
-  }
-
-  func start() {
+  @objc func start() {
     scheduler.start()
     running = true
     animateStarted()
     fireTimer()
   }
 
-  func stop() {
+  @objc func stop() {
     scheduler.stop()
     running = false
     animateStopped()
