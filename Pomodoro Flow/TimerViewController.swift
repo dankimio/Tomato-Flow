@@ -166,7 +166,7 @@ class TimerViewController: UIViewController {
     reloadData()
   }
 
-  @objc func secondPassed() {
+  @objc func tick() {
     if currentTime > 0 {
       currentTime = currentTime - 1.0
       updateTimerLabel()
@@ -283,7 +283,7 @@ class TimerViewController: UIViewController {
 
   fileprivate func fireTimer() {
     timer = Timer.scheduledTimer(timeInterval: 1,
-                                 target: self, selector: #selector(secondPassed), userInfo: nil, repeats: true)
+                                 target: self, selector: #selector(tick), userInfo: nil, repeats: true)
   }
 
   fileprivate func refreshPomodoros() {
