@@ -31,7 +31,9 @@ class TimerViewController: UIViewController {
   }()
   
   private lazy var startButton: UIButton = {
-    let startButton = UIButton(configuration: .filled())
+    var buttonConfiguration = UIButton.Configuration.filled()
+    buttonConfiguration.baseBackgroundColor = Colors.primary
+    let startButton = UIButton(configuration: buttonConfiguration)
     startButton.setTitle("Start", for: .normal)
     startButton.isHidden = false
     return startButton
@@ -49,7 +51,9 @@ class TimerViewController: UIViewController {
   }()
 
   private lazy var stopButton: UIButton = {
-    let stopButton = UIButton(configuration: .filled())
+    var buttonConfiguration = UIButton.Configuration.filled()
+    buttonConfiguration.baseBackgroundColor = Colors.primary
+    let stopButton = UIButton(configuration: buttonConfiguration)
     stopButton.setTitle("Stop", for: .normal)
     stopButton.isHidden = true
     return stopButton
