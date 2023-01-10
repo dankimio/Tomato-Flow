@@ -34,6 +34,21 @@ class TimerViewController: UIViewController {
     )
     return newTimerLabel
   }()
+
+  private lazy var buttonsContainer: UIStackView = {
+    let buttonsStackView = UIStackView()
+    buttonsStackView.axis = .horizontal
+    buttonsStackView.alignment = .fill
+    buttonsStackView.distribution = .fill
+    return buttonsStackView
+  }()
+  
+  private lazy var newStartButton: UIButton = {
+    let newStartButton = UIButton()
+    newStartButton.setTitle("Title", for: .normal)
+    newStartButton.setTitleColor(.red, for: .normal)
+    return newStartButton
+  }()
   
   private lazy var newCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -94,6 +109,14 @@ class TimerViewController: UIViewController {
     }
     
     stackView.addArrangedSubview(newTimerLabel)
+    
+    buttonsContainer.snp.makeConstraints { make in
+      make.height.equalTo(50)
+    }
+    buttonsContainer.addArrangedSubview(newStartButton)
+    stackView.addArrangedSubview(buttonsContainer)
+    stackView.setCustomSpacing(20, after: buttonsContainer)
+    
     stackView.addArrangedSubview(newCollectionView)
 
     let notificationCenter = NotificationCenter.default
