@@ -29,11 +29,11 @@ class TimerViewController: UIViewController {
     return buttonsStackView
   }()
   
-  private lazy var newStartButton: UIButton = {
-    let newStartButton = UIButton(configuration: .filled())
-    newStartButton.setTitle("Start", for: .normal)
-    newStartButton.isHidden = false
-    return newStartButton
+  private lazy var startButton: UIButton = {
+    let startButton = UIButton(configuration: .filled())
+    startButton.setTitle("Start", for: .normal)
+    startButton.isHidden = false
+    return startButton
   }()
   
   private lazy var newPauseButton: UIButton = {
@@ -116,9 +116,9 @@ class TimerViewController: UIViewController {
     
     stackView.addArrangedSubview(timerLabel)
     
-    newStartButton.addTarget(self, action: #selector(newStart), for: .touchUpInside)
+    startButton.addTarget(self, action: #selector(newStart), for: .touchUpInside)
     
-    buttonsContainer.addArrangedSubview(newStartButton)
+    buttonsContainer.addArrangedSubview(startButton)
     buttonsContainer.addArrangedSubview(newPauseButton)
     buttonsContainer.addArrangedSubview(newStopButton)
     stackView.addArrangedSubview(buttonsContainer)
