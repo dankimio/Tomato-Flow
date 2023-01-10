@@ -16,9 +16,8 @@ class TimerViewController: UIViewController {
     let timerLabel = UILabel()
     timerLabel.text = "25:00"
     timerLabel.font = UIFont.monospacedDigitSystemFont(
-      ofSize: 200, weight: .medium
+      ofSize: 108, weight: .medium
     )
-    timerLabel.adjustsFontSizeToFitWidth = true
     return timerLabel
   }()
 
