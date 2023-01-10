@@ -26,6 +26,7 @@ class TimerViewController: UIViewController {
     buttonsStackView.axis = .horizontal
     buttonsStackView.alignment = .fill
     buttonsStackView.distribution = .fillEqually
+    buttonsStackView.spacing = 12
     return buttonsStackView
   }()
   
