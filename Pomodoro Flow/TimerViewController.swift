@@ -58,9 +58,8 @@ class TimerViewController: UIViewController {
   }()
 
   private lazy var newStopButton: UIButton = {
-    let newStopButton = UIButton()
+    let newStopButton = UIButton(configuration: .filled())
     newStopButton.setTitle("Stop", for: .normal)
-    newStopButton.setTitleColor(.red, for: .normal)
     newStopButton.isHidden = true
     return newStopButton
   }()
