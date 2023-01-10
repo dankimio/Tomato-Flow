@@ -187,6 +187,8 @@ class TimerViewController: UIViewController {
   }
 
   @objc func start() {
+    guard !running else { return }
+    
     scheduler.start()
     running = true
     animateStarted()
