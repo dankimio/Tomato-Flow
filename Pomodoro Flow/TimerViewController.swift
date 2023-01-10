@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class TimerViewController: UIViewController {
-  
+
   private lazy var stackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
@@ -10,7 +10,7 @@ class TimerViewController: UIViewController {
     stackView.distribution = .fill
     return stackView
   }()
-  
+
   // TODO: center
   private lazy var timerLabel: UILabel = {
     let timerLabel = UILabel()
@@ -31,7 +31,7 @@ class TimerViewController: UIViewController {
     buttonsStackView.spacing = 12
     return buttonsStackView
   }()
-  
+
   private lazy var startButton: UIButton = {
     // TODO: get rid of repetition
     var buttonConfiguration = UIButton.Configuration.filled()
@@ -41,7 +41,7 @@ class TimerViewController: UIViewController {
     startButton.isHidden = false
     return startButton
   }()
-  
+
   private lazy var pauseButton: UIButton = {
     var buttonConfiguration = UIButton.Configuration.filled()
     buttonConfiguration.baseBackgroundColor = UIColor.clear
@@ -65,7 +65,7 @@ class TimerViewController: UIViewController {
     stopButton.isHidden = true
     return stopButton
   }()
-  
+
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: 32, height: 32)
@@ -111,9 +111,9 @@ class TimerViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     view.addSubview(stackView)
-    
+
     stackView.snp.makeConstraints { make in
       make.leading.equalToSuperview().offset(40)
       make.trailing.equalToSuperview().offset(-40)
@@ -121,26 +121,26 @@ class TimerViewController: UIViewController {
       // TODO: do not set fixed height
       make.height.equalTo(352)
     }
-    
+
     stackView.addArrangedSubview(timerLabel)
-    
+
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
-    
+
     pauseButton.addTarget(self, action: #selector(togglePaused), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(pauseButton)
-    
+
     stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(stopButton)
-    
+
     stackView.addArrangedSubview(buttonsContainer)
-    
+
     buttonsContainer.snp.makeConstraints { make in
       make.height.equalTo(50)
     }
-    
+
     stackView.setCustomSpacing(48, after: buttonsContainer)
-    
+
     stackView.addArrangedSubview(collectionView)
 
     let notificationCenter = NotificationCenter.default
@@ -189,14 +189,14 @@ class TimerViewController: UIViewController {
   }
 
   // MARK: - Actions
-  
+
   @objc func togglePaused() {
     scheduler.paused ? unpause() :pause()
   }
 
   @objc func start() {
     guard !running else { return }
-    
+
     scheduler.start()
     running = true
     animateStarted()
@@ -233,7 +233,7 @@ class TimerViewController: UIViewController {
                                             message: notification.alertBody,
                                             preferredStyle: .alert)
 
-    let okAction = UIAlertAction(title: "OK", style: .default) { action in print("OK") }
+    let okAction = UIAlertAction(title: "OK", style: .default) { _ in print("OK") }
     alertController.addAction(okAction)
 
     present(alertController, animated: true, completion: nil)
@@ -307,7 +307,7 @@ class TimerViewController: UIViewController {
     startButton.isHidden = false
     pauseButton.isHidden = true
     stopButton.isHidden = true
-    
+
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
 
