@@ -31,6 +31,7 @@ class TimerViewController: UIViewController {
   }()
   
   private lazy var startButton: UIButton = {
+    // TODO: get rid of repetition
     var buttonConfiguration = UIButton.Configuration.filled()
     buttonConfiguration.baseBackgroundColor = Colors.primary
     let startButton = UIButton(configuration: buttonConfiguration)
@@ -51,6 +52,7 @@ class TimerViewController: UIViewController {
   }()
 
   private lazy var stopButton: UIButton = {
+    // TODO: get rid of repetition
     var buttonConfiguration = UIButton.Configuration.filled()
     buttonConfiguration.baseBackgroundColor = Colors.primary
     let stopButton = UIButton(configuration: buttonConfiguration)
