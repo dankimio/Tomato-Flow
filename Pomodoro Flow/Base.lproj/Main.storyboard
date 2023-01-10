@@ -36,27 +36,8 @@
                             <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-X6-5pN">
                                 <rect key="frame" x="36" y="317.5" width="303" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A71-Pa-qZN" customClass="RoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="141.5" height="50"/>
-                                        <color key="backgroundColor" red="0.91487574577331543" green="0.25728178024291992" blue="0.28367936611175537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="132" id="yT3-BQ-UFT"/>
-                                        </constraints>
-                                        <state key="normal" title="Stop">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="yT3-BQ-UFT"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="stop:" destination="9pv-A4-QxB" eventType="touchUpInside" id="VMI-Cs-hry"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mK0-Fu-s2u" customClass="EmptyRoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
-                                        <rect key="frame" x="161.5" y="0.0" width="141.5" height="50"/>
+                                        <rect key="frame" x="254" y="0.0" width="49" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="132" id="VNu-ne-yem"/>
@@ -79,25 +60,16 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="mK0-Fu-s2u" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="Dss-R9-ZwY"/>
                                     <constraint firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="EYY-Vc-fxe"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="top" id="JDC-NW-rh1"/>
-                                    <constraint firstItem="A71-Pa-qZN" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="top" id="LtD-fL-MBg"/>
-                                    <constraint firstItem="A71-Pa-qZN" firstAttribute="width" secondItem="mK0-Fu-s2u" secondAttribute="width" id="NCM-g0-X1T"/>
                                     <constraint firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="PHh-Tm-eqj"/>
                                     <constraint firstAttribute="bottom" secondItem="mK0-Fu-s2u" secondAttribute="bottom" id="WQW-tj-VdO"/>
-                                    <constraint firstItem="mK0-Fu-s2u" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="aw5-aO-r1s"/>
-                                    <constraint firstItem="mK0-Fu-s2u" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="trailing" constant="20" id="fO3-TJ-qb9"/>
                                     <constraint firstItem="mK0-Fu-s2u" firstAttribute="width" secondItem="9rf-X6-5pN" secondAttribute="width" id="hDz-1z-yAz"/>
-                                    <constraint firstItem="A71-Pa-qZN" firstAttribute="leading" secondItem="9rf-X6-5pN" secondAttribute="leading" id="kGr-ZU-LWZ"/>
                                     <constraint firstAttribute="height" constant="50" id="qYQ-5l-6FU"/>
-                                    <constraint firstAttribute="bottom" secondItem="A71-Pa-qZN" secondAttribute="bottom" id="wrS-Vf-a7q"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Dss-R9-ZwY"/>
                                         <exclude reference="PHh-Tm-eqj"/>
-                                        <exclude reference="fO3-TJ-qb9"/>
                                         <exclude reference="hDz-1z-yAz"/>
                                     </mask>
                                 </variation>
@@ -132,7 +104,6 @@
                     <connections>
                         <outlet property="buttonContainer" destination="9rf-X6-5pN" id="yX4-hR-sFR"/>
                         <outlet property="pauseButton" destination="mK0-Fu-s2u" id="QaV-ql-531"/>
-                        <outlet property="stopButton" destination="A71-Pa-qZN" id="RR1-xu-5ih"/>
                         <outlet property="timerLabel" destination="pQ0-r5-ZH3" id="pAw-xf-P5I"/>
                     </connections>
                 </viewController>

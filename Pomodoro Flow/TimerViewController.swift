@@ -3,7 +3,6 @@ import SnapKit
 
 class TimerViewController: UIViewController {
 
-  @IBOutlet weak var stopButton: UIButton!
   @IBOutlet weak var pauseButton: UIButton!
   @IBOutlet weak var buttonContainer: UIView!
 
