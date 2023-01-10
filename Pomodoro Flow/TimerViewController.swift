@@ -90,11 +90,6 @@ class TimerViewController: UIViewController {
   fileprivate let animationDuration = 0.3
   fileprivate let settings = SettingsManager.sharedManager
 
-  fileprivate struct CollectionViewIdentifiers {
-    static let emptyCell = "EmptyCell"
-    static let filledCell = "FilledCell"
-  }
-
   // Pomodoros view
   fileprivate var pomodorosCompleted: Int!
   fileprivate var targetPomodoros: Int
