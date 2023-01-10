@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class TimerViewController: UIViewController {
 
@@ -17,6 +18,9 @@ class TimerViewController: UIViewController {
   }
 
   @IBOutlet weak var collectionView: UICollectionView!
+  
+  lazy var stackView = UIStackView()
+  lazy var myLabel = UILabel()
 
   // Scheduler
   fileprivate let scheduler: Scheduler
@@ -56,6 +60,20 @@ class TimerViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    view.addSubview(stackView)
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.distribution = .fill
+    stackView.snp.makeConstraints { make in
+      make.top.equalTo(view).offset(50)
+      make.leading.equalTo(view).offset(20)
+      make.trailing.equalTo(view).offset(-20)
+      make.height.equalTo(400)
+    }
+    
+    stackView.addArrangedSubview(myLabel)
+    myLabel.text = "Hello"
 
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
