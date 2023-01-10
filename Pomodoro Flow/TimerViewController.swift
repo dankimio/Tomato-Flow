@@ -41,7 +41,10 @@ class TimerViewController: UIViewController {
   }()
   
   private lazy var pauseButton: UIButton = {
-    let pauseButton = UIButton()
+    var buttonConfiguration = UIButton.Configuration.filled()
+    buttonConfiguration.baseBackgroundColor = UIColor.clear
+    buttonConfiguration.baseForegroundColor = Colors.primary
+    let pauseButton = UIButton(configuration: buttonConfiguration)
     pauseButton.setTitle("Pause", for: .normal)
     pauseButton.setTitleColor(.red, for: .normal)
     pauseButton.layer.cornerRadius = 6
