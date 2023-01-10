@@ -3,8 +3,6 @@ import SnapKit
 
 class TimerViewController: UIViewController {
 
-  @IBOutlet weak var buttonContainer: UIView!
-
   @IBOutlet weak var timerLabel: UILabel! {
     didSet {
       timerLabel.font = UIFont.monospacedDigitSystemFont(

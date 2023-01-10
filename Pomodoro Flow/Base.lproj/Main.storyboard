@@ -33,41 +33,23 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-X6-5pN">
-                                <rect key="frame" x="36" y="317.5" width="303" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="qYQ-5l-6FU"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="pQ0-r5-ZH3" secondAttribute="centerX" id="7YH-9C-SNO"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" constant="-110" id="Aar-vy-4GN"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="HiX-je-fy3"/>
-                            <constraint firstAttribute="centerX" secondItem="9rf-X6-5pN" secondAttribute="centerX" id="XEG-Kt-u2G"/>
-                            <constraint firstItem="9rf-X6-5pN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="XgJ-Td-SgG"/>
-                            <constraint firstAttribute="centerY" secondItem="9rf-X6-5pN" secondAttribute="centerY" id="Xuh-gR-ZUV"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pQ0-r5-ZH3" secondAttribute="trailing" constant="20" id="bpN-eu-1bu"/>
-                            <constraint firstItem="9rf-X6-5pN" firstAttribute="trailing" secondItem="pQ0-r5-ZH3" secondAttribute="trailing" id="gcW-tA-ilg"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="9rf-X6-5pN" secondAttribute="trailing" constant="20" id="kyy-qJ-jsi"/>
-                            <constraint firstItem="9rf-X6-5pN" firstAttribute="leading" secondItem="pQ0-r5-ZH3" secondAttribute="leading" id="mR4-TN-vJg"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="88" id="wEa-ap-gaW"/>
-                            <constraint firstItem="9rf-X6-5pN" firstAttribute="top" secondItem="pQ0-r5-ZH3" secondAttribute="bottom" constant="8" id="zBP-82-qjy"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="wEa-ap-gaW"/>
-                                <exclude reference="XgJ-Td-SgG"/>
-                                <exclude reference="Xuh-gR-ZUV"/>
-                                <exclude reference="kyy-qJ-jsi"/>
-                                <exclude reference="zBP-82-qjy"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Timer" image="Timer" id="acW-dT-cKf"/>
                     <connections>
-                        <outlet property="buttonContainer" destination="9rf-X6-5pN" id="yX4-hR-sFR"/>
                         <outlet property="timerLabel" destination="pQ0-r5-ZH3" id="pAw-xf-P5I"/>
                     </connections>
                 </viewController>
