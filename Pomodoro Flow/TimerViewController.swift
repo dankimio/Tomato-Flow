@@ -44,9 +44,8 @@ class TimerViewController: UIViewController {
   }()
   
   private lazy var newStartButton: UIButton = {
-    let newStartButton = UIButton()
+    let newStartButton = UIButton(configuration: .filled())
     newStartButton.setTitle("Start", for: .normal)
-    newStartButton.setTitleColor(.red, for: .normal)
     return newStartButton
   }()
   
