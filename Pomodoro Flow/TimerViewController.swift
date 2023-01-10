@@ -277,8 +277,8 @@ class TimerViewController: UIViewController {
 
   fileprivate func resetTimerLabelColor() {
     switch pomodoro.state {
-    case .initial: timerLabel.textColor = UIColor.accentColor
-    case .shortBreak, .longBreak: timerLabel.textColor = UIColor.breakColor
+    case .initial: timerLabel.textColor = UIColor.label
+    case .shortBreak, .longBreak: timerLabel.textColor = UIColor.systemGreen
     }
   }
 
