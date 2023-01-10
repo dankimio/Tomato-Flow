@@ -16,8 +16,6 @@ class TimerViewController: UIViewController {
       )
     }
   }
-
-  @IBOutlet weak var collectionView: UICollectionView!
   
   private lazy var stackView: UIStackView = {
     let stackView = UIStackView()
@@ -249,7 +247,6 @@ class TimerViewController: UIViewController {
 
   fileprivate func refreshPomodoros() {
     targetPomodoros = settings.targetPomodoros
-    collectionView.reloadData()
   }
 
   fileprivate func animateStarted() {
