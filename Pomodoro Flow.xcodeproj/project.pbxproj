@@ -22,6 +22,7 @@
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		3774E53A296799AF00BEAFBA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3774E539296799AF00BEAFBA /* SnapKit */; };
 		378192051B40682D0016375D /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378192041B40682D0016375D /* EmptyCell.swift */; };
+		37CBA52A296DABDD0043596C /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBA529296DABDD0043596C /* MyCell.swift */; };
 		37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */; };
 		37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* TimerState.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		375850271B3B5B4A005628A0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		378192041B40682D0016375D /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
+		37CBA529296DABDD0043596C /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		37EFAC081C94C83200D1DC76 /* TimerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 				375850251B3B50B0005628A0 /* EmptyRoundedButton.swift */,
 				375850271B3B5B4A005628A0 /* RoundedButton.swift */,
 				378192041B40682D0016375D /* EmptyCell.swift */,
+				37CBA529296DABDD0043596C /* MyCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */,
 				3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */,
 				375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */,
+				37CBA52A296DABDD0043596C /* MyCell.swift in Sources */,
 				37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */,
 				375850261B3B50B0005628A0 /* EmptyRoundedButton.swift in Sources */,
 				376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */,
