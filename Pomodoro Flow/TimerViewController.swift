@@ -39,7 +39,7 @@ class TimerViewController: UIViewController {
     let buttonsStackView = UIStackView()
     buttonsStackView.axis = .horizontal
     buttonsStackView.alignment = .fill
-    buttonsStackView.distribution = .fill
+    buttonsStackView.distribution = .fillEqually
     return buttonsStackView
   }()
   
@@ -128,14 +128,14 @@ class TimerViewController: UIViewController {
     
     stackView.addArrangedSubview(newTimerLabel)
     
-    buttonsContainer.snp.makeConstraints { make in
-      make.height.equalTo(50)
-    }
     buttonsContainer.addArrangedSubview(newStartButton)
     buttonsContainer.addArrangedSubview(newPauseButton)
     buttonsContainer.addArrangedSubview(newStopButton)
-    
     stackView.addArrangedSubview(buttonsContainer)
+    
+    buttonsContainer.snp.makeConstraints { make in
+      make.height.equalTo(50)
+    }
     
     stackView.setCustomSpacing(48, after: buttonsContainer)
     
