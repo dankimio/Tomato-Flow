@@ -116,6 +116,7 @@ class TimerViewController: UIViewController {
     }
     
     stackView.addArrangedSubview(timerLabel)
+    stackView.setCustomSpacing(16, after: timerLabel)
     
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
