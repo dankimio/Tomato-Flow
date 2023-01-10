@@ -36,15 +36,15 @@ class TimerViewController: UIViewController {
     return startButton
   }()
   
-  private lazy var newPauseButton: UIButton = {
-    let newPauseButton = UIButton()
-    newPauseButton.setTitle("Pause", for: .normal)
-    newPauseButton.setTitleColor(.red, for: .normal)
-    newPauseButton.layer.cornerRadius = 6
-    newPauseButton.layer.borderWidth = 2
-    newPauseButton.layer.borderColor = Colors.primary.cgColor
-    newPauseButton.isHidden = true
-    return newPauseButton
+  private lazy var pauseButton: UIButton = {
+    let pauseButton = UIButton()
+    pauseButton.setTitle("Pause", for: .normal)
+    pauseButton.setTitleColor(.red, for: .normal)
+    pauseButton.layer.cornerRadius = 6
+    pauseButton.layer.borderWidth = 2
+    pauseButton.layer.borderColor = Colors.primary.cgColor
+    pauseButton.isHidden = true
+    return pauseButton
   }()
 
   private lazy var newStopButton: UIButton = {
@@ -119,7 +119,7 @@ class TimerViewController: UIViewController {
     startButton.addTarget(self, action: #selector(newStart), for: .touchUpInside)
     
     buttonsContainer.addArrangedSubview(startButton)
-    buttonsContainer.addArrangedSubview(newPauseButton)
+    buttonsContainer.addArrangedSubview(pauseButton)
     buttonsContainer.addArrangedSubview(newStopButton)
     stackView.addArrangedSubview(buttonsContainer)
     
