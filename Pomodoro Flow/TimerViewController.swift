@@ -19,8 +19,32 @@ class TimerViewController: UIViewController {
 
   @IBOutlet weak var collectionView: UICollectionView!
   
-  lazy var stackView = UIStackView()
-  lazy var myLabel = UILabel()
+  private lazy var stackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.distribution = .fill
+    return stackView
+  }()
+  
+  private lazy var newTimerLabel: UILabel = {
+    let newTimerLabel = UILabel()
+    newTimerLabel.text = "25:00"
+    newTimerLabel.font = UIFont.monospacedDigitSystemFont(
+      ofSize: 64, weight: .medium
+    )
+    return newTimerLabel
+  }()
+  
+  private lazy var newCollectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.itemSize = CGSize(width: 32, height: 32)
+    let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
+    newCollectionView.register(MyCell.self, forCellWithReuseIdentifier: "MyCell")
+    newCollectionView.dataSource = self
+
+    return newCollectionView
+  }()
 
   // Scheduler
   fileprivate let scheduler: Scheduler
@@ -62,18 +86,17 @@ class TimerViewController: UIViewController {
     super.viewDidLoad()
     
     view.addSubview(stackView)
-    stackView.axis = .vertical
-    stackView.alignment = .fill
-    stackView.distribution = .fill
-    stackView.snp.makeConstraints { make in
-      make.top.equalTo(view).offset(50)
-      make.leading.equalTo(view).offset(20)
-      make.trailing.equalTo(view).offset(-20)
-      make.height.equalTo(400)
-    }
     
-    stackView.addArrangedSubview(myLabel)
-    myLabel.text = "Hello"
+    stackView.snp.makeConstraints { make in
+      make.top.equalToSuperview().offset(50)
+      make.leading.equalToSuperview().offset(20)
+      make.trailing.equalToSuperview().offset(-20)
+      make.bottom.equalToSuperview().offset(-100)
+    }
+    stackView.addArrangedSubview(newTimerLabel)
+    
+    
+    stackView.addArrangedSubview(newCollectionView)
 
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -182,7 +205,6 @@ class TimerViewController: UIViewController {
   fileprivate func reloadData() {
     targetPomodoros = settings.targetPomodoros
     pomodorosCompleted = pomodoro.pomodorosCompleted
-    collectionView.reloadData()
   }
 
   fileprivate func updateTimerLabel() {
@@ -262,81 +284,20 @@ class TimerViewController: UIViewController {
 
 }
 
-extension TimerViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension TimerViewController: UICollectionViewDataSource {
 
   // MARK: UICollectionViewDataSource
-
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return numberOfSections
-  }
 
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
 
-    return numberOfRows(inSection: section)
+    return 10
   }
 
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-    let index = rowsPerSection * indexPath.section + indexPath.row
-    let identifier = (index < pomodorosCompleted) ?
-      CollectionViewIdentifiers.filledCell : CollectionViewIdentifiers.emptyCell
-
-    return collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
-                                              for: indexPath)
-  }
-
-  // MARK: UICollectionViewDelegate
-
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      insetForSectionAt section: Int) -> UIEdgeInsets {
-
-    let bottomInset: CGFloat = 12
-    return UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
-  }
-
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 10.0
-  }
-
-  // MARK: Helpers
-
-  fileprivate var rowsPerSection: Int {
-    let cellWidth: CGFloat = 30.0
-    let margin: CGFloat = 10.0
-    return Int(collectionView.frame.width / (cellWidth + margin))
-  }
-
-  fileprivate func numberOfRows(inSection section: Int) -> Int {
-    if section == lastSectionIndex {
-      return numberOfRowsInLastSection
-    } else {
-      return rowsPerSection
-    }
-  }
-
-  fileprivate var numberOfRowsInLastSection: Int {
-    if targetPomodoros % rowsPerSection == 0 {
-      return rowsPerSection
-    } else {
-      return targetPomodoros % rowsPerSection
-    }
-  }
-
-  fileprivate var numberOfSections: Int {
-    return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
-  }
-
-  fileprivate var lastSectionIndex: Int {
-    if numberOfSections == 0 {
-      return 0
-    }
-
-    return numberOfSections - 1
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
+    return cell
   }
 
 }
