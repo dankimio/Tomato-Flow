@@ -1,22 +1,82 @@
 import UIKit
+import SnapKit
 
 class TimerViewController: UIViewController {
 
-  @IBOutlet weak var startButton: UIButton!
-  @IBOutlet weak var stopButton: UIButton!
-  @IBOutlet weak var pauseButton: UIButton!
-  @IBOutlet weak var buttonContainer: UIView!
+  private lazy var stackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.distribution = .fill
+    return stackView
+  }()
 
-  @IBOutlet weak var timerLabel: UILabel! {
-    didSet {
-      timerLabel.font = UIFont.monospacedDigitSystemFont(
-        ofSize: 124.0,
-        weight: UIFont.Weight.light
-      )
-    }
-  }
+  // TODO: center
+  private lazy var timerLabel: UILabel = {
+    let timerLabel = UILabel()
+    timerLabel.text = "25:00"
+    timerLabel.textAlignment = .center
+    timerLabel.font = UIFont.monospacedDigitSystemFont(
+      ofSize: 128, weight: .medium
+    )
+    timerLabel.adjustsFontSizeToFitWidth = true
+    return timerLabel
+  }()
 
-  @IBOutlet weak var collectionView: UICollectionView!
+  private lazy var buttonsContainer: UIStackView = {
+    let buttonsStackView = UIStackView()
+    buttonsStackView.axis = .horizontal
+    buttonsStackView.alignment = .fill
+    buttonsStackView.distribution = .fillEqually
+    buttonsStackView.spacing = 12
+    return buttonsStackView
+  }()
+
+  private lazy var startButton: UIButton = {
+    // TODO: get rid of repetition
+    var buttonConfiguration = UIButton.Configuration.filled()
+    buttonConfiguration.baseBackgroundColor = Colors.primary
+    let startButton = UIButton(configuration: buttonConfiguration)
+    startButton.setTitle("Start", for: .normal)
+    startButton.isHidden = false
+    return startButton
+  }()
+
+  private lazy var pauseButton: UIButton = {
+    var buttonConfiguration = UIButton.Configuration.filled()
+    buttonConfiguration.baseBackgroundColor = UIColor.clear
+    buttonConfiguration.baseForegroundColor = Colors.primary
+    let pauseButton = UIButton(configuration: buttonConfiguration)
+    pauseButton.setTitle("Pause", for: .normal)
+    pauseButton.setTitleColor(.red, for: .normal)
+    pauseButton.layer.cornerRadius = 6
+    pauseButton.layer.borderWidth = 2
+    pauseButton.layer.borderColor = Colors.primary.cgColor
+    pauseButton.isHidden = true
+    return pauseButton
+  }()
+
+  private lazy var stopButton: UIButton = {
+    // TODO: get rid of repetition
+    var buttonConfiguration = UIButton.Configuration.filled()
+    buttonConfiguration.baseBackgroundColor = Colors.primary
+    let stopButton = UIButton(configuration: buttonConfiguration)
+    stopButton.setTitle("Stop", for: .normal)
+    stopButton.isHidden = true
+    return stopButton
+  }()
+
+  private lazy var collectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.itemSize = CGSize(width: 32, height: 32)
+    let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
+    newCollectionView.register(EmptyCell.self, forCellWithReuseIdentifier: "EmptyCell")
+    newCollectionView.register(FilledCell.self, forCellWithReuseIdentifier: "FilledCell")
+    newCollectionView.dataSource = self
+    newCollectionView.backgroundColor = .clear
+
+    return newCollectionView
+  }()
 
   // Scheduler
   fileprivate let scheduler: Scheduler
@@ -30,11 +90,6 @@ class TimerViewController: UIViewController {
   // Configuration
   fileprivate let animationDuration = 0.3
   fileprivate let settings = SettingsManager.sharedManager
-
-  fileprivate struct CollectionViewIdentifiers {
-    static let emptyCell = "EmptyCell"
-    static let filledCell = "FilledCell"
-  }
 
   // Pomodoros view
   fileprivate var pomodorosCompleted: Int!
@@ -56,6 +111,8 @@ class TimerViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    setUpSubviews()
 
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -80,8 +137,41 @@ class TimerViewController: UIViewController {
 
     reloadData()
   }
+  
+  private func setUpSubviews() {
+    view.addSubview(stackView)
 
-  @objc func secondPassed() {
+    stackView.snp.makeConstraints { make in
+      make.leading.equalToSuperview().offset(40)
+      make.trailing.equalToSuperview().offset(-40)
+      make.centerY.equalToSuperview().offset(-64)
+      // TODO: do not set fixed height
+      make.height.equalTo(352)
+    }
+
+    stackView.addArrangedSubview(timerLabel)
+
+    startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
+    buttonsContainer.addArrangedSubview(startButton)
+
+    pauseButton.addTarget(self, action: #selector(togglePaused), for: .touchUpInside)
+    buttonsContainer.addArrangedSubview(pauseButton)
+
+    stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
+    buttonsContainer.addArrangedSubview(stopButton)
+
+    stackView.addArrangedSubview(buttonsContainer)
+
+    buttonsContainer.snp.makeConstraints { make in
+      make.height.equalTo(50)
+    }
+
+    stackView.setCustomSpacing(48, after: buttonsContainer)
+
+    stackView.addArrangedSubview(collectionView)
+  }
+
+  @objc func tick() {
     if currentTime > 0 {
       currentTime = currentTime - 1.0
       updateTimerLabel()
@@ -104,26 +194,20 @@ class TimerViewController: UIViewController {
 
   // MARK: - Actions
 
-  @IBAction func togglePaused(_ sender: EmptyRoundedButton) {
+  @objc func togglePaused() {
     scheduler.paused ? unpause() :pause()
   }
 
-  @IBAction func start(_ sender: RoundedButton) {
-    start()
-  }
+  @objc func start() {
+    guard !running else { return }
 
-  @IBAction func stop(_ sender: RoundedButton) {
-    stop()
-  }
-
-  func start() {
     scheduler.start()
     running = true
     animateStarted()
     fireTimer()
   }
 
-  func stop() {
+  @objc func stop() {
     scheduler.stop()
     running = false
     animateStopped()
@@ -153,7 +237,7 @@ class TimerViewController: UIViewController {
                                             message: notification.alertBody,
                                             preferredStyle: .alert)
 
-    let okAction = UIAlertAction(title: "OK", style: .default) { action in print("OK") }
+    let okAction = UIAlertAction(title: "OK", style: .default) { _ in print("OK") }
     alertController.addAction(okAction)
 
     present(alertController, animated: true, completion: nil)
@@ -198,38 +282,35 @@ class TimerViewController: UIViewController {
 
   fileprivate func resetTimerLabelColor() {
     switch pomodoro.state {
-    case .initial: timerLabel.textColor = UIColor.accentColor
-    case .shortBreak, .longBreak: timerLabel.textColor = UIColor.breakColor
+    case .initial: timerLabel.textColor = UIColor.label
+    case .shortBreak, .longBreak: timerLabel.textColor = UIColor.systemGreen
     }
   }
 
   fileprivate func fireTimer() {
-    timer = Timer.scheduledTimer(timeInterval: 1,
-                                 target: self, selector: #selector(secondPassed), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(
+      timeInterval: 1,
+      target: self,
+      selector: #selector(tick),
+      userInfo: nil,
+      repeats: true
+    )
   }
 
   fileprivate func refreshPomodoros() {
     targetPomodoros = settings.targetPomodoros
-    collectionView.reloadData()
   }
 
   fileprivate func animateStarted() {
-    let deltaY: CGFloat = 54
-    buttonContainer.frame.origin.y += deltaY
-    buttonContainer.isHidden = false
-
-    UIView.animate(withDuration: animationDuration, animations: {
-      self.startButton.alpha = 0.0
-      self.buttonContainer.alpha = 1.0
-      self.buttonContainer.frame.origin.y += -deltaY
-    })
+    startButton.isHidden = true
+    pauseButton.isHidden = false
+    stopButton.isHidden = false
   }
 
   fileprivate func animateStopped() {
-    UIView.animate(withDuration: animationDuration, animations: {
-      self.startButton.alpha = 1.0
-      self.buttonContainer.alpha = 0.0
-    })
+    startButton.isHidden = false
+    pauseButton.isHidden = true
+    stopButton.isHidden = true
 
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
@@ -244,81 +325,20 @@ class TimerViewController: UIViewController {
 
 }
 
-extension TimerViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension TimerViewController: UICollectionViewDataSource {
 
   // MARK: UICollectionViewDataSource
-
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return numberOfSections
-  }
 
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
 
-    return numberOfRows(inSection: section)
+    return targetPomodoros
   }
 
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-    let index = rowsPerSection * indexPath.section + indexPath.row
-    let identifier = (index < pomodorosCompleted) ?
-      CollectionViewIdentifiers.filledCell : CollectionViewIdentifiers.emptyCell
-
-    return collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
-                                              for: indexPath)
-  }
-
-  // MARK: UICollectionViewDelegate
-
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      insetForSectionAt section: Int) -> UIEdgeInsets {
-
-    let bottomInset: CGFloat = 12
-    return UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
-  }
-
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 10.0
-  }
-
-  // MARK: Helpers
-
-  fileprivate var rowsPerSection: Int {
-    let cellWidth: CGFloat = 30.0
-    let margin: CGFloat = 10.0
-    return Int(collectionView.frame.width / (cellWidth + margin))
-  }
-
-  fileprivate func numberOfRows(inSection section: Int) -> Int {
-    if section == lastSectionIndex {
-      return numberOfRowsInLastSection
-    } else {
-      return rowsPerSection
-    }
-  }
-
-  fileprivate var numberOfRowsInLastSection: Int {
-    if targetPomodoros % rowsPerSection == 0 {
-      return rowsPerSection
-    } else {
-      return targetPomodoros % rowsPerSection
-    }
-  }
-
-  fileprivate var numberOfSections: Int {
-    return Int(ceil(Double(targetPomodoros) / Double(rowsPerSection)))
-  }
-
-  fileprivate var lastSectionIndex: Int {
-    if numberOfSections == 0 {
-      return 0
-    }
-
-    return numberOfSections - 1
+    let identifier = (indexPath.row < pomodorosCompleted) ? "FilledCell" : "EmptyCell"
+    return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
   }
 
 }
