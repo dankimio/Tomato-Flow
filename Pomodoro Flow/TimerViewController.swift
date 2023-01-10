@@ -46,6 +46,7 @@ class TimerViewController: UIViewController {
   private lazy var newStartButton: UIButton = {
     let newStartButton = UIButton(configuration: .filled())
     newStartButton.setTitle("Start", for: .normal)
+    newStartButton.isHidden = true
     return newStartButton
   }()
   
@@ -53,14 +54,17 @@ class TimerViewController: UIViewController {
     let newPauseButton = UIButton()
     newPauseButton.setTitle("Pause", for: .normal)
     newPauseButton.setTitleColor(.red, for: .normal)
-    newPauseButton.isHidden = true
+    newPauseButton.layer.cornerRadius = 6
+    newPauseButton.layer.borderWidth = 2
+    newPauseButton.layer.borderColor = Colors.primary.cgColor
+    newPauseButton.isHidden = false
     return newPauseButton
   }()
 
   private lazy var newStopButton: UIButton = {
     let newStopButton = UIButton(configuration: .filled())
     newStopButton.setTitle("Stop", for: .normal)
-    newStopButton.isHidden = true
+    newStopButton.isHidden = false
     return newStopButton
   }()
   
