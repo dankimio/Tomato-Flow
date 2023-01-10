@@ -33,21 +33,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxv-ph-lBJ" customClass="RoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
-                                <rect key="frame" x="36" y="317.5" width="303" height="50"/>
-                                <color key="backgroundColor" red="0.91487574577331543" green="0.25728178024291992" blue="0.28367936611175537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="0z6-ba-sEe"/>
-                                </constraints>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="start:" destination="9pv-A4-QxB" eventType="touchUpInside" id="BD9-om-4jg"/>
-                                </connections>
-                            </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-X6-5pN">
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-X6-5pN">
                                 <rect key="frame" x="36" y="317.5" width="303" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A71-Pa-qZN" customClass="RoundedButton" customModule="Pomodoro_Flow" customModuleProvider="target">
@@ -119,31 +105,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="leading" constant="1" id="1qe-dp-KMQ"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Kxv-ph-lBJ" secondAttribute="trailing" constant="20" id="277-Ls-4gN"/>
-                            <constraint firstAttribute="centerX" secondItem="Kxv-ph-lBJ" secondAttribute="centerX" id="58z-0s-qWT"/>
                             <constraint firstAttribute="centerX" secondItem="pQ0-r5-ZH3" secondAttribute="centerX" id="7YH-9C-SNO"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" constant="-110" id="Aar-vy-4GN"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="B3L-G8-5q6"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" secondItem="9rf-X6-5pN" secondAttribute="leading" id="GBx-5o-uSP"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="HiX-je-fy3"/>
-                            <constraint firstItem="9rf-X6-5pN" firstAttribute="top" secondItem="Kxv-ph-lBJ" secondAttribute="top" id="M4r-Fm-HyQ"/>
                             <constraint firstAttribute="centerX" secondItem="9rf-X6-5pN" secondAttribute="centerX" id="XEG-Kt-u2G"/>
                             <constraint firstItem="9rf-X6-5pN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="20" id="XgJ-Td-SgG"/>
                             <constraint firstAttribute="centerY" secondItem="9rf-X6-5pN" secondAttribute="centerY" id="Xuh-gR-ZUV"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="trailing" secondItem="9rf-X6-5pN" secondAttribute="trailing" id="bWT-DG-I97"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pQ0-r5-ZH3" secondAttribute="trailing" constant="20" id="bpN-eu-1bu"/>
                             <constraint firstItem="9rf-X6-5pN" firstAttribute="trailing" secondItem="pQ0-r5-ZH3" secondAttribute="trailing" id="gcW-tA-ilg"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="9rf-X6-5pN" secondAttribute="trailing" constant="20" id="kyy-qJ-jsi"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" secondItem="A71-Pa-qZN" secondAttribute="leading" id="mJu-MH-RU4"/>
                             <constraint firstItem="9rf-X6-5pN" firstAttribute="leading" secondItem="pQ0-r5-ZH3" secondAttribute="leading" id="mR4-TN-vJg"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="trailing" secondItem="pQ0-r5-ZH3" secondAttribute="trailing" id="oBJ-VX-EeZ"/>
-                            <constraint firstItem="9rf-X6-5pN" firstAttribute="top" secondItem="Kxv-ph-lBJ" secondAttribute="bottom" id="oNW-hv-QGu"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="top" secondItem="pQ0-r5-ZH3" secondAttribute="bottom" constant="20" id="pgl-mw-eK0"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="top" secondItem="9rf-X6-5pN" secondAttribute="bottom" constant="8" id="tu8-U6-8o3"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="leading" secondItem="pQ0-r5-ZH3" secondAttribute="leading" id="ucP-bh-iEt"/>
                             <constraint firstItem="pQ0-r5-ZH3" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="88" id="wEa-ap-gaW"/>
-                            <constraint firstItem="Kxv-ph-lBJ" firstAttribute="trailing" secondItem="mK0-Fu-s2u" secondAttribute="trailing" id="wti-A2-zIV"/>
                             <constraint firstItem="9rf-X6-5pN" firstAttribute="top" secondItem="pQ0-r5-ZH3" secondAttribute="bottom" constant="8" id="zBP-82-qjy"/>
                         </constraints>
                         <variation key="default">
@@ -152,14 +124,7 @@
                                 <exclude reference="XgJ-Td-SgG"/>
                                 <exclude reference="Xuh-gR-ZUV"/>
                                 <exclude reference="kyy-qJ-jsi"/>
-                                <exclude reference="oNW-hv-QGu"/>
                                 <exclude reference="zBP-82-qjy"/>
-                                <exclude reference="1qe-dp-KMQ"/>
-                                <exclude reference="GBx-5o-uSP"/>
-                                <exclude reference="bWT-DG-I97"/>
-                                <exclude reference="mJu-MH-RU4"/>
-                                <exclude reference="tu8-U6-8o3"/>
-                                <exclude reference="wti-A2-zIV"/>
                             </mask>
                         </variation>
                     </view>
@@ -167,7 +132,6 @@
                     <connections>
                         <outlet property="buttonContainer" destination="9rf-X6-5pN" id="yX4-hR-sFR"/>
                         <outlet property="pauseButton" destination="mK0-Fu-s2u" id="QaV-ql-531"/>
-                        <outlet property="startButton" destination="Kxv-ph-lBJ" id="cjz-pf-sBF"/>
                         <outlet property="stopButton" destination="A71-Pa-qZN" id="RR1-xu-5ih"/>
                         <outlet property="timerLabel" destination="pQ0-r5-ZH3" id="pAw-xf-P5I"/>
                     </connections>
