@@ -15,9 +15,11 @@ class TimerViewController: UIViewController {
   private lazy var timerLabel: UILabel = {
     let timerLabel = UILabel()
     timerLabel.text = "25:00"
+    timerLabel.textAlignment = .center
     timerLabel.font = UIFont.monospacedDigitSystemFont(
-      ofSize: 108, weight: .medium
+      ofSize: 128, weight: .medium
     )
+    timerLabel.adjustsFontSizeToFitWidth = true
     return timerLabel
   }()
 
@@ -121,11 +123,10 @@ class TimerViewController: UIViewController {
       make.trailing.equalToSuperview().offset(-40)
       make.centerY.equalToSuperview().offset(-64)
       // TODO: do not set fixed height
-      make.height.equalTo(320)
+      make.height.equalTo(352)
     }
     
     stackView.addArrangedSubview(timerLabel)
-    stackView.setCustomSpacing(16, after: timerLabel)
     
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
