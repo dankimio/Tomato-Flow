@@ -105,9 +105,9 @@ class TimerViewController: UIViewController {
     stackView.snp.makeConstraints { make in
       make.leading.equalToSuperview().offset(40)
       make.trailing.equalToSuperview().offset(-40)
-      make.centerY.equalToSuperview().offset(-80)
+      make.centerY.equalToSuperview().offset(-64)
       // TODO: do not set fixed height
-      make.height.equalTo(300)
+      make.height.equalTo(320)
     }
     
     stackView.addArrangedSubview(newTimerLabel)
@@ -117,7 +117,7 @@ class TimerViewController: UIViewController {
     }
     buttonsContainer.addArrangedSubview(newStartButton)
     stackView.addArrangedSubview(buttonsContainer)
-    stackView.setCustomSpacing(32, after: buttonsContainer)
+    stackView.setCustomSpacing(48, after: buttonsContainer)
     
     stackView.addArrangedSubview(newCollectionView)
 
