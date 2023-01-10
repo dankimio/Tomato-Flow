@@ -45,9 +45,23 @@ class TimerViewController: UIViewController {
   
   private lazy var newStartButton: UIButton = {
     let newStartButton = UIButton()
-    newStartButton.setTitle("Title", for: .normal)
+    newStartButton.setTitle("Start", for: .normal)
     newStartButton.setTitleColor(.red, for: .normal)
     return newStartButton
+  }()
+  
+  private lazy var newPauseButton: UIButton = {
+    let newPauseButton = UIButton()
+    newPauseButton.setTitle("Pause", for: .normal)
+    newPauseButton.setTitleColor(.red, for: .normal)
+    return newPauseButton
+  }()
+
+  private lazy var newStopButton: UIButton = {
+    let newStopButton = UIButton()
+    newStopButton.setTitle("Stop", for: .normal)
+    newStopButton.setTitleColor(.red, for: .normal)
+    return newStopButton
   }()
   
   private lazy var newCollectionView: UICollectionView = {
