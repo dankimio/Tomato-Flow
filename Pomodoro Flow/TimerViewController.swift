@@ -31,7 +31,7 @@ class TimerViewController: UIViewController {
     let newTimerLabel = UILabel()
     newTimerLabel.text = "25:00"
     newTimerLabel.font = UIFont.monospacedDigitSystemFont(
-      ofSize: 64, weight: .medium
+      ofSize: 96, weight: .medium
     )
     return newTimerLabel
   }()
