@@ -284,10 +284,16 @@ class TimerViewController: UIViewController {
   }
 
   fileprivate func animateStarted() {
-    buttonsContainer.isHidden = false
+    startButton.isHidden = true
+    pauseButton.isHidden = false
+    stopButton.isHidden = false
   }
 
   fileprivate func animateStopped() {
+    startButton.isHidden = false
+    pauseButton.isHidden = true
+    stopButton.isHidden = true
+    
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
 
