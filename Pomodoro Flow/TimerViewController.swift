@@ -129,8 +129,8 @@ class TimerViewController: UIViewController {
     view.addSubview(stackView)
 
     stackView.snp.makeConstraints { make in
-      make.leading.equalToSuperview().offset(40)
-      make.trailing.equalToSuperview().offset(-40)
+      make.leading.equalToSuperview().inset(40)
+      make.trailing.equalToSuperview().inset(40)
       make.centerY.equalToSuperview().offset(-64)
       // TODO: do not set fixed height
       make.height.equalTo(352)
