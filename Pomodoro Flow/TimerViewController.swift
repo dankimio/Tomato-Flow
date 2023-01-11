@@ -7,7 +7,6 @@ class TimerViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.alignment = .fill
-    stackView.distribution = .fill
     return stackView
   }()
 
