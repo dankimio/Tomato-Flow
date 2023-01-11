@@ -1,6 +1,23 @@
 import UIKit
 import SnapKit
 
+extension UIButton.Configuration {
+  public static func primary() -> UIButton.Configuration {
+    var configuration = UIButton.Configuration.filled()
+    configuration.baseBackgroundColor = Colors.primary
+    
+    return configuration
+  }
+  
+  public static func secondary() -> UIButton.Configuration {
+    var configuration = UIButton.Configuration.filled()
+    configuration.baseBackgroundColor = UIColor.clear
+    configuration.baseForegroundColor = Colors.primary
+    
+    return configuration
+  }
+}
+
 class TimerViewController: UIViewController {
 
   private lazy var stackView: UIStackView = {
@@ -32,34 +49,23 @@ class TimerViewController: UIViewController {
   }()
 
   private lazy var startButton: UIButton = {
-    // TODO: get rid of repetition
-    var buttonConfiguration = UIButton.Configuration.filled()
-    buttonConfiguration.baseBackgroundColor = Colors.primary
-    let startButton = UIButton(configuration: buttonConfiguration)
+    let startButton = UIButton(configuration: .primary())
     startButton.setTitle("Start", for: .normal)
     startButton.isHidden = false
+    
     return startButton
   }()
 
-  private lazy var pauseButton: UIButton = {
-    var buttonConfiguration = UIButton.Configuration.filled()
-    buttonConfiguration.baseBackgroundColor = UIColor.clear
-    buttonConfiguration.baseForegroundColor = Colors.primary
-    let pauseButton = UIButton(configuration: buttonConfiguration)
+  private lazy var pauseButton: SecondaryButton = {
+    let pauseButton = SecondaryButton(configuration: .secondary())
     pauseButton.setTitle("Pause", for: .normal)
-    pauseButton.setTitleColor(.red, for: .normal)
-    pauseButton.layer.cornerRadius = 6
-    pauseButton.layer.borderWidth = 2
-    pauseButton.layer.borderColor = Colors.primary.cgColor
     pauseButton.isHidden = true
+    
     return pauseButton
   }()
 
   private lazy var stopButton: UIButton = {
-    // TODO: get rid of repetition
-    var buttonConfiguration = UIButton.Configuration.filled()
-    buttonConfiguration.baseBackgroundColor = Colors.primary
-    let stopButton = UIButton(configuration: buttonConfiguration)
+    let stopButton = UIButton(configuration: .primary())
     stopButton.setTitle("Stop", for: .normal)
     stopButton.isHidden = true
     return stopButton
