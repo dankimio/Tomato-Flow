@@ -193,6 +193,7 @@ class TimerViewController: UIViewController {
     running = true
     animateStarted()
     fireTimer()
+    generateHapticFeedback()
   }
 
   @objc func stop() {
@@ -202,6 +203,7 @@ class TimerViewController: UIViewController {
     timer?.invalidate()
     resetCurrentTime()
     updateTimerLabel()
+    generateHapticFeedback()
   }
 
   func pause() {
@@ -211,6 +213,7 @@ class TimerViewController: UIViewController {
     running = false
     timer?.invalidate()
     animatePaused()
+    generateHapticFeedback()
   }
 
   func unpause() {
@@ -218,6 +221,7 @@ class TimerViewController: UIViewController {
     running = true
     fireTimer()
     animateUnpaused()
+    generateHapticFeedback()
   }
 
   func presentAlertFromNotification(_ notification: UILocalNotification) {
@@ -309,6 +313,10 @@ class TimerViewController: UIViewController {
 
   fileprivate func animateUnpaused() {
     pauseButton.setTitle("Pause", for: UIControl.State())
+  }
+  
+  private func generateHapticFeedback() {
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
   }
 
 }
