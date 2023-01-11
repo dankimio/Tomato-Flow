@@ -31,8 +31,8 @@ class TimerViewController: UIViewController {
     return buttonsStackView
   }()
 
-  private lazy var startButton: UIButton = {
-    let startButton = UIButton(configuration: .primary())
+  private lazy var startButton: AnimatedButton = {
+    let startButton = AnimatedButton(configuration: .primary())
     startButton.setTitle("Start", for: .normal)
     startButton.isHidden = false
     
@@ -47,8 +47,8 @@ class TimerViewController: UIViewController {
     return pauseButton
   }()
 
-  private lazy var stopButton: UIButton = {
-    let stopButton = UIButton(configuration: .primary())
+  private lazy var stopButton: AnimatedButton = {
+    let stopButton = AnimatedButton(configuration: .primary())
     stopButton.setTitle("Stop", for: .normal)
     stopButton.isHidden = true
     return stopButton

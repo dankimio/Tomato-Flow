@@ -17,6 +17,7 @@
 		3753473E1B3AFF010089AB7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3753473D1B3AFF010089AB7F /* Images.xcassets */; };
 		375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753473F1B3AFF010089AB7F /* LaunchScreen.xib */; };
 		3767662B296E397100E7345E /* UIButton.Configuration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */; };
+		3767662D296E3BBF00E7345E /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767662C296E3BBF00E7345E /* AnimatedButton.swift */; };
 		376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767956F1B52DDDD007E6CBC /* Scheduler.swift */; };
 		3774E53A296799AF00BEAFBA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3774E539296799AF00BEAFBA /* SnapKit */; };
 		37B6EEAD296DD71A00467643 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6EEAC296DD71A00467643 /* Colors.swift */; };
@@ -40,6 +41,7 @@
 		3753473D1B3AFF010089AB7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		375347401B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton.Configuration+Extensions.swift"; sourceTree = "<group>"; };
+		3767662C296E3BBF00E7345E /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		3767956F1B52DDDD007E6CBC /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Scheduler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		37B6EEAC296DD71A00467643 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		37B6EEAE296E019F00467643 /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				37B6EEAE296E019F00467643 /* EmptyCell.swift */,
 				37B6EEB2296E26E800467643 /* SecondaryButton.swift */,
 				3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */,
+				3767662C296E3BBF00E7345E /* AnimatedButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */,
 				37CBA52A296DABDD0043596C /* FilledCell.swift in Sources */,
 				37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */,
+				3767662D296E3BBF00E7345E /* AnimatedButton.swift in Sources */,
 				376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

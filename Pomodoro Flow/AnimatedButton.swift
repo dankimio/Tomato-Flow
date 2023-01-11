@@ -1,19 +1,11 @@
 import UIKit
 
-class SecondaryButton: AnimatedButton {
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    layer.cornerRadius = 6
-    layer.borderWidth = 2
-    layer.borderColor = Colors.primary.cgColor
-  }
-  
+class AnimatedButton: UIButton {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     
     UIView.animate(withDuration: 0.15) {
-      self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+      self.transform = CGAffineTransform(scaleX: 0.975, y: 0.975)
     }
   }
   
