@@ -35,7 +35,7 @@ class TimerViewController: UIViewController {
     let startButton = AnimatedButton(configuration: .primary())
     startButton.setTitle("Start", for: .normal)
     startButton.isHidden = false
-    
+
     return startButton
   }()
 
@@ -43,7 +43,7 @@ class TimerViewController: UIViewController {
     let pauseButton = SecondaryButton(configuration: .secondary())
     pauseButton.setTitle("Pause", for: .normal)
     pauseButton.isHidden = true
-    
+
     return pauseButton
   }()
 
@@ -125,7 +125,7 @@ class TimerViewController: UIViewController {
 
     reloadData()
   }
-  
+
   private func setUpSubviews() {
     view.addSubview(stackView)
 
@@ -314,7 +314,7 @@ class TimerViewController: UIViewController {
   fileprivate func animateUnpaused() {
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
-  
+
   private func generateHapticFeedback() {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
   }
