@@ -57,8 +57,14 @@ class TimerViewController: UIViewController {
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: 32, height: 32)
     let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
-    newCollectionView.register(EmptyCell.self, forCellWithReuseIdentifier: "EmptyCell")
-    newCollectionView.register(FilledCell.self, forCellWithReuseIdentifier: "FilledCell")
+    newCollectionView.register(
+      EmptyCell.self,
+      forCellWithReuseIdentifier: String(describing: EmptyCell.self)
+    )
+    newCollectionView.register(
+      FilledCell.self,
+      forCellWithReuseIdentifier: String(describing: FilledCell.self)
+    )
     newCollectionView.dataSource = self
     newCollectionView.backgroundColor = .clear
 
@@ -331,7 +337,8 @@ extension TimerViewController: UICollectionViewDataSource {
 
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let identifier = (indexPath.row < pomodorosCompleted) ? "FilledCell" : "EmptyCell"
+    let identifier = (indexPath.row < pomodorosCompleted) ?
+      String(describing: FilledCell.self) : String(describing: EmptyCell.self)
     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
   }
 
