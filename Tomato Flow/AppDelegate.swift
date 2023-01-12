@@ -62,22 +62,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // MARK: - Helpers
 
-  fileprivate var timerViewController: TimerViewController {
+  private var timerViewController: TimerViewController {
     let tabBarController = window!.rootViewController as! UITabBarController
     return tabBarController.viewControllers!.first as! TimerViewController
   }
 
-  fileprivate func registerNotifications() {
+  private func registerNotifications() {
     let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
                                                           categories: nil)
     UIApplication.shared.registerUserNotificationSettings(notificationSettings)
   }
 
-  fileprivate func resetBadgeNumber() {
+  private func resetBadgeNumber() {
     UIApplication.shared.applicationIconBadgeNumber = 0
   }
 
-  fileprivate func configureTabBarColor() {
+  private func configureTabBarColor() {
     UITabBar.appearance().tintColor = UIColor(
       red: 240/255.0, green: 90/255.0, blue: 90/255.0, alpha: 1)
   }

@@ -12,10 +12,10 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
   @IBOutlet weak var homepageCell: UITableViewCell!
   @IBOutlet weak var appStoreCell: UITableViewCell!
 
-  fileprivate let userDefaults = UserDefaults.standard
-  fileprivate let settings = SettingsManager.sharedManager
+  private let userDefaults = UserDefaults.standard
+  private let settings = SettingsManager.sharedManager
 
-  fileprivate struct About {
+  private struct About {
     static let twitterURL = "https://twitter.com/dankimio"
     static let homepageURL = "https://dan.kim"
     static let appStoreURL = "https://apps.apple.com/us/app/tomato-flow/id1095742214"
@@ -35,7 +35,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
     }
   }
 
-  fileprivate func setupLabels() {
+  private func setupLabels() {
     pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
     shortBreakLengthLabel.text = "\(settings.shortBreakLength / 60) minutes"
     longBreakLengthLabel.text = "\(settings.longBreakLength / 60) minutes"
@@ -87,7 +87,7 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
 
   // MARK: - Helpers
 
-  fileprivate func openURL(_ url: String) {
+  private func openURL(_ url: String) {
     if let url = URL(string: url) {
       UIApplication.shared.open(url)
     }

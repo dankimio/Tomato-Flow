@@ -14,7 +14,7 @@ class PickerViewController: UITableViewController {
   var selectedIndexPath: IndexPath?
   var delegate: PickerViewControllerDelegate?
 
-  fileprivate struct PickerOptions {
+  private struct PickerOptions {
     static let pomodoroLength = [25, 30, 35, 40].map { $0 * 60 }
     static let shortBreakLength = [5, 10, 15, 20].map { $0 * 60 }
     static let longBreakLength = [10, 15, 20, 25, 30].map { $0 * 60 }
@@ -100,7 +100,7 @@ class PickerViewController: UITableViewController {
     }
   }
 
-  fileprivate func updateSettings() {
+  private func updateSettings() {
     let settings = SettingsManager.sharedManager
 
     switch type! {

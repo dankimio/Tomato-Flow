@@ -10,7 +10,7 @@ class Pomodoro {
 
   var state: TimerState = .initial
 
-  fileprivate init() {}
+  private init() {}
 
   var pomodorosCompleted: Int {
     get {
@@ -30,7 +30,7 @@ class Pomodoro {
     state = .initial
   }
 
-  fileprivate var currentDateKey: String {
+  private var currentDateKey: String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     return dateFormatter.string(from: Date())

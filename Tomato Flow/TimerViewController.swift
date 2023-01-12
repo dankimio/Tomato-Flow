@@ -72,21 +72,21 @@ class TimerViewController: UIViewController {
   }()
 
   // Scheduler
-  fileprivate let scheduler: Scheduler
-  fileprivate let pomodoro = Pomodoro.sharedInstance
+  private let scheduler: Scheduler
+  private let pomodoro = Pomodoro.sharedInstance
 
   // Time
-  fileprivate var timer: Timer?
-  fileprivate var currentTime: Double!
-  fileprivate var running = false
+  private var timer: Timer?
+  private var currentTime: Double!
+  private var running = false
 
   // Configuration
-  fileprivate let animationDuration = 0.3
-  fileprivate let settings = SettingsManager.sharedManager
+  private let animationDuration = 0.3
+  private let settings = SettingsManager.sharedManager
 
   // Pomodoros view
-  fileprivate var pomodorosCompleted: Int!
-  fileprivate var targetPomodoros: Int
+  private var pomodorosCompleted: Int!
+  private var targetPomodoros: Int
 
   // MARK: - Initialization
 
@@ -241,18 +241,18 @@ class TimerViewController: UIViewController {
 
   // MARK: - Helpers
 
-  fileprivate func reloadData() {
+  private func reloadData() {
     targetPomodoros = settings.targetPomodoros
     pomodorosCompleted = pomodoro.pomodorosCompleted
     collectionView.reloadData()
   }
 
-  fileprivate func updateTimerLabel() {
+  private func updateTimerLabel() {
     let time = Int(currentTime)
     timerLabel.text = String(format: "%02d:%02d", time / 60, time % 60)
   }
 
-  fileprivate func setCurrentTime() {
+  private func setCurrentTime() {
     if let pausedTime = scheduler.pausedTime {
       currentTime = pausedTime
       return
@@ -267,7 +267,7 @@ class TimerViewController: UIViewController {
     resetCurrentTime()
   }
 
-  fileprivate func resetCurrentTime() {
+  private func resetCurrentTime() {
     switch pomodoro.state {
     case .initial: currentTime = Double(settings.pomodoroLength)
     case .shortBreak: currentTime = Double(settings.shortBreakLength)
@@ -276,14 +276,14 @@ class TimerViewController: UIViewController {
     resetTimerLabelColor()
   }
 
-  fileprivate func resetTimerLabelColor() {
+  private func resetTimerLabelColor() {
     switch pomodoro.state {
     case .initial: timerLabel.textColor = UIColor.label
     case .shortBreak, .longBreak: timerLabel.textColor = UIColor.systemGreen
     }
   }
 
-  fileprivate func fireTimer() {
+  private func fireTimer() {
     timer = Timer.scheduledTimer(
       timeInterval: 1,
       target: self,
@@ -293,17 +293,17 @@ class TimerViewController: UIViewController {
     )
   }
 
-  fileprivate func refreshPomodoros() {
+  private func refreshPomodoros() {
     targetPomodoros = settings.targetPomodoros
   }
 
-  fileprivate func animateStarted() {
+  private func animateStarted() {
     startButton.isHidden = true
     pauseButton.isHidden = false
     stopButton.isHidden = false
   }
 
-  fileprivate func animateStopped() {
+  private func animateStopped() {
     startButton.isHidden = false
     pauseButton.isHidden = true
     stopButton.isHidden = true
@@ -311,11 +311,11 @@ class TimerViewController: UIViewController {
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
 
-  fileprivate func animatePaused() {
+  private func animatePaused() {
     pauseButton.setTitle("Resume", for: UIControl.State())
   }
 
-  fileprivate func animateUnpaused() {
+  private func animateUnpaused() {
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
 

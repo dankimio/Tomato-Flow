@@ -11,9 +11,9 @@ class Scheduler {
 
   weak var delegate: SchedulerDelegate?
 
-  fileprivate let userDefaults = UserDefaults.standard
-  fileprivate let settings = SettingsManager.sharedManager
-  fileprivate let pomodoro = Pomodoro.sharedInstance
+  private let userDefaults = UserDefaults.standard
+  private let settings = SettingsManager.sharedManager
+  private let pomodoro = Pomodoro.sharedInstance
 
   // Interval for rescheduling timers
   var pausedTime: Double? {
@@ -92,38 +92,38 @@ class Scheduler {
 
   // MARK: - Helpers
 
-  fileprivate var firstScheduledNotification: UILocalNotification? {
+  private var firstScheduledNotification: UILocalNotification? {
     return UIApplication.shared.scheduledLocalNotifications?.first
   }
 
-  fileprivate func cancelNotification() {
+  private func cancelNotification() {
     UIApplication.shared.cancelAllLocalNotifications()
     fireDate = nil
     print("Notification canceled")
   }
 
-  fileprivate func schedulePomodoro(_ interval: TimeInterval? = nil) {
+  private func schedulePomodoro(_ interval: TimeInterval? = nil) {
     let interval = interval ?? TimeInterval(settings.pomodoroLength)
     scheduleNotification(interval,
                          title: "Pomodoro finished", body: "Time to take a break!")
     print("Pomodoro scheduled")
   }
 
-  fileprivate func scheduleShortBreak(_ interval: TimeInterval? = nil) {
+  private func scheduleShortBreak(_ interval: TimeInterval? = nil) {
     let interval = interval ?? TimeInterval(settings.shortBreakLength)
     scheduleNotification(interval,
                          title: "Break finished", body: "Time to get back to work!")
     print("Short break scheduled")
   }
 
-  fileprivate func scheduleLongBreak(_ interval: TimeInterval? = nil) {
+  private func scheduleLongBreak(_ interval: TimeInterval? = nil) {
     let interval = interval ?? TimeInterval(settings.longBreakLength)
     scheduleNotification(interval,
                          title: "Long break is over", body: "Time to get back to work!")
     print("Long break scheduled")
   }
 
-  fileprivate func scheduleNotification(_ interval: TimeInterval, title: String, body: String) {
+  private func scheduleNotification(_ interval: TimeInterval, title: String, body: String) {
     let notification = UILocalNotification()
     notification.fireDate = Date(timeIntervalSinceNow: interval)
     notification.alertTitle = title

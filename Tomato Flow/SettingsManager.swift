@@ -4,12 +4,12 @@ import Foundation
 class SettingsManager {
 
   static let sharedManager = SettingsManager()
-  fileprivate init() {}
+  private init() {}
 
-  fileprivate let userDefaults = UserDefaults.standard
-  fileprivate let notificationCenter = NotificationCenter.default
+  private let userDefaults = UserDefaults.standard
+  private let notificationCenter = NotificationCenter.default
 
-  fileprivate struct Settings {
+  private struct Settings {
     static let pomodoroLength = "Settings.PomodoroLength"
     static let shortBreakLength = "Settings.ShortBreakLength"
     static let longBreakLength = "Settings.LongBreakLength"
