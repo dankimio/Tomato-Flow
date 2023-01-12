@@ -10,7 +10,7 @@
         <!--Timer-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" userLabel="Timer" customClass="TimerViewController" customModule="Pomodoro_Flow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" userLabel="Timer" customClass="TimerViewController" customModule="Tomato_Flow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -29,7 +29,7 @@
         <!--Settings-->
         <scene sceneID="Zoo-ro-4k5">
             <objects>
-                <tableViewController id="VEE-a6-uH4" customClass="SettingsViewController" customModule="Pomodoro_Flow" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VEE-a6-uH4" customClass="SettingsViewController" customModule="Tomato_Flow" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="gGc-74-AnA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,8 +43,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="533.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Pomodoro length" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GUA-Bt-35o">
-                                                    <rect key="frame" x="16" y="13" width="125" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Interval length" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GUA-Bt-35o">
+                                                    <rect key="frame" x="16" y="13" width="103.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -234,7 +234,7 @@
         <!--Picker View Controller-->
         <scene sceneID="Kwx-im-gL8">
             <objects>
-                <tableViewController id="DOU-es-Ptn" customClass="PickerViewController" customModule="Pomodoro_Flow" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="DOU-es-Ptn" customClass="PickerViewController" customModule="Tomato_Flow" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="V7s-v3-AiX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
