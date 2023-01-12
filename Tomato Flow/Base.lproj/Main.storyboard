@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timer" image="Timer" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Timer" image="timer" catalog="system" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -281,7 +281,7 @@
         <scene sceneID="8vf-UE-Nuw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dr4-Ed-R2Y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="7CE-2J-eUX"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gearshape" catalog="system" id="7CE-2J-eUX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3yf-yo-0cl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -302,7 +302,7 @@
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.91487574577331543" green="0.25728178024291992" blue="0.28367936611175537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
-        <image name="Settings" width="30" height="30"/>
-        <image name="Timer" width="30" height="30"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
+        <image name="timer" catalog="system" width="128" height="123"/>
     </resources>
 </document>
