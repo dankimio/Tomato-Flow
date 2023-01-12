@@ -66,7 +66,7 @@
 		375347261B3AFF010089AB7F = {
 			isa = PBXGroup;
 			children = (
-				375347311B3AFF010089AB7F /* Pomodoro Flow */,
+				375347311B3AFF010089AB7F /* Tomato Flow */,
 				375347301B3AFF010089AB7F /* Products */,
 			);
 			indentWidth = 2;
@@ -80,7 +80,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		375347311B3AFF010089AB7F /* Pomodoro Flow */ = {
+		375347311B3AFF010089AB7F /* Tomato Flow */ = {
 			isa = PBXGroup;
 			children = (
 				37FE4A8D1B5289D200280C97 /* Model */,
@@ -88,7 +88,7 @@
 				37FE4A8B1B5289A600280C97 /* View */,
 				375347321B3AFF010089AB7F /* Supporting Files */,
 			);
-			path = "Pomodoro Flow";
+			path = "Tomato Flow";
 			sourceTree = "<group>";
 		};
 		375347321B3AFF010089AB7F /* Supporting Files */ = {
@@ -377,7 +377,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B2K4X3ZJDS;
-				INFOPLIST_FILE = "Pomodoro Flow/Info.plist";
+				INFOPLIST_FILE = "Tomato Flow/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -399,7 +399,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = B2K4X3ZJDS;
-				INFOPLIST_FILE = "Pomodoro Flow/Info.plist";
+				INFOPLIST_FILE = "Tomato Flow/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
