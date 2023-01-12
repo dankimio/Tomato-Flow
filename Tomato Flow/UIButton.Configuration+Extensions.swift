@@ -9,10 +9,6 @@ extension UIButton.Configuration {
   }
 
   public static func secondary() -> UIButton.Configuration {
-    var configuration = UIButton.Configuration.filled()
-    configuration.baseBackgroundColor = UIColor.clear
-    configuration.baseForegroundColor = Colors.primary
-
-    return configuration
+    return UIButton.Configuration.tinted()
   }
 }
