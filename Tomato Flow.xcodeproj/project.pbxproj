@@ -33,7 +33,7 @@
 		3737994A1B4ABA160025260A /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		3737994C1B4B01250025260A /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		3737994E1B4C153B0025260A /* PickerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerType.swift; sourceTree = "<group>"; };
-		3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Flow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3753472F1B3AFF010089AB7F /* Tomato Flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tomato Flow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		375347331B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		375347361B3AFF010089AB7F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -75,7 +75,7 @@
 		375347301B3AFF010089AB7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */,
+				3753472F1B3AFF010089AB7F /* Tomato Flow.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3753472E1B3AFF010089AB7F /* Pomodoro Flow */ = {
+		3753472E1B3AFF010089AB7F /* Tomato Flow */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 375347501B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Pomodoro Flow" */;
+			buildConfigurationList = 375347501B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Tomato Flow" */;
 			buildPhases = (
 				3753472B1B3AFF010089AB7F /* Sources */,
 				3753472C1B3AFF010089AB7F /* Frameworks */,
@@ -153,12 +153,12 @@
 			);
 			dependencies = (
 			);
-			name = "Pomodoro Flow";
+			name = "Tomato Flow";
 			packageProductDependencies = (
 				3774E539296799AF00BEAFBA /* SnapKit */,
 			);
 			productName = "Pomodoro Flow";
-			productReference = 3753472F1B3AFF010089AB7F /* Pomodoro Flow.app */;
+			productReference = 3753472F1B3AFF010089AB7F /* Tomato Flow.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3753472A1B3AFF010089AB7F /* Build configuration list for PBXProject "Pomodoro Flow" */;
+			buildConfigurationList = 3753472A1B3AFF010089AB7F /* Build configuration list for PBXProject "Tomato Flow" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -199,7 +199,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3753472E1B3AFF010089AB7F /* Pomodoro Flow */,
+				3753472E1B3AFF010089AB7F /* Tomato Flow */,
 			);
 		};
 /* End PBXProject section */
@@ -416,7 +416,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3753472A1B3AFF010089AB7F /* Build configuration list for PBXProject "Pomodoro Flow" */ = {
+		3753472A1B3AFF010089AB7F /* Build configuration list for PBXProject "Tomato Flow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3753474E1B3AFF010089AB7F /* Debug */,
@@ -425,7 +425,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		375347501B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Pomodoro Flow" */ = {
+		375347501B3AFF010089AB7F /* Build configuration list for PBXNativeTarget "Tomato Flow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				375347511B3AFF010089AB7F /* Debug */,
