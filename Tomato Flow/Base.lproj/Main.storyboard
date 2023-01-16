@@ -234,7 +234,7 @@
         <!--Picker View Controller-->
         <scene sceneID="Kwx-im-gL8">
             <objects>
-                <tableViewController id="DOU-es-Ptn" customClass="PickerViewController" customModule="Tomato_Flow" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="DOU-es-Ptn" customClass="PickerViewController" customModule="Tomato_Flow" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="V7s-v3-AiX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
