@@ -14,7 +14,7 @@
 		375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347341B3AFF010089AB7F /* AppDelegate.swift */; };
 		375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347361B3AFF010089AB7F /* TimerViewController.swift */; };
 		3753473C1B3AFF010089AB7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3753473A1B3AFF010089AB7F /* Main.storyboard */; };
-		3753473E1B3AFF010089AB7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3753473D1B3AFF010089AB7F /* Images.xcassets */; };
+		3753473E1B3AFF010089AB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3753473D1B3AFF010089AB7F /* Assets.xcassets */; };
 		375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753473F1B3AFF010089AB7F /* LaunchScreen.xib */; };
 		3767662B296E397100E7345E /* UIButton.Configuration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */; };
 		3767662D296E3BBF00E7345E /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767662C296E3BBF00E7345E /* AnimatedButton.swift */; };
@@ -41,7 +41,7 @@
 		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		375347361B3AFF010089AB7F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3753473B1B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3753473D1B3AFF010089AB7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3753473D1B3AFF010089AB7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		375347401B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton.Configuration+Extensions.swift"; sourceTree = "<group>"; };
 		3767662C296E3BBF00E7345E /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				375347341B3AFF010089AB7F /* AppDelegate.swift */,
-				3753473D1B3AFF010089AB7F /* Images.xcassets */,
+				3753473D1B3AFF010089AB7F /* Assets.xcassets */,
 				375347331B3AFF010089AB7F /* Info.plist */,
 				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
 			);
@@ -221,7 +221,7 @@
 			files = (
 				3753473C1B3AFF010089AB7F /* Main.storyboard in Resources */,
 				375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */,
-				3753473E1B3AFF010089AB7F /* Images.xcassets in Resources */,
+				3753473E1B3AFF010089AB7F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
