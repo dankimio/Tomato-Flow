@@ -15,9 +15,9 @@ class PickerViewController: UITableViewController {
   var delegate: PickerViewControllerDelegate?
 
   private struct PickerOptions {
-    static let pomodoroLength = [25, 30, 35, 40].map { $0 * 60 }
-    static let shortBreakLength = [5, 10, 15, 20].map { $0 * 60 }
-    static let longBreakLength = [10, 15, 20, 25, 30].map { $0 * 60 }
+    static let pomodoroLength = [25, 30, 35, 40]
+    static let shortBreakLength = [5, 10, 15, 20]
+    static let longBreakLength = [10, 15, 20, 25, 30]
     static let targetPomodoros = (2...14).map { $0 }
   }
 
@@ -50,7 +50,7 @@ class PickerViewController: UITableViewController {
 
     // Configure the cell
     let value = options[indexPath.row]
-    let formattedValue = (type == PickerType.targetPomodoros ? value : value / 60)
+    let formattedValue = value
     cell.textLabel?.text = "\(formattedValue) \(specifier)"
 
     let currentValue = options[indexPath.row]

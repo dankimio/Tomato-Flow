@@ -36,9 +36,9 @@ class SettingsViewController: UITableViewController, PickerViewControllerDelegat
   }
 
   private func setupLabels() {
-    pomodoroLengthLabel.text = "\(settings.pomodoroLength / 60) minutes"
-    shortBreakLengthLabel.text = "\(settings.shortBreakLength / 60) minutes"
-    longBreakLengthLabel.text = "\(settings.longBreakLength / 60) minutes"
+    pomodoroLengthLabel.text = "\(settings.pomodoroLength) minutes"
+    shortBreakLengthLabel.text = "\(settings.shortBreakLength) minutes"
+    longBreakLengthLabel.text = "\(settings.longBreakLength) minutes"
     targetPomodorosLabel.text = "\(settings.targetPomodoros) pomodoros"
   }
 

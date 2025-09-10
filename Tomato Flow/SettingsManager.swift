@@ -19,17 +19,38 @@ class SettingsManager {
   // MARK: - General settings
 
   var pomodoroLength: Int {
-    get { return userDefaults.object(forKey: Settings.pomodoroLength) as? Int ?? 25 * 60 }
+    get {
+      let value = userDefaults.object(forKey: Settings.pomodoroLength) as? Int ?? 25
+      #if DEBUG
+        return value / 5
+      #else
+        return value * 60
+      #endif
+    }
     set { userDefaults.set(newValue, forKey: Settings.pomodoroLength) }
   }
 
   var shortBreakLength: Int {
-    get { return userDefaults.object(forKey: Settings.shortBreakLength) as? Int ?? 5 * 60 }
+    get {
+      let value = userDefaults.object(forKey: Settings.shortBreakLength) as? Int ?? 5
+      #if DEBUG
+        return value / 5
+      #else
+        return value * 60
+      #endif
+    }
     set { userDefaults.set(newValue, forKey: Settings.shortBreakLength) }
   }
 
   var longBreakLength: Int {
-    get { return userDefaults.object(forKey: Settings.longBreakLength) as? Int ?? 20 * 60 }
+    get {
+      let value = userDefaults.object(forKey: Settings.longBreakLength) as? Int ?? 20
+      #if DEBUG
+        return value / 5
+      #else
+        return value * 60
+      #endif
+    }
     set { userDefaults.set(newValue, forKey: Settings.longBreakLength) }
   }
 
@@ -37,7 +58,8 @@ class SettingsManager {
     get { return userDefaults.object(forKey: Settings.targetPomodoros) as? Int ?? 5 }
     set {
       userDefaults.set(newValue, forKey: Settings.targetPomodoros)
-      notificationCenter.post(name: Notification.Name(rawValue: "targetPomodorosUpdated"), object: self)
+      notificationCenter.post(
+        name: Notification.Name(rawValue: "targetPomodorosUpdated"), object: self)
     }
   }
 
