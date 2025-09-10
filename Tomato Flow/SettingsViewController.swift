@@ -7,7 +7,6 @@ class SettingsViewController: UITableViewController {
 
   private lazy var hostingController: UIHostingController<SettingsRootView> = {
     let controller = UIHostingController(rootView: SettingsRootView())
-    controller.view.backgroundColor = .clear
     return controller
   }()
 
@@ -15,8 +14,8 @@ class SettingsViewController: UITableViewController {
     super.viewDidLoad()
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     if let nav = navigationController {
       nav.setViewControllers([hostingController], animated: false)
     }
