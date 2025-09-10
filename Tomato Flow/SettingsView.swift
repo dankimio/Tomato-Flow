@@ -100,17 +100,21 @@ struct SettingsView: View {
           Button(action: { open(url: About.twitterURL) }) {
             HStack {
               Text("Follow me on Twitter")
+                .tint(.black)
               Spacer()
-              Text("@dankimio").foregroundColor(.secondary)
+              Text("@dankimio")
+                .tint(.secondary)
             }
           }
 
           Button(action: { open(url: About.homepageURL) }) {
             Text("Visit my website")
+              .tint(.black)
           }
 
           Button(action: { open(url: About.appStoreURL) }) {
             Text("Rate on the App Store")
+              .tint(.black)
           }
         }
       }

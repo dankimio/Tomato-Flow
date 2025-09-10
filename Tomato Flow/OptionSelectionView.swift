@@ -18,6 +18,7 @@ struct OptionSelectionView: View {
         }) {
           HStack {
             Text("\(option) \(specifier)")
+              .tint(.black)
             Spacer()
             if option == selected {
               Image(systemName: "checkmark")
