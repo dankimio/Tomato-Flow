@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 final class TimerTextViewModel: ObservableObject {
   @Published var timeString: String
@@ -33,3 +34,20 @@ struct TimerTextView: View {
     }
   }
 }
+
+#if DEBUG
+  struct TimerTextView_Previews: PreviewProvider {
+    static var previews: some View {
+      Group {
+        TimerTextView(
+          viewModel: TimerTextViewModel(timeString: "25:00", textColor: Color(UIColor.label))
+        )
+        .previewDisplayName("Work")
+        TimerTextView(viewModel: TimerTextViewModel(timeString: "05:00", textColor: .green))
+          .previewDisplayName("Break")
+      }
+      .padding()
+      .background(Color(UIColor.systemBackground))
+    }
+  }
+#endif
