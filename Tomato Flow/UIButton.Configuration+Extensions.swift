@@ -4,28 +4,24 @@ extension UIButton.Configuration {
   public static func primary() -> UIButton.Configuration {
     var configuration = UIButton.Configuration.filled()
     configuration.baseBackgroundColor = Colors.primary
-    configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
-      incoming in
-      var outgoing = incoming
-      let bodyFont = UIFont.preferredFont(forTextStyle: .body)
-      let mediumWeight = UIFont.Weight.medium
-      outgoing.font = UIFont.systemFont(ofSize: bodyFont.pointSize, weight: mediumWeight)
-      return outgoing
-    }
+    configuration.titleTextAttributesTransformer = mediumWeightFontTransformer()
 
     return configuration
   }
 
   public static func secondary() -> UIButton.Configuration {
     var configuration = UIButton.Configuration.tinted()
-    configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
-      incoming in
+    configuration.titleTextAttributesTransformer = mediumWeightFontTransformer()
+    return configuration
+  }
+
+  private static func mediumWeightFontTransformer() -> UIConfigurationTextAttributesTransformer {
+    return UIConfigurationTextAttributesTransformer { incoming in
       var outgoing = incoming
       let bodyFont = UIFont.preferredFont(forTextStyle: .body)
       let mediumWeight = UIFont.Weight.medium
       outgoing.font = UIFont.systemFont(ofSize: bodyFont.pointSize, weight: mediumWeight)
       return outgoing
     }
-    return configuration
   }
 }
