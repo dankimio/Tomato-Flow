@@ -28,7 +28,7 @@
 		37EFAC091C94C83200D1DC76 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFAC081C94C83200D1DC76 /* TimerState.swift */; };
 		37F0A0012A00000100AAA001 /* TimerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0002A00000100AAA001 /* TimerTextView.swift */; };
 		37F0A0042A00000100AAA004 /* SettingsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0022A00000100AAA002 /* SettingsRootView.swift */; };
-		37F0A0052A00000100AAA005 /* DiscreteOptionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0032A00000100AAA003 /* DiscreteOptionSelectionView.swift */; };
+		37F0A0052A00000100AAA005 /* OptionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0032A00000100AAA003 /* OptionSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +54,7 @@
 		37EFAC081C94C83200D1DC76 /* TimerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 		37F0A0002A00000100AAA001 /* TimerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTextView.swift; sourceTree = "<group>"; };
 		37F0A0022A00000100AAA002 /* SettingsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootView.swift; sourceTree = "<group>"; };
-		37F0A0032A00000100AAA003 /* DiscreteOptionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscreteOptionSelectionView.swift; sourceTree = "<group>"; };
+		37F0A0032A00000100AAA003 /* OptionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +120,7 @@
 				3767662C296E3BBF00E7345E /* AnimatedButton.swift */,
 				37F0A0002A00000100AAA001 /* TimerTextView.swift */,
 				37F0A0022A00000100AAA002 /* SettingsRootView.swift */,
-				37F0A0032A00000100AAA003 /* DiscreteOptionSelectionView.swift */,
+				37F0A0032A00000100AAA003 /* OptionSelectionView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -249,7 +249,7 @@
 				376795701B52DDDD007E6CBC /* Scheduler.swift in Sources */,
 				37F0A0012A00000100AAA001 /* TimerTextView.swift in Sources */,
 				37F0A0042A00000100AAA004 /* SettingsRootView.swift in Sources */,
-				37F0A0052A00000100AAA005 /* DiscreteOptionSelectionView.swift in Sources */,
+				37F0A0052A00000100AAA005 /* OptionSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DiscreteOptionSelectionView: View {
+struct OptionSelectionView: View {
   let title: String
   let options: [Int]
   let specifier: String
@@ -35,7 +35,7 @@ struct DiscreteOptionSelectionView: View {
   struct DiscreteOptionSelectionView_Previews: PreviewProvider {
     static var previews: some View {
       NavigationView {
-        DiscreteOptionSelectionView(
+        OptionSelectionView(
           title: "Interval length",
           options: [25, 30, 35, 40],
           specifier: "minutes",

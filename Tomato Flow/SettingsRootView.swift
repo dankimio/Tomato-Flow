@@ -20,7 +20,7 @@ struct SettingsRootView: View {
       List {
         Section(header: Text("General")) {
           NavigationLink(
-            destination: DiscreteOptionSelectionView(
+            destination: OptionSelectionView(
               title: "Interval length",
               options: [25, 30, 35, 40],
               specifier: "minutes",
@@ -39,7 +39,7 @@ struct SettingsRootView: View {
           }
 
           NavigationLink(
-            destination: DiscreteOptionSelectionView(
+            destination: OptionSelectionView(
               title: "Short break length",
               options: [5, 10, 15, 20],
               specifier: "minutes",
@@ -58,7 +58,7 @@ struct SettingsRootView: View {
           }
 
           NavigationLink(
-            destination: DiscreteOptionSelectionView(
+            destination: OptionSelectionView(
               title: "Long break length",
               options: [10, 15, 20, 25, 30],
               specifier: "minutes",
@@ -77,7 +77,7 @@ struct SettingsRootView: View {
           }
 
           NavigationLink(
-            destination: DiscreteOptionSelectionView(
+            destination: OptionSelectionView(
               title: "Target pomodoros",
               options: Array(2...14),
               specifier: "pomodoros",
