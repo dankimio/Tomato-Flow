@@ -30,3 +30,19 @@ struct DiscreteOptionSelectionView: View {
     .navigationTitle(title)
   }
 }
+
+#if DEBUG
+  struct DiscreteOptionSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+      NavigationView {
+        DiscreteOptionSelectionView(
+          title: "Interval length",
+          options: [25, 30, 35, 40],
+          specifier: "minutes",
+          selected: 25,
+          onSelect: { _ in }
+        )
+      }
+    }
+  }
+#endif

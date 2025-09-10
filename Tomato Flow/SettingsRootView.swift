@@ -138,3 +138,17 @@ private func displayMinutes(from value: Int) -> Int {
     return max(1, value / 60)
   #endif
 }
+
+#if DEBUG
+  struct SettingsRootView_Previews: PreviewProvider {
+    static var previews: some View {
+      Group {
+        SettingsRootView()
+          .previewDisplayName("Light")
+        SettingsRootView()
+          .preferredColorScheme(.dark)
+          .previewDisplayName("Dark")
+      }
+    }
+  }
+#endif
