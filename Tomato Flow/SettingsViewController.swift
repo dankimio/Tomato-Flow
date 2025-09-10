@@ -22,30 +22,28 @@ class SettingsViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    tableView.isHidden = true
-    embedSwiftUIView()
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: false)
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    navigationController?.setNavigationBarHidden(false, animated: false)
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if let nav = navigationController {
+      nav.setViewControllers([hostingController], animated: false)
+    }
   }
 
   private func embedSwiftUIView() {
+    guard hostingController.view.superview == nil else { return }
+
     addChild(hostingController)
     view.addSubview(hostingController.view)
+    view.bringSubviewToFront(hostingController.view)
     hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+    let guide = view.safeAreaLayoutGuide
     NSLayoutConstraint.activate([
-      hostingController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      hostingController.view.topAnchor.constraint(equalTo: guide.topAnchor),
       hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      hostingController.view.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
     ])
     hostingController.didMove(toParent: self)
   }
