@@ -1,0 +1,32 @@
+import SwiftUI
+
+struct DiscreteOptionSelectionView: View {
+  let title: String
+  let options: [Int]
+  let specifier: String
+  let selected: Int
+  let onSelect: (Int) -> Void
+
+  @Environment(\.dismiss) private var dismiss
+
+  var body: some View {
+    List {
+      ForEach(options, id: \.self) { option in
+        Button(action: {
+          onSelect(option)
+          dismiss()
+        }) {
+          HStack {
+            Text("\(option) \(specifier)")
+            Spacer()
+            if option == selected {
+              Image(systemName: "checkmark")
+                .foregroundColor(.accentColor)
+            }
+          }
+        }
+      }
+    }
+    .navigationTitle(title)
+  }
+}
