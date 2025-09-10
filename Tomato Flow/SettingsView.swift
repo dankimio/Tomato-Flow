@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-struct SettingsRootView: View {
+struct SettingsView: View {
   @State private var pomodoroMinutes: Int = 25
   @State private var shortBreakMinutes: Int = 5
   @State private var longBreakMinutes: Int = 20
@@ -143,9 +143,9 @@ private func displayMinutes(from value: Int) -> Int {
   struct SettingsRootView_Previews: PreviewProvider {
     static var previews: some View {
       Group {
-        SettingsRootView()
+        SettingsView()
           .previewDisplayName("Light")
-        SettingsRootView()
+        SettingsView()
           .preferredColorScheme(.dark)
           .previewDisplayName("Dark")
       }

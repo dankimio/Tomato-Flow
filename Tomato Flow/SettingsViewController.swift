@@ -5,8 +5,8 @@ class SettingsViewController: UITableViewController {
 
   private let settings = SettingsManager.sharedManager
 
-  private lazy var hostingController: UIHostingController<SettingsRootView> = {
-    let controller = UIHostingController(rootView: SettingsRootView())
+  private lazy var hostingController: UIHostingController<SettingsView> = {
+    let controller = UIHostingController(rootView: SettingsView())
     return controller
   }()
 
