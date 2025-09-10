@@ -14,13 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   ) -> Bool {
 
     registerNotifications()
-    configureTabBarColor()
-
-    if let accent = UIColor(named: "AccentColor") {
-      UIView.appearance().tintColor = accent
-      UINavigationBar.appearance().tintColor = accent
-      UITabBar.appearance().tintColor = accent
-    }
+    configureColor()
 
     return true
   }
@@ -94,9 +88,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
   }
 
-  private func configureTabBarColor() {
-    UITabBar.appearance().tintColor = UIColor(
-      red: 240 / 255.0, green: 90 / 255.0, blue: 90 / 255.0, alpha: 1)
+  private func configureColor() {
+    guard let accent = UIColor(named: "AccentColor") else { return }
+
+    UIView.appearance().tintColor = accent
+    UINavigationBar.appearance().tintColor = accent
+    UITabBar.appearance().tintColor = accent
   }
 
 }
