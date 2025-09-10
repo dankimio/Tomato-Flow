@@ -1,5 +1,6 @@
-import UIKit
 import SnapKit
+import SwiftUI
+import UIKit
 
 class TimerViewController: UIViewController {
 
@@ -10,15 +11,11 @@ class TimerViewController: UIViewController {
     return stackView
   }()
 
-  private lazy var timerLabel: UILabel = {
-    let timerLabel = UILabel()
-    timerLabel.text = "25:00"
-    timerLabel.textAlignment = .center
-    timerLabel.font = UIFont.monospacedDigitSystemFont(
-      ofSize: 128, weight: .medium
-    )
-    timerLabel.adjustsFontSizeToFitWidth = true
-    return timerLabel
+  private let timerTextViewModel = TimerTextViewModel()
+  private lazy var timerHostingController: UIHostingController<TimerTextView> = {
+    let hosting = UIHostingController(rootView: TimerTextView(viewModel: timerTextViewModel))
+    hosting.view.backgroundColor = .clear
+    return hosting
   }()
 
   private lazy var buttonsContainer: UIStackView = {
@@ -56,7 +53,7 @@ class TimerViewController: UIViewController {
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = CGSize(width: 32, height: 32)
-    let newCollectionView =  UICollectionView(frame: .zero, collectionViewLayout: layout)
+    let newCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     newCollectionView.register(
       EmptyCell.self,
       forCellWithReuseIdentifier: String(describing: EmptyCell.self)
@@ -108,7 +105,9 @@ class TimerViewController: UIViewController {
     setUpSubviews()
 
     let notificationCenter = NotificationCenter.default
-    notificationCenter.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    notificationCenter.addObserver(
+      self, selector: #selector(willEnterForeground),
+      name: UIApplication.willEnterForegroundNotification, object: nil)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +140,9 @@ class TimerViewController: UIViewController {
       make.height.equalTo(352)
     }
 
-    stackView.addArrangedSubview(timerLabel)
+    addChild(timerHostingController)
+    stackView.addArrangedSubview(timerHostingController.view)
+    timerHostingController.didMove(toParent: self)
 
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
@@ -187,7 +188,7 @@ class TimerViewController: UIViewController {
   // MARK: - Actions
 
   @objc func togglePaused() {
-    scheduler.paused ? unpause() :pause()
+    scheduler.paused ? unpause() : pause()
   }
 
   @objc func start() {
@@ -229,9 +230,10 @@ class TimerViewController: UIViewController {
   }
 
   func presentAlertFromNotification(_ notification: UNNotification) {
-    let alertController = UIAlertController(title: notification.request.content.title,
-                                            message: notification.request.content.body,
-                                            preferredStyle: .alert)
+    let alertController = UIAlertController(
+      title: notification.request.content.title,
+      message: notification.request.content.body,
+      preferredStyle: .alert)
 
     let okAction = UIAlertAction(title: "OK", style: .default) { _ in print("OK") }
     alertController.addAction(okAction)
@@ -249,7 +251,14 @@ class TimerViewController: UIViewController {
 
   private func updateTimerLabel() {
     let time = Int(currentTime)
-    timerLabel.text = String(format: "%02d:%02d", time / 60, time % 60)
+    let newString = String(format: "%02d:%02d", time / 60, time % 60)
+    if #available(iOS 17.0, *) {
+      withAnimation(.easeInOut(duration: animationDuration)) {
+        timerTextViewModel.timeString = newString
+      }
+    } else {
+      timerTextViewModel.timeString = newString
+    }
   }
 
   private func setCurrentTime() {
@@ -278,8 +287,10 @@ class TimerViewController: UIViewController {
 
   private func resetTimerLabelColor() {
     switch pomodoro.state {
-    case .initial: timerLabel.textColor = UIColor.label
-    case .shortBreak, .longBreak: timerLabel.textColor = UIColor.systemGreen
+    case .initial:
+      timerTextViewModel.textColor = Color(UIColor.label)
+    case .shortBreak, .longBreak:
+      timerTextViewModel.textColor = Color(UIColor.systemGreen)
     }
   }
 
@@ -329,16 +340,21 @@ extension TimerViewController: UICollectionViewDataSource {
 
   // MARK: UICollectionViewDataSource
 
-  func collectionView(_ collectionView: UICollectionView,
-                      numberOfItemsInSection section: Int) -> Int {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    numberOfItemsInSection section: Int
+  ) -> Int {
 
     return targetPomodoros
   }
 
-  func collectionView(_ collectionView: UICollectionView,
-                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let identifier = (indexPath.row < pomodorosCompleted) ?
-      String(describing: FilledCell.self) : String(describing: EmptyCell.self)
+  func collectionView(
+    _ collectionView: UICollectionView,
+    cellForItemAt indexPath: IndexPath
+  ) -> UICollectionViewCell {
+    let identifier =
+      (indexPath.row < pomodorosCompleted)
+      ? String(describing: FilledCell.self) : String(describing: EmptyCell.self)
     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
   }
 
