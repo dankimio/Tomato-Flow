@@ -228,9 +228,9 @@ class TimerViewController: UIViewController {
     generateHapticFeedback()
   }
 
-  func presentAlertFromNotification(_ notification: UILocalNotification) {
-    let alertController = UIAlertController(title: notification.alertTitle,
-                                            message: notification.alertBody,
+  func presentAlertFromNotification(_ notification: UNNotification) {
+    let alertController = UIAlertController(title: notification.request.content.title,
+                                            message: notification.request.content.body,
                                             preferredStyle: .alert)
 
     let okAction = UIAlertAction(title: "OK", style: .default) { _ in print("OK") }

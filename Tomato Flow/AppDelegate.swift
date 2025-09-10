@@ -1,7 +1,8 @@
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
   var window: UIWindow?
 
@@ -15,11 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
 
-  func application(_ application: UIApplication,
-                   didReceive notification: UILocalNotification) {
+  // MARK: - UNUserNotificationCenterDelegate
 
-    print("didReceiveLocalNotification")
-    timerViewController.presentAlertFromNotification(notification)
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                             didReceive response: UNNotificationResponse,
+                             withCompletionHandler completionHandler: @escaping () -> Void) {
+    print("didReceiveNotification")
+    timerViewController.presentAlertFromNotification(response.notification)
+    completionHandler()
+  }
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                             willPresent notification: UNNotification,
+                             withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    // Show notification even when app is in foreground
+    completionHandler([.alert, .badge, .sound])
   }
 
   func applicationWillResignActive(_ application: UIApplication) {
@@ -68,9 +79,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   private func registerNotifications() {
-    let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
-                                                          categories: nil)
-    UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+    UNUserNotificationCenter.current().delegate = self
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+      if let error = error {
+        print("Notification authorization error: \(error)")
+      } else {
+        print("Notification authorization granted: \(granted)")
+      }
+    }
   }
 
   private func resetBadgeNumber() {

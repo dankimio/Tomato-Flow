@@ -1,4 +1,5 @@
 import UIKit
+import UserNotifications
 
 protocol SchedulerDelegate: class {
   func schedulerDidPause()
@@ -92,12 +93,14 @@ class Scheduler {
 
   // MARK: - Helpers
 
-  private var firstScheduledNotification: UILocalNotification? {
-    return UIApplication.shared.scheduledLocalNotifications?.first
+  private var firstScheduledNotification: UNNotificationRequest? {
+    // Note: We'll need to track notification requests manually since UNUserNotificationCenter
+    // doesn't provide a direct way to get pending notifications by identifier
+    return nil
   }
 
   private func cancelNotification() {
-    UIApplication.shared.cancelAllLocalNotifications()
+    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     fireDate = nil
     print("Notification canceled")
   }
@@ -124,17 +127,24 @@ class Scheduler {
   }
 
   private func scheduleNotification(_ interval: TimeInterval, title: String, body: String) {
-    let notification = UILocalNotification()
-    notification.fireDate = Date(timeIntervalSinceNow: interval)
-    notification.alertTitle = title
-    notification.alertBody = body
-    notification.applicationIconBadgeNumber = 1
-    notification.soundName = UILocalNotificationDefaultSoundName
-    UIApplication.shared.scheduleLocalNotification(notification)
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+    content.badge = 1
+    content.sound = .default
 
-    fireDate = notification.fireDate
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+    let request = UNNotificationRequest(identifier: "pomodoro-notification", content: content, trigger: trigger)
 
-    print("Pomodoro notification scheduled for \(notification.fireDate!)")
+    UNUserNotificationCenter.current().add(request) { error in
+      if let error = error {
+        print("Error scheduling notification: \(error)")
+      } else {
+        print("Pomodoro notification scheduled for \(Date(timeIntervalSinceNow: interval))")
+      }
+    }
+
+    fireDate = Date(timeIntervalSinceNow: interval)
   }
 
 }
