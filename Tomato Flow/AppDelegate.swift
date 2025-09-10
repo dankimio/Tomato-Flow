@@ -13,6 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     registerNotifications()
     configureTabBarColor()
 
+    if let accent = UIColor(named: "AccentColor") {
+      UIView.appearance().tintColor = accent
+      UINavigationBar.appearance().tintColor = accent
+      UITabBar.appearance().tintColor = accent
+    }
+
     return true
   }
 

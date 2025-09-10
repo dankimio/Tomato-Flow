@@ -1,96 +1,42 @@
+import SwiftUI
 import UIKit
 
-class SettingsViewController: UITableViewController, PickerViewControllerDelegate {
+class SettingsViewController: UITableViewController {
 
-  @IBOutlet weak var pomodoroLengthLabel: UILabel!
-  @IBOutlet weak var shortBreakLengthLabel: UILabel!
-  @IBOutlet weak var longBreakLengthLabel: UILabel!
-  @IBOutlet weak var targetPomodorosLabel: UILabel!
-
-  // About section
-  @IBOutlet weak var twitterCell: UITableViewCell!
-  @IBOutlet weak var homepageCell: UITableViewCell!
-  @IBOutlet weak var appStoreCell: UITableViewCell!
-
-  private let userDefaults = UserDefaults.standard
   private let settings = SettingsManager.sharedManager
 
-  private struct About {
-    static let twitterURL = "https://twitter.com/dankimio"
-    static let homepageURL = "https://dan.kim"
-    static let appStoreURL = "https://apps.apple.com/us/app/tomato-flow/id1095742214"
-  }
+  private lazy var hostingController: UIHostingController<SettingsView> = {
+    let controller = UIHostingController(rootView: SettingsView())
+    return controller
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    setupLabels()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
-    if let selectedIndexPath = tableView.indexPathForSelectedRow {
-      tableView.deselectRow(at: selectedIndexPath, animated: true)
+    if let nav = navigationController {
+      nav.setViewControllers([hostingController], animated: false)
     }
   }
 
-  private func setupLabels() {
-    pomodoroLengthLabel.text = "\(settings.pomodoroLength) minutes"
-    shortBreakLengthLabel.text = "\(settings.shortBreakLength) minutes"
-    longBreakLengthLabel.text = "\(settings.longBreakLength) minutes"
-    targetPomodorosLabel.text = "\(settings.targetPomodoros) pomodoros"
+  private func embedSwiftUIView() {
+    guard hostingController.view.superview == nil else { return }
+
+    addChild(hostingController)
+    view.addSubview(hostingController.view)
+    view.bringSubviewToFront(hostingController.view)
+    hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+    let guide = view.safeAreaLayoutGuide
+    NSLayoutConstraint.activate([
+      hostingController.view.topAnchor.constraint(equalTo: guide.topAnchor),
+      hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      hostingController.view.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+    ])
+    hostingController.didMove(toParent: self)
   }
-
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let picker = segue.destination as? PickerViewController {
-      switch segue.identifier! {
-      case "PomodoroLengthPicker":
-        picker.selectedValue = settings.pomodoroLength
-        picker.type = PickerType.pomodoroLength
-      case "ShortBreakLengthPicker":
-        picker.selectedValue = settings.shortBreakLength
-        picker.type = PickerType.shortBreakLength
-      case "LongBreakLengthPicker":
-        picker.selectedValue = settings.longBreakLength
-        picker.type = PickerType.longBreakLength
-      case "TargetPomodorosPicker":
-        picker.specifier = "pomodoros"
-        picker.selectedValue = settings.targetPomodoros
-        picker.type = PickerType.targetPomodoros
-      default:
-        break
-      }
-      picker.delegate = self
-    }
-  }
-
-  func pickerDidFinishPicking(_ picker: PickerViewController) {
-    setupLabels()
-  }
-
-  // MARK: - Table view delegate
-
-  override func tableView(_ tableView: UITableView,
-                          didSelectRowAt indexPath: IndexPath) {
-
-    tableView.deselectRow(at: indexPath, animated: true)
-
-    let cell = tableView.cellForRow(at: indexPath)!
-    switch cell {
-    case twitterCell: openURL(About.twitterURL)
-    case homepageCell: openURL(About.homepageURL)
-    case appStoreCell: openURL(About.appStoreURL)
-    default: return
-    }
-  }
-
-  // MARK: - Helpers
-
-  private func openURL(_ url: String) {
-    if let url = URL(string: url) {
-      UIApplication.shared.open(url)
-    }
-  }
-
 }
+
+// SwiftUI views moved to separate files: SettingsRootView.swift and DiscreteOptionSelectionView.swift
