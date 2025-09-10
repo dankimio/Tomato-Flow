@@ -3,15 +3,6 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-  @IBOutlet weak var pomodoroLengthLabel: UILabel!
-  @IBOutlet weak var shortBreakLengthLabel: UILabel!
-  @IBOutlet weak var longBreakLengthLabel: UILabel!
-  @IBOutlet weak var targetPomodorosLabel: UILabel!
-
-  @IBOutlet weak var twitterCell: UITableViewCell!
-  @IBOutlet weak var homepageCell: UITableViewCell!
-  @IBOutlet weak var appStoreCell: UITableViewCell!
-
   private let settings = SettingsManager.sharedManager
 
   private lazy var hostingController: UIHostingController<SettingsRootView> = {
