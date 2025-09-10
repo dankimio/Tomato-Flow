@@ -1,11 +1,10 @@
 import SwiftUI
-import UIKit
 
 final class TimerTextViewModel: ObservableObject {
   @Published var timeString: String
   @Published var textColor: Color
 
-  init(timeString: String = "25:00", textColor: Color = Color(UIColor.label)) {
+  init(timeString: String = "25:00", textColor: Color = .primary) {
     self.timeString = timeString
     self.textColor = textColor
   }
@@ -39,15 +38,13 @@ struct TimerTextView: View {
   struct TimerTextView_Previews: PreviewProvider {
     static var previews: some View {
       Group {
-        TimerTextView(
-          viewModel: TimerTextViewModel(timeString: "25:00", textColor: Color(UIColor.label))
-        )
-        .previewDisplayName("Work")
+        TimerTextView(viewModel: TimerTextViewModel(timeString: "25:00", textColor: .primary))
+          .previewDisplayName("Work")
         TimerTextView(viewModel: TimerTextViewModel(timeString: "05:00", textColor: .green))
           .previewDisplayName("Break")
       }
       .padding()
-      .background(Color(UIColor.systemBackground))
+      .background(Color.clear)
     }
   }
 #endif
