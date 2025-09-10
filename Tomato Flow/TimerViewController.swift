@@ -143,6 +143,7 @@ class TimerViewController: UIViewController {
     addChild(timerHostingController)
     stackView.addArrangedSubview(timerHostingController.view)
     timerHostingController.didMove(toParent: self)
+    stackView.setCustomSpacing(4, after: timerHostingController.view)
 
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
