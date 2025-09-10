@@ -87,6 +87,14 @@ class TimerViewController: UIViewController {
 
   // MARK: - Initialization
 
+  init() {
+    scheduler = Scheduler()
+    targetPomodoros = SettingsManager.sharedManager.targetPomodoros
+    pomodorosCompleted = Pomodoro.sharedInstance.pomodorosCompleted
+
+    super.init(nibName: nil, bundle: nil)
+  }
+
   required init?(coder aDecoder: NSCoder) {
     targetPomodoros = settings.targetPomodoros
     pomodorosCompleted = pomodoro.pomodorosCompleted

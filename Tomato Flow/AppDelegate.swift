@@ -1,3 +1,4 @@
+import SwiftUI
 import UIKit
 import UserNotifications
 
@@ -7,8 +8,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   var window: UIWindow?
 
   // Override point for customization after application launch.
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
 
     registerNotifications()
     configureTabBarColor()
@@ -19,22 +22,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       UITabBar.appearance().tintColor = accent
     }
 
+    // Bootstrap UI programmatically (no storyboard)
+    let window = UIWindow(frame: UIScreen.main.bounds)
+
+    let timerViewController = TimerViewController()
+    timerViewController.tabBarItem = UITabBarItem(
+      title: "Timer",
+      image: UIImage(systemName: "timer"),
+      selectedImage: nil
+    )
+
+    let settingsRoot = UIHostingController(rootView: SettingsView())
+    settingsRoot.title = "Settings"
+    let settingsNavigation = UINavigationController(rootViewController: settingsRoot)
+    settingsNavigation.tabBarItem = UITabBarItem(
+      title: "Settings",
+      image: UIImage(systemName: "gearshape"),
+      selectedImage: nil
+    )
+
+    let tabBarController = UITabBarController()
+    tabBarController.viewControllers = [timerViewController, settingsNavigation]
+
+    window.rootViewController = tabBarController
+    window.makeKeyAndVisible()
+    self.window = window
+
     return true
   }
 
   // MARK: - UNUserNotificationCenterDelegate
 
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                             didReceive response: UNNotificationResponse,
-                             withCompletionHandler completionHandler: @escaping () -> Void) {
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
     print("didReceiveNotification")
     timerViewController.presentAlertFromNotification(response.notification)
     completionHandler()
   }
 
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                             willPresent notification: UNNotification,
-                             withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
     // Show notification even when app is in foreground
     completionHandler([.banner, .badge, .sound])
   }
@@ -86,7 +119,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
   private func registerNotifications() {
     UNUserNotificationCenter.current().delegate = self
-    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
+      granted, error in
       if let error = error {
         print("Notification authorization error: \(error)")
       } else {
@@ -96,12 +130,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   }
 
   private func resetBadgeNumber() {
-    UIApplication.shared.applicationIconBadgeNumber = 0
+    if #available(iOS 17.0, *) {
+      UNUserNotificationCenter.current().setBadgeCount(0) { _ in }
+    } else {
+      UIApplication.shared.applicationIconBadgeNumber = 0
+    }
   }
 
   private func configureTabBarColor() {
     UITabBar.appearance().tintColor = UIColor(
-      red: 240/255.0, green: 90/255.0, blue: 90/255.0, alpha: 1)
+      red: 240 / 255.0, green: 90 / 255.0, blue: 90 / 255.0, alpha: 1)
   }
 
 }
