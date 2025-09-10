@@ -22,7 +22,7 @@ class SettingsManager {
     get {
       let value = userDefaults.object(forKey: Settings.pomodoroLength) as? Int ?? 25
       #if DEBUG
-        return value / 5
+        return value
       #else
         return value * 60
       #endif
@@ -34,7 +34,7 @@ class SettingsManager {
     get {
       let value = userDefaults.object(forKey: Settings.shortBreakLength) as? Int ?? 5
       #if DEBUG
-        return value / 5
+        return value
       #else
         return value * 60
       #endif
@@ -46,7 +46,7 @@ class SettingsManager {
     get {
       let value = userDefaults.object(forKey: Settings.longBreakLength) as? Int ?? 20
       #if DEBUG
-        return value / 5
+        return value
       #else
         return value * 60
       #endif
