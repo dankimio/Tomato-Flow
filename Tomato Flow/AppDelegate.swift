@@ -22,30 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       UITabBar.appearance().tintColor = accent
     }
 
-    // Bootstrap UI programmatically (no storyboard)
-    let window = UIWindow(frame: UIScreen.main.bounds)
-
-    let timerViewController = TimerViewController()
-    timerViewController.tabBarItem = UITabBarItem(
-      title: "Timer",
-      image: UIImage(systemName: "timer"),
-      selectedImage: nil
-    )
-
-    let settingsRoot = UIHostingController(rootView: SettingsView())
-    settingsRoot.tabBarItem = UITabBarItem(
-      title: "Settings",
-      image: UIImage(systemName: "gearshape"),
-      selectedImage: nil
-    )
-
-    let tabBarController = UITabBarController()
-    tabBarController.viewControllers = [timerViewController, settingsRoot]
-
-    window.rootViewController = tabBarController
-    window.makeKeyAndVisible()
-    self.window = window
-
     return true
   }
 
@@ -111,6 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
   // MARK: - Helpers
 
   private var timerViewController: TimerViewController {
+    let windowScene = UIApplication.shared.connectedScenes
+      .compactMap { $0 as? UIWindowScene }
+      .first { $0.activationState != .unattached }
+
+    let window = windowScene?.windows.first { $0.isKeyWindow } ?? windowScene?.windows.first
     let tabBarController = window!.rootViewController as! UITabBarController
     return tabBarController.viewControllers!.first as! TimerViewController
   }

@@ -27,6 +27,7 @@
 		37F0A0012A00000100AAA001 /* TimerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0002A00000100AAA001 /* TimerTextView.swift */; };
 		37F0A0042A00000100AAA004 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0022A00000100AAA002 /* SettingsView.swift */; };
 		37F0A0052A00000100AAA005 /* OptionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F0A0032A00000100AAA003 /* OptionSelectionView.swift */; };
+		A1B2C3D41A2B3C4D5E6F0001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41A2B3C4D5E6F0002 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		37F0A0002A00000100AAA001 /* TimerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTextView.swift; sourceTree = "<group>"; };
 		37F0A0022A00000100AAA002 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37F0A0032A00000100AAA003 /* OptionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectionView.swift; sourceTree = "<group>"; };
+		A1B2C3D41A2B3C4D5E6F0002 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				375347341B3AFF010089AB7F /* AppDelegate.swift */,
+				A1B2C3D41A2B3C4D5E6F0002 /* SceneDelegate.swift */,
 				3753473D1B3AFF010089AB7F /* Assets.xcassets */,
 				375347331B3AFF010089AB7F /* Info.plist */,
 				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
@@ -242,6 +245,7 @@
 				37F0A0012A00000100AAA001 /* TimerTextView.swift in Sources */,
 				37F0A0042A00000100AAA004 /* SettingsView.swift in Sources */,
 				37F0A0052A00000100AAA005 /* OptionSelectionView.swift in Sources */,
+				A1B2C3D41A2B3C4D5E6F0001 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
