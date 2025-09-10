@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3737994B1B4ABA160025260A /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994A1B4ABA160025260A /* SettingsManager.swift */; };
-		3737994D1B4B01250025260A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994C1B4B01250025260A /* PickerViewController.swift */; };
 		3737994F1B4C153B0025260A /* PickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994E1B4C153B0025260A /* PickerType.swift */; };
 		375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347341B3AFF010089AB7F /* AppDelegate.swift */; };
 		375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347361B3AFF010089AB7F /* TimerViewController.swift */; };
@@ -32,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		3737994A1B4ABA160025260A /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
-		3737994C1B4B01250025260A /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		3737994E1B4C153B0025260A /* PickerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerType.swift; sourceTree = "<group>"; };
 		3753472F1B3AFF010089AB7F /* Tomato Flow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tomato Flow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		375347331B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,6 +89,7 @@
 				376CAEAE2E723D6B0014EF32 /* View */,
 				376CAEAD2E723D5D0014EF32 /* Controller */,
 				376CAEAF2E723D780014EF32 /* Supporting Files */,
+				375347331B3AFF010089AB7F /* Info.plist */,
 			);
 			path = "Tomato Flow";
 			sourceTree = "<group>";
@@ -111,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				375347361B3AFF010089AB7F /* TimerViewController.swift */,
-				3737994C1B4B01250025260A /* PickerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -138,7 +136,6 @@
 				375347341B3AFF010089AB7F /* AppDelegate.swift */,
 				A1B2C3D41A2B3C4D5E6F0002 /* SceneDelegate.swift */,
 				3753473D1B3AFF010089AB7F /* Assets.xcassets */,
-				375347331B3AFF010089AB7F /* Info.plist */,
 				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
 			);
 			path = "Supporting Files";
@@ -230,7 +227,6 @@
 			files = (
 				3737994F1B4C153B0025260A /* PickerType.swift in Sources */,
 				37B6EEAD296DD71A00467643 /* Colors.swift in Sources */,
-				3737994D1B4B01250025260A /* PickerViewController.swift in Sources */,
 				37EFAC071C94C40F00D1DC76 /* Pomodoro.swift in Sources */,
 				37B6EEB3296E26E800467643 /* SecondaryButton.swift in Sources */,
 				37B6EEAF296E019F00467643 /* EmptyCell.swift in Sources */,
