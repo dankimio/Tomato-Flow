@@ -107,22 +107,25 @@ class Scheduler {
 
   private func schedulePomodoro(_ interval: TimeInterval? = nil) {
     let interval = interval ?? TimeInterval(settings.pomodoroLength)
-    scheduleNotification(interval,
-                         title: "Pomodoro finished", body: "Time to take a break!")
+    scheduleNotification(
+      interval,
+      title: "Pomodoro finished", body: "Time to take a break!")
     print("Pomodoro scheduled")
   }
 
   private func scheduleShortBreak(_ interval: TimeInterval? = nil) {
     let interval = interval ?? TimeInterval(settings.shortBreakLength)
-    scheduleNotification(interval,
-                         title: "Break finished", body: "Time to get back to work!")
+    scheduleNotification(
+      interval,
+      title: "Break finished", body: "Time to get back to work!")
     print("Short break scheduled")
   }
 
   private func scheduleLongBreak(_ interval: TimeInterval? = nil) {
     let interval = interval ?? TimeInterval(settings.longBreakLength)
-    scheduleNotification(interval,
-                         title: "Long break is over", body: "Time to get back to work!")
+    scheduleNotification(
+      interval,
+      title: "Long break is over", body: "Time to get back to work!")
     print("Long break scheduled")
   }
 
@@ -134,7 +137,8 @@ class Scheduler {
     content.sound = .default
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
-    let request = UNNotificationRequest(identifier: "pomodoro-notification", content: content, trigger: trigger)
+    let request = UNNotificationRequest(
+      identifier: "pomodoro-notification", content: content, trigger: trigger)
 
     UNUserNotificationCenter.current().add(request) { error in
       if let error = error {

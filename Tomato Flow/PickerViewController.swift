@@ -42,11 +42,14 @@ class PickerViewController: UITableViewController {
     return options.count
   }
 
-  override func tableView(_ tableView: UITableView,
-                          cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  override func tableView(
+    _ tableView: UITableView,
+    cellForRowAt indexPath: IndexPath
+  ) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: "PickerCell",
-                                             for: indexPath)
+    let cell = tableView.dequeueReusableCell(
+      withIdentifier: "PickerCell",
+      for: indexPath)
 
     // Configure the cell
     let value = options[indexPath.row]
@@ -65,8 +68,10 @@ class PickerViewController: UITableViewController {
     return cell
   }
 
-  override func tableView(_ tableView: UITableView,
-                          didSelectRowAt indexPath: IndexPath) {
+  override func tableView(
+    _ tableView: UITableView,
+    didSelectRowAt indexPath: IndexPath
+  ) {
 
     tableView.deselectRow(at: indexPath, animated: true)
 
@@ -82,7 +87,8 @@ class PickerViewController: UITableViewController {
 
     // Remove a checkmark from the old cell
     if let previousIndexPath = selectedIndexPath,
-      let oldCell = tableView.cellForRow(at: previousIndexPath) {
+      let oldCell = tableView.cellForRow(at: previousIndexPath)
+    {
       oldCell.accessoryType = .none
     }
 
