@@ -33,16 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     )
 
     let settingsRoot = UIHostingController(rootView: SettingsView())
-    settingsRoot.title = "Settings"
-    let settingsNavigation = UINavigationController(rootViewController: settingsRoot)
-    settingsNavigation.tabBarItem = UITabBarItem(
+    settingsRoot.tabBarItem = UITabBarItem(
       title: "Settings",
       image: UIImage(systemName: "gearshape"),
       selectedImage: nil
     )
 
     let tabBarController = UITabBarController()
-    tabBarController.viewControllers = [timerViewController, settingsNavigation]
+    tabBarController.viewControllers = [timerViewController, settingsRoot]
 
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
