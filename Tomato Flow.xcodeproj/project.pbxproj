@@ -13,7 +13,6 @@
 		3737994F1B4C153B0025260A /* PickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737994E1B4C153B0025260A /* PickerType.swift */; };
 		375347351B3AFF010089AB7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347341B3AFF010089AB7F /* AppDelegate.swift */; };
 		375347371B3AFF010089AB7F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375347361B3AFF010089AB7F /* TimerViewController.swift */; };
-		/* 3753473C1B3AFF010089AB7F removed Main.storyboard in Resources */
 		3753473E1B3AFF010089AB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3753473D1B3AFF010089AB7F /* Assets.xcassets */; };
 		375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753473F1B3AFF010089AB7F /* LaunchScreen.xib */; };
 		3767662B296E397100E7345E /* UIButton.Configuration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */; };
@@ -40,7 +39,6 @@
 		375347331B3AFF010089AB7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375347341B3AFF010089AB7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		375347361B3AFF010089AB7F /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TimerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		/* 3753473B1B3AFF010089AB7F removed Base.lproj/Main.storyboard */
 		3753473D1B3AFF010089AB7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		375347401B3AFF010089AB7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3767662A296E397100E7345E /* UIButton.Configuration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton.Configuration+Extensions.swift"; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 		37FE4A8B1B5289A600280C97 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				/* removed 3753473A1B3AFF010089AB7F Main.storyboard */
 				37CBA529296DABDD0043596C /* FilledCell.swift */,
 				37B6EEAC296DD71A00467643 /* Colors.swift */,
 				37B6EEAE296E019F00467643 /* EmptyCell.swift */,
@@ -219,7 +216,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				/* removed 3753473C1B3AFF010089AB7F Main.storyboard in Resources */
 				375347411B3AFF010089AB7F /* LaunchScreen.xib in Resources */,
 				3753473E1B3AFF010089AB7F /* Assets.xcassets in Resources */,
 			);
