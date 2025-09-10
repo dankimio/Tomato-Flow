@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                              willPresent notification: UNNotification,
                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
     // Show notification even when app is in foreground
-    completionHandler([.alert, .badge, .sound])
+    completionHandler([.banner, .badge, .sound])
   }
 
   func applicationWillResignActive(_ application: UIApplication) {
