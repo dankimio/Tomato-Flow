@@ -16,8 +16,8 @@ struct TimerTextView: View {
   var body: some View {
     let baseText = Text(viewModel.timeString)
       .font(.system(size: 128, weight: .semibold, design: .rounded))
+      .foregroundStyle(Color(UIColor.darkText))
       .monospacedDigit()
-      .foregroundColor(viewModel.textColor)
       .multilineTextAlignment(.center)
       .lineLimit(1)
       .minimumScaleFactor(0.2)
