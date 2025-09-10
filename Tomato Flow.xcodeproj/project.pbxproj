@@ -87,27 +87,36 @@
 		375347311B3AFF010089AB7F /* Tomato Flow */ = {
 			isa = PBXGroup;
 			children = (
-				37FE4A8D1B5289D200280C97 /* Model */,
-				37FE4A8C1B5289BE00280C97 /* Controller */,
-				37FE4A8B1B5289A600280C97 /* View */,
-				375347321B3AFF010089AB7F /* Supporting Files */,
+				376CAEAC2E723D3D0014EF32 /* Model */,
+				376CAEAE2E723D6B0014EF32 /* View */,
+				376CAEAD2E723D5D0014EF32 /* Controller */,
+				376CAEAF2E723D780014EF32 /* Supporting Files */,
 			);
 			path = "Tomato Flow";
 			sourceTree = "<group>";
 		};
-		375347321B3AFF010089AB7F /* Supporting Files */ = {
+		376CAEAC2E723D3D0014EF32 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				375347341B3AFF010089AB7F /* AppDelegate.swift */,
-				A1B2C3D41A2B3C4D5E6F0002 /* SceneDelegate.swift */,
-				3753473D1B3AFF010089AB7F /* Assets.xcassets */,
-				375347331B3AFF010089AB7F /* Info.plist */,
-				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
+				3737994A1B4ABA160025260A /* SettingsManager.swift */,
+				3737994E1B4C153B0025260A /* PickerType.swift */,
+				3767956F1B52DDDD007E6CBC /* Scheduler.swift */,
+				37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */,
+				37EFAC081C94C83200D1DC76 /* TimerState.swift */,
 			);
-			name = "Supporting Files";
+			path = Model;
 			sourceTree = "<group>";
 		};
-		37FE4A8B1B5289A600280C97 /* View */ = {
+		376CAEAD2E723D5D0014EF32 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				375347361B3AFF010089AB7F /* TimerViewController.swift */,
+				3737994C1B4B01250025260A /* PickerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		376CAEAE2E723D6B0014EF32 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				37CBA529296DABDD0043596C /* FilledCell.swift */,
@@ -120,28 +129,19 @@
 				37F0A0022A00000100AAA002 /* SettingsView.swift */,
 				37F0A0032A00000100AAA003 /* OptionSelectionView.swift */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
-		37FE4A8C1B5289BE00280C97 /* Controller */ = {
+		376CAEAF2E723D780014EF32 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				375347361B3AFF010089AB7F /* TimerViewController.swift */,
-				3737994C1B4B01250025260A /* PickerViewController.swift */,
+				375347341B3AFF010089AB7F /* AppDelegate.swift */,
+				A1B2C3D41A2B3C4D5E6F0002 /* SceneDelegate.swift */,
+				3753473D1B3AFF010089AB7F /* Assets.xcassets */,
+				375347331B3AFF010089AB7F /* Info.plist */,
+				3753473F1B3AFF010089AB7F /* LaunchScreen.xib */,
 			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		37FE4A8D1B5289D200280C97 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3737994A1B4ABA160025260A /* SettingsManager.swift */,
-				3737994E1B4C153B0025260A /* PickerType.swift */,
-				3767956F1B52DDDD007E6CBC /* Scheduler.swift */,
-				37EFAC061C94C40F00D1DC76 /* Pomodoro.swift */,
-				37EFAC081C94C83200D1DC76 /* TimerState.swift */,
-			);
-			name = Model;
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
