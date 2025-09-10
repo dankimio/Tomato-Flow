@@ -1,7 +1,7 @@
 import UIKit
 import UserNotifications
 
-protocol SchedulerDelegate: class {
+protocol SchedulerDelegate: AnyObject {
   func schedulerDidPause()
   func schedulerDidUnpause()
   func schedulerDidStart()
