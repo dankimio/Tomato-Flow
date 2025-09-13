@@ -44,6 +44,14 @@ class TimerViewController: UIViewController {
     return pauseButton
   }()
 
+  private lazy var skipBreakButton: SecondaryButton = {
+    let skipButton = SecondaryButton(configuration: .secondary())
+    skipButton.setTitle("Skip", for: .normal)
+    skipButton.isHidden = true
+
+    return skipButton
+  }()
+
   private lazy var stopButton: AnimatedButton = {
     let stopButton = AnimatedButton(configuration: .primary())
     stopButton.setTitle("Stop", for: .normal)
@@ -140,6 +148,7 @@ class TimerViewController: UIViewController {
     }
 
     reloadData()
+    updateSkipBreakVisibility()
   }
 
   private func setUpSubviews() {
@@ -156,6 +165,9 @@ class TimerViewController: UIViewController {
     stackView.addArrangedSubview(timerHostingController.view)
     timerHostingController.didMove(toParent: self)
     stackView.setCustomSpacing(4, after: timerHostingController.view)
+    
+    skipBreakButton.addTarget(self, action: #selector(skipBreak), for: .touchUpInside)
+    buttonsContainer.addArrangedSubview(skipBreakButton)
 
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
@@ -223,6 +235,18 @@ class TimerViewController: UIViewController {
     timer?.invalidate()
     resetCurrentTime()
     updateTimerLabel()
+    updateSkipBreakVisibility()
+    generateHapticFeedback()
+  }
+
+  @objc func skipBreak() {
+    guard !running else { return }
+    guard pomodoro.state == .shortBreak || pomodoro.state == .longBreak else { return }
+
+    pomodoro.completeBreak()
+    resetCurrentTime()
+    updateTimerLabel()
+    updateSkipBreakVisibility()
     generateHapticFeedback()
   }
 
@@ -345,12 +369,14 @@ class TimerViewController: UIViewController {
     startButton.isHidden = true
     pauseButton.isHidden = false
     stopButton.isHidden = false
+    skipBreakButton.isHidden = true
   }
 
   private func animateStopped() {
     startButton.isHidden = false
     pauseButton.isHidden = true
     stopButton.isHidden = true
+    updateSkipBreakVisibility()
 
     pauseButton.setTitle("Pause", for: UIControl.State())
   }
@@ -365,6 +391,11 @@ class TimerViewController: UIViewController {
 
   private func generateHapticFeedback() {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
+  }
+
+  private func updateSkipBreakVisibility() {
+    let onBreak = (pomodoro.state == .shortBreak || pomodoro.state == .longBreak)
+    skipBreakButton.isHidden = running || !onBreak
   }
 
 }
