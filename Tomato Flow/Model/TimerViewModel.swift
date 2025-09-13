@@ -49,6 +49,7 @@ final class TimerViewModel {
     emitTime()
 
     if scheduler.pausedTime != nil {
+      running = false
       onRunningChanged?(false)
       onPausedChanged?(true)
     }
@@ -64,6 +65,7 @@ final class TimerViewModel {
     onRunningChanged?(true)
     setCurrentTime()
     emitTime()
+    cancelTimer()
     fireTimer()
   }
 
@@ -71,7 +73,7 @@ final class TimerViewModel {
     scheduler.stop()
     running = false
     onRunningChanged?(false)
-    timer?.invalidate()
+    cancelTimer()
     resetCurrentTime()
     emitTime()
     onPhaseChanged?(pomodoro.state)
@@ -95,7 +97,7 @@ final class TimerViewModel {
     guard running else { return }
     scheduler.pause(currentTime)
     running = false
-    timer?.invalidate()
+    cancelTimer()
     onPausedChanged?(true)
     onRunningChanged?(false)
   }
@@ -103,6 +105,7 @@ final class TimerViewModel {
   private func unpause() {
     scheduler.unpause()
     running = true
+    cancelTimer()
     fireTimer()
     onPausedChanged?(false)
     onRunningChanged?(true)
@@ -115,6 +118,7 @@ final class TimerViewModel {
       return
     }
 
+    cancelTimer()
     onCycleCompleted?()
 
     if pomodoro.state == .initial {
@@ -131,6 +135,11 @@ final class TimerViewModel {
     timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
       self?.tick()
     }
+  }
+
+  private func cancelTimer() {
+    timer?.invalidate()
+    timer = nil
   }
 
   private func setCurrentTime() {
