@@ -1,3 +1,4 @@
+import AVFoundation
 import SnapKit
 import SwiftUI
 import UIKit
@@ -84,6 +85,9 @@ class TimerViewController: UIViewController {
   // Pomodoros view
   private var pomodorosCompleted: Int!
   private var targetPomodoros: Int
+
+  // Audio
+  private var completionPlayer: AVAudioPlayer?
 
   // MARK: - Initialization
 
@@ -188,6 +192,10 @@ class TimerViewController: UIViewController {
     } else {
       pomodoro.completeBreak()
     }
+
+    // Play completion feedback (sound + haptic) then stop the timer
+    playSuccessSound()
+    generateCompletionFeedback()
 
     stop()
 
@@ -341,6 +349,31 @@ class TimerViewController: UIViewController {
 
   private func generateHapticFeedback() {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
+  }
+
+  private func generateCompletionFeedback() {
+    let generator = UINotificationFeedbackGenerator()
+    generator.notificationOccurred(.success)
+  }
+
+  private func playSuccessSound() {
+    guard completionPlayer == nil else {
+      completionPlayer?.play()
+      return
+    }
+
+    guard let url = Bundle.main.url(forResource: "success", withExtension: "m4a") else {
+      print("success.m4a not found in bundle")
+      return
+    }
+
+    do {
+      completionPlayer = try AVAudioPlayer(contentsOf: url)
+      completionPlayer?.prepareToPlay()
+      completionPlayer?.play()
+    } catch {
+      print("Failed to play success sound: \(error)")
+    }
   }
 
 }
