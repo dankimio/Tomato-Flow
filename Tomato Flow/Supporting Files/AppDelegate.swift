@@ -2,7 +2,7 @@ import UIKit
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // Override point for customization after application launch.
   func application(
@@ -14,32 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     configureColor()
 
     return true
-  }
-
-  // MARK: - UNUserNotificationCenterDelegate
-
-  func userNotificationCenter(
-    _ center: UNUserNotificationCenter,
-    didReceive response: UNNotificationResponse,
-    withCompletionHandler completionHandler: @escaping () -> Void
-  ) {
-    print("didReceiveNotification")
-    let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
-    let activeScene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
-    if let sceneDelegate = activeScene?.delegate as? SceneDelegate {
-      sceneDelegate.handleNotification(response.notification)
-    }
-    completionHandler()
-  }
-
-  func userNotificationCenter(
-    _ center: UNUserNotificationCenter,
-    willPresent notification: UNNotification,
-    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-  ) {
-    // Show notification in foreground without sound to prevent double audio;
-    // in-app completion sound is handled by TimerViewController
-    completionHandler([.banner, .badge])
   }
 
   // Scene lifecycle handles active/background transitions in SceneDelegate
@@ -68,4 +42,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     UITabBar.appearance().tintColor = accent
   }
 
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
+    print("didReceiveNotification")
+    let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+    let activeScene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+    if let sceneDelegate = activeScene?.delegate as? SceneDelegate {
+      sceneDelegate.handleNotification(response.notification)
+    }
+    completionHandler()
+  }
+
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+    // Show notification in foreground without sound to prevent double audio;
+    // in-app completion sound is handled by TimerViewController
+    completionHandler([.banner, .badge])
+  }
 }
