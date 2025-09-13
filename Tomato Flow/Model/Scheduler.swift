@@ -93,12 +93,6 @@ class Scheduler {
 
   // MARK: - Helpers
 
-  private var firstScheduledNotification: UNNotificationRequest? {
-    // Note: We'll need to track notification requests manually since UNUserNotificationCenter
-    // doesn't provide a direct way to get pending notifications by identifier
-    return nil
-  }
-
   private func cancelNotification() {
     UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     fireDate = nil
