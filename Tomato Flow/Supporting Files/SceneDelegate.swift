@@ -34,13 +34,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
+    
     self.window = window
-
-    // App owns the UI reference at the scene level, not via AppDelegate
   }
 
   func sceneDidEnterBackground(_ scene: UIScene) {
-    timerViewController?.pause()
   }
 
   func sceneDidBecomeActive(_ scene: UIScene) {
