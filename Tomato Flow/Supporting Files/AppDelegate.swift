@@ -6,7 +6,6 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
   var window: UIWindow?
-  weak var timerViewController: TimerViewController?
 
   // Override point for customization after application launch.
   func application(
@@ -28,7 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     withCompletionHandler completionHandler: @escaping () -> Void
   ) {
     print("didReceiveNotification")
-    timerViewController?.presentAlertFromNotification(response.notification)
+    let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+    let activeScene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+    if let sceneDelegate = activeScene?.delegate as? SceneDelegate {
+      sceneDelegate.handleNotification(response.notification)
+    }
     completionHandler()
   }
 

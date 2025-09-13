@@ -4,6 +4,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
+  private weak var timerViewController: TimerViewController?
 
   func scene(
     _ scene: UIScene,
@@ -13,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = scene as? UIWindowScene else { return }
 
     let timerViewController = TimerViewController()
+    self.timerViewController = timerViewController
     timerViewController.tabBarItem = UITabBarItem(
       title: "Timer",
       image: UIImage(systemName: "timer"),
@@ -34,12 +36,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window.makeKeyAndVisible()
     self.window = window
 
-    // Provide easy access to the timer view controller from AppDelegate
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    appDelegate?.timerViewController = timerViewController
+    // App owns the UI reference at the scene level, not via AppDelegate
   }
 
   func sceneDidEnterBackground(_ scene: UIScene) {
-    (UIApplication.shared.delegate as? AppDelegate)?.timerViewController?.pause()
+    timerViewController?.pause()
+  }
+
+  func handleNotification(_ notification: UNNotification) {
+    timerViewController?.presentAlertFromNotification(notification)
   }
 }
