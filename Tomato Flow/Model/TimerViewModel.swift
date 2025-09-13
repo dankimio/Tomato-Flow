@@ -13,9 +13,10 @@ final class TimerViewModel {
   private(set) var running = false
 
   // Outputs
+  enum PlaybackState { case running, paused, stopped }
+
   var onTimeChanged: ((Double) -> Void)?
-  var onRunningChanged: ((Bool) -> Void)?
-  var onPausedChanged: ((Bool) -> Void)?
+  var onPlaybackStateChanged: ((PlaybackState) -> Void)?
   var onPhaseChanged: ((TimerState) -> Void)?
   var onCycleCompleted: (() -> Void)?
   var onNeedsReload: (() -> Void)?
@@ -35,10 +36,10 @@ final class TimerViewModel {
     emitTime()
 
     if scheduler.pausedTime != nil {
-      onRunningChanged?(false)
-      onPausedChanged?(true)
+      running = false
+      onPlaybackStateChanged?(.paused)
     } else {
-      onRunningChanged?(false)
+      onPlaybackStateChanged?(.stopped)
     }
 
     onPhaseChanged?(pomodoro.state)
@@ -50,8 +51,7 @@ final class TimerViewModel {
 
     if scheduler.pausedTime != nil {
       running = false
-      onRunningChanged?(false)
-      onPausedChanged?(true)
+      onPlaybackStateChanged?(.paused)
     }
 
     onPhaseChanged?(pomodoro.state)
@@ -62,7 +62,7 @@ final class TimerViewModel {
     guard !running else { return }
     scheduler.start()
     running = true
-    onRunningChanged?(true)
+    onPlaybackStateChanged?(.running)
     setCurrentTime()
     emitTime()
     cancelTimer()
@@ -72,7 +72,7 @@ final class TimerViewModel {
   func stop() {
     scheduler.stop()
     running = false
-    onRunningChanged?(false)
+    onPlaybackStateChanged?(.stopped)
     cancelTimer()
     resetCurrentTime()
     emitTime()
@@ -98,8 +98,7 @@ final class TimerViewModel {
     scheduler.pause(currentTime)
     running = false
     cancelTimer()
-    onPausedChanged?(true)
-    onRunningChanged?(false)
+    onPlaybackStateChanged?(.paused)
   }
 
   private func unpause() {
@@ -107,8 +106,7 @@ final class TimerViewModel {
     running = true
     cancelTimer()
     fireTimer()
-    onPausedChanged?(false)
-    onRunningChanged?(true)
+    onPlaybackStateChanged?(.running)
   }
 
   private func tick() {

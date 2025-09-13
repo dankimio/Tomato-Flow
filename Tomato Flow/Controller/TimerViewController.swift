@@ -262,12 +262,18 @@ class TimerViewController: UIViewController {
     viewModel.onTimeChanged = { [weak self] seconds in
       self?.updateTimerLabel(seconds: seconds)
     }
-    viewModel.onRunningChanged = { [weak self] isRunning in
-      if isRunning { self?.animateStarted() } else { self?.animateStopped() }
+    viewModel.onPlaybackStateChanged = { [weak self] state in
+      switch state {
+      case .running:
+        self?.animateStarted()
+        self?.animateUnpaused()
+      case .paused:
+        self?.animateStarted()
+        self?.animatePaused()
+      case .stopped:
+        self?.animateStopped()
+      }
       self?.updateSkipBreakVisibility()
-    }
-    viewModel.onPausedChanged = { [weak self] isPaused in
-      if isPaused { self?.animatePaused() } else { self?.animateUnpaused() }
     }
     viewModel.onPhaseChanged = { [weak self] _ in
       self?.resetTimerLabelColor()
