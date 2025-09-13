@@ -186,16 +186,14 @@ class TimerViewController: UIViewController {
 
     print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
 
+    playCompletionFeedback()
+
     if pomodoro.state == .initial {
       pomodoro.completePomodoro()
       reloadData()
     } else {
       pomodoro.completeBreak()
     }
-
-    // Play completion feedback (sound + haptic) then stop the timer
-    playSuccessSound()
-    generateCompletionFeedback()
 
     stop()
 
@@ -325,6 +323,24 @@ class TimerViewController: UIViewController {
     targetPomodoros = settings.targetPomodoros
   }
 
+  private func playCompletionFeedback() {
+    // Haptic feedback for completion
+    UINotificationFeedbackGenerator().notificationOccurred(.success)
+
+    // Play custom completion sound when app is in foreground
+    guard let url = Bundle.main.url(forResource: "success", withExtension: "wav") else {
+      return
+    }
+
+    do {
+      completionPlayer = try AVAudioPlayer(contentsOf: url)
+      completionPlayer?.prepareToPlay()
+      completionPlayer?.play()
+    } catch {
+      print("Failed to play completion sound: \(error)")
+    }
+  }
+
   private func animateStarted() {
     startButton.isHidden = true
     pauseButton.isHidden = false
@@ -349,31 +365,6 @@ class TimerViewController: UIViewController {
 
   private func generateHapticFeedback() {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-  }
-
-  private func generateCompletionFeedback() {
-    let generator = UINotificationFeedbackGenerator()
-    generator.notificationOccurred(.success)
-  }
-
-  private func playSuccessSound() {
-    guard completionPlayer == nil else {
-      completionPlayer?.play()
-      return
-    }
-
-    guard let url = Bundle.main.url(forResource: "success", withExtension: "m4a") else {
-      print("success.m4a not found in bundle")
-      return
-    }
-
-    do {
-      completionPlayer = try AVAudioPlayer(contentsOf: url)
-      completionPlayer?.prepareToPlay()
-      completionPlayer?.play()
-    } catch {
-      print("Failed to play success sound: \(error)")
-    }
   }
 
 }

@@ -134,12 +134,7 @@ class Scheduler {
     content.title = title
     content.body = body
     content.badge = 1
-    // Use custom sound bundled in the app (Assets/success.m4a)
-    if Bundle.main.url(forResource: "success", withExtension: "m4a") != nil {
-      content.sound = UNNotificationSound(named: UNNotificationSoundName("success.m4a"))
-    } else {
-      content.sound = .default
-    }
+    content.sound = UNNotificationSound(named: UNNotificationSoundName("success.wav"))
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
     let request = UNNotificationRequest(
