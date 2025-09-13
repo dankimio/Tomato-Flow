@@ -37,8 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     willPresent notification: UNNotification,
     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
   ) {
-    // Show notification even when app is in foreground
-    completionHandler([.banner, .badge, .sound])
+    // Show notification in foreground without sound to prevent double audio;
+    // in-app completion sound is handled by TimerViewController
+    completionHandler([.banner, .badge])
   }
 
   // Scene lifecycle handles active/background transitions in SceneDelegate
