@@ -33,5 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
     self.window = window
+
+    // Provide easy access to the timer view controller from AppDelegate
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    appDelegate?.timerViewController = timerViewController
   }
 }

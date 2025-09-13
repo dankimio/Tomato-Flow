@@ -6,6 +6,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
   var window: UIWindow?
+  weak var timerViewController: TimerViewController?
 
   // Override point for customization after application launch.
   func application(
@@ -27,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     withCompletionHandler completionHandler: @escaping () -> Void
   ) {
     print("didReceiveNotification")
-    timerViewController.presentAlertFromNotification(response.notification)
+    timerViewController?.presentAlertFromNotification(response.notification)
     completionHandler()
   }
 
@@ -53,20 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // Save data if appropriate. See also applicationDidEnterBackground:.
 
     print("applicationWillTerminate")
-    timerViewController.pause()
+    timerViewController?.pause()
   }
 
   // MARK: - Helpers
-
-  private var timerViewController: TimerViewController {
-    let windowScene = UIApplication.shared.connectedScenes
-      .compactMap { $0 as? UIWindowScene }
-      .first { $0.activationState != .unattached }
-
-    let window = windowScene?.windows.first { $0.isKeyWindow } ?? windowScene?.windows.first
-    let tabBarController = window!.rootViewController as! UITabBarController
-    return tabBarController.viewControllers!.first as! TimerViewController
-  }
 
   private func registerNotifications() {
     UNUserNotificationCenter.current().delegate = self
