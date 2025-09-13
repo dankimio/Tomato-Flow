@@ -23,7 +23,9 @@ final class TimerViewModel {
 
   // Derived
   var shouldShowSkipBreak: Bool {
-    return !running && (pomodoro.state == .shortBreak || pomodoro.state == .longBreak)
+    // Show Skip only when on a break, not running, and not paused
+    return !running && !scheduler.paused
+      && (pomodoro.state == .shortBreak || pomodoro.state == .longBreak)
   }
 
   var targetPomodorosCount: Int { settings.targetPomodoros }
