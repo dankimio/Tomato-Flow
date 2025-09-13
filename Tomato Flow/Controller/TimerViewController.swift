@@ -78,12 +78,12 @@ class TimerViewController: UIViewController {
   }()
 
   // Scheduler
-  private let scheduler: Scheduler
+  private let scheduler = Scheduler()
   private let pomodoro = Pomodoro.sharedInstance
 
   // Time
   private var timer: Timer?
-  private var currentTime: Double!
+  private var currentTime: Double = 0
   private var running = false
 
   // Configuration
@@ -91,29 +91,11 @@ class TimerViewController: UIViewController {
   private let settings = SettingsManager.sharedManager
 
   // Pomodoros view
-  private var pomodorosCompleted: Int!
-  private var targetPomodoros: Int
 
   // Audio
   private var completionPlayer: AVAudioPlayer?
 
   // MARK: - Initialization
-
-  init() {
-    scheduler = Scheduler()
-    targetPomodoros = SettingsManager.sharedManager.targetPomodoros
-    pomodorosCompleted = Pomodoro.sharedInstance.pomodorosCompleted
-
-    super.init(nibName: nil, bundle: nil)
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    targetPomodoros = settings.targetPomodoros
-    pomodorosCompleted = pomodoro.pomodorosCompleted
-    scheduler = Scheduler()
-
-    super.init(coder: aDecoder)
-  }
 
   deinit {
     NotificationCenter.default.removeObserver(self)
@@ -128,15 +110,14 @@ class TimerViewController: UIViewController {
     notificationCenter.addObserver(
       self, selector: #selector(handleDidBecomeActive),
       name: UIApplication.didBecomeActiveNotification, object: nil)
+
+    // Initialize UI state
+    resetCurrentTime()
+    updateTimerLabel()
+    updateSkipBreakVisibility()
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-
-  @objc func handleDidBecomeActive() {
-    print("didBecomeActive")
-
+  @objc private func handleDidBecomeActive() {
     setCurrentTime()
     updateTimerLabel()
 
@@ -187,14 +168,12 @@ class TimerViewController: UIViewController {
     stackView.addArrangedSubview(collectionView)
   }
 
-  @objc func tick() {
+  @objc private func tick() {
     if currentTime > 0 {
       currentTime = currentTime - 1.0
       updateTimerLabel()
       return
     }
-
-    print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
 
     playCompletionFeedback()
 
@@ -206,17 +185,15 @@ class TimerViewController: UIViewController {
     }
 
     stop()
-
-    print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
   }
 
   // MARK: - Actions
 
-  @objc func togglePaused() {
+  @objc private func togglePaused() {
     scheduler.paused ? unpause() : pause()
   }
 
-  @objc func start() {
+  @objc private func start() {
     guard !running else { return }
 
     scheduler.start()
@@ -226,7 +203,7 @@ class TimerViewController: UIViewController {
     generateHapticFeedback()
   }
 
-  @objc func stop() {
+  @objc private func stop() {
     scheduler.stop()
     running = false
     animateStopped()
@@ -237,7 +214,7 @@ class TimerViewController: UIViewController {
     generateHapticFeedback()
   }
 
-  @objc func skipBreak() {
+  @objc private func skipBreak() {
     guard !running else { return }
     guard pomodoro.state == .shortBreak || pomodoro.state == .longBreak else { return }
 
@@ -248,7 +225,7 @@ class TimerViewController: UIViewController {
     generateHapticFeedback()
   }
 
-  func pause() {
+  private func pause() {
     guard running else { return }
 
     scheduler.pause(currentTime)
@@ -258,7 +235,7 @@ class TimerViewController: UIViewController {
     generateHapticFeedback()
   }
 
-  func unpause() {
+  private func unpause() {
     scheduler.unpause()
     running = true
     fireTimer()
@@ -281,8 +258,6 @@ class TimerViewController: UIViewController {
   // MARK: - Helpers
 
   private func reloadData() {
-    targetPomodoros = settings.targetPomodoros
-    pomodorosCompleted = pomodoro.pomodorosCompleted
     collectionView.reloadData()
   }
 
@@ -338,10 +313,6 @@ class TimerViewController: UIViewController {
     )
   }
 
-  private func refreshPomodoros() {
-    targetPomodoros = settings.targetPomodoros
-  }
-
   private func playCompletionFeedback() {
     // Haptic feedback for completion
     UINotificationFeedbackGenerator().notificationOccurred(.success)
@@ -373,15 +344,15 @@ class TimerViewController: UIViewController {
     stopButton.isHidden = true
     updateSkipBreakVisibility()
 
-    pauseButton.setTitle("Pause", for: UIControl.State())
+    pauseButton.setTitle("Pause", for: .normal)
   }
 
   private func animatePaused() {
-    pauseButton.setTitle("Resume", for: UIControl.State())
+    pauseButton.setTitle("Resume", for: .normal)
   }
 
   private func animateUnpaused() {
-    pauseButton.setTitle("Pause", for: UIControl.State())
+    pauseButton.setTitle("Pause", for: .normal)
   }
 
   private func generateHapticFeedback() {
@@ -404,7 +375,7 @@ extension TimerViewController: UICollectionViewDataSource {
     numberOfItemsInSection section: Int
   ) -> Int {
 
-    return targetPomodoros
+    return settings.targetPomodoros
   }
 
   func collectionView(
@@ -412,7 +383,7 @@ extension TimerViewController: UICollectionViewDataSource {
     cellForItemAt indexPath: IndexPath
   ) -> UICollectionViewCell {
     let identifier =
-      (indexPath.row < pomodorosCompleted)
+      (indexPath.row < pomodoro.pomodorosCompleted)
       ? String(describing: FilledCell.self) : String(describing: EmptyCell.self)
     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
   }
