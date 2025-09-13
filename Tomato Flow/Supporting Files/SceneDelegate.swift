@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
-    
+
     self.window = window
   }
 
@@ -42,12 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   func sceneDidBecomeActive(_ scene: UIScene) {
-    // Clear any badges when the scene becomes active again
-    if #available(iOS 17.0, *) {
-      UNUserNotificationCenter.current().setBadgeCount(0) { _ in }
-    } else {
-      UIApplication.shared.applicationIconBadgeNumber = 0
-    }
+    UNUserNotificationCenter.current().setBadgeCount(0) { _ in }
   }
 
   func handleNotification(_ notification: UNNotification) {
