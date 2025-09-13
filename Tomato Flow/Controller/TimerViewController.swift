@@ -126,18 +126,16 @@ class TimerViewController: UIViewController {
 
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(
-      self, selector: #selector(willEnterForeground),
-      name: UIApplication.willEnterForegroundNotification, object: nil)
+      self, selector: #selector(handleDidBecomeActive),
+      name: UIApplication.didBecomeActiveNotification, object: nil)
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
-    willEnterForeground()
   }
 
-  @objc func willEnterForeground() {
-    print("willEnterForeground")
+  @objc func handleDidBecomeActive() {
+    print("didBecomeActive")
 
     setCurrentTime()
     updateTimerLabel()
