@@ -79,8 +79,19 @@ final class TimerViewModel {
     onPhaseChanged?(pomodoro.state)
   }
 
-  func togglePaused() {
-    scheduler.paused ? unpause() : pause()
+  func pause() {
+    guard running else { return }
+    scheduler.pause(currentTime)
+    running = false
+    cancelTimer()
+    onPlaybackStateChanged?(.paused)
+  }
+  func resume() {
+    scheduler.unpause()
+    running = true
+    cancelTimer()
+    fireTimer()
+    onPlaybackStateChanged?(.running)
   }
 
   func skipBreak() {
@@ -93,21 +104,6 @@ final class TimerViewModel {
   }
 
   // Internals
-  private func pause() {
-    guard running else { return }
-    scheduler.pause(currentTime)
-    running = false
-    cancelTimer()
-    onPlaybackStateChanged?(.paused)
-  }
-
-  private func unpause() {
-    scheduler.unpause()
-    running = true
-    cancelTimer()
-    fireTimer()
-    onPlaybackStateChanged?(.running)
-  }
 
   private func tick() {
     if currentTime > 0 {

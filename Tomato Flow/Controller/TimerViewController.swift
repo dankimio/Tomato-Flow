@@ -45,6 +45,14 @@ class TimerViewController: UIViewController {
     return pauseButton
   }()
 
+  private lazy var resumeButton: SecondaryButton = {
+    let resumeButton = SecondaryButton(configuration: .secondary())
+    resumeButton.setTitle("Resume", for: .normal)
+    resumeButton.isHidden = true
+
+    return resumeButton
+  }()
+
   private lazy var skipBreakButton: SecondaryButton = {
     let skipButton = SecondaryButton(configuration: .secondary())
     skipButton.setTitle("Skip", for: .normal)
@@ -138,8 +146,11 @@ class TimerViewController: UIViewController {
     startButton.addTarget(self, action: #selector(start), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(startButton)
 
-    pauseButton.addTarget(self, action: #selector(togglePaused), for: .touchUpInside)
+    pauseButton.addTarget(self, action: #selector(pause), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(pauseButton)
+
+    resumeButton.addTarget(self, action: #selector(resume), for: .touchUpInside)
+    buttonsContainer.addArrangedSubview(resumeButton)
 
     stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(stopButton)
@@ -159,7 +170,14 @@ class TimerViewController: UIViewController {
 
   // MARK: - Actions
 
-  @objc private func togglePaused() { viewModel.togglePaused() }
+  @objc private func pause() {
+    viewModel.pause()
+    generateHapticFeedback()
+  }
+  @objc private func resume() {
+    viewModel.resume()
+    generateHapticFeedback()
+  }
 
   @objc private func start() {
     viewModel.start()
@@ -229,6 +247,7 @@ class TimerViewController: UIViewController {
   private func animateStarted() {
     startButton.isHidden = true
     pauseButton.isHidden = false
+    resumeButton.isHidden = true
     stopButton.isHidden = false
     skipBreakButton.isHidden = true
   }
@@ -236,18 +255,20 @@ class TimerViewController: UIViewController {
   private func animateStopped() {
     startButton.isHidden = false
     pauseButton.isHidden = true
+    resumeButton.isHidden = true
     stopButton.isHidden = true
     updateSkipBreakVisibility()
 
-    pauseButton.setTitle("Pause", for: .normal)
   }
 
   private func animatePaused() {
-    pauseButton.setTitle("Resume", for: .normal)
+    pauseButton.isHidden = true
+    resumeButton.isHidden = false
   }
 
   private func animateUnpaused() {
-    pauseButton.setTitle("Pause", for: .normal)
+    pauseButton.isHidden = false
+    resumeButton.isHidden = true
   }
 
   private func generateHapticFeedback() {
