@@ -1,3 +1,4 @@
+import AVFoundation
 import SnapKit
 import SwiftUI
 import UIKit
@@ -84,6 +85,9 @@ class TimerViewController: UIViewController {
   // Pomodoros view
   private var pomodorosCompleted: Int!
   private var targetPomodoros: Int
+
+  // Audio
+  private var completionPlayer: AVAudioPlayer?
 
   // MARK: - Initialization
 
@@ -181,6 +185,8 @@ class TimerViewController: UIViewController {
     }
 
     print("State: \(pomodoro.state), done: \(pomodoro.pomodorosCompleted)")
+
+    playCompletionFeedback()
 
     if pomodoro.state == .initial {
       pomodoro.completePomodoro()
@@ -315,6 +321,24 @@ class TimerViewController: UIViewController {
 
   private func refreshPomodoros() {
     targetPomodoros = settings.targetPomodoros
+  }
+
+  private func playCompletionFeedback() {
+    // Haptic feedback for completion
+    UINotificationFeedbackGenerator().notificationOccurred(.success)
+
+    // Play custom completion sound when app is in foreground
+    guard let url = Bundle.main.url(forResource: "success", withExtension: "wav") else {
+      return
+    }
+
+    do {
+      completionPlayer = try AVAudioPlayer(contentsOf: url)
+      completionPlayer?.prepareToPlay()
+      completionPlayer?.play()
+    } catch {
+      print("Failed to play completion sound: \(error)")
+    }
   }
 
   private func animateStarted() {

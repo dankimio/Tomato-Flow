@@ -93,12 +93,6 @@ class Scheduler {
 
   // MARK: - Helpers
 
-  private var firstScheduledNotification: UNNotificationRequest? {
-    // Note: We'll need to track notification requests manually since UNUserNotificationCenter
-    // doesn't provide a direct way to get pending notifications by identifier
-    return nil
-  }
-
   private func cancelNotification() {
     UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     fireDate = nil
@@ -134,7 +128,7 @@ class Scheduler {
     content.title = title
     content.body = body
     content.badge = 1
-    content.sound = .default
+    content.sound = UNNotificationSound(named: UNNotificationSoundName("success.wav"))
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
     let request = UNNotificationRequest(
