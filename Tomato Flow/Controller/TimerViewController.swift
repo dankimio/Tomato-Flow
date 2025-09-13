@@ -13,6 +13,7 @@ class TimerViewController: UIViewController {
   }()
 
   private let timerTextViewModel = TimerTextViewModel()
+  private let viewModel = TimerViewModel()
   private lazy var timerHostingController: UIHostingController<TimerTextView> = {
     let hosting = UIHostingController(rootView: TimerTextView(viewModel: timerTextViewModel))
     hosting.view.backgroundColor = .clear
@@ -78,22 +79,16 @@ class TimerViewController: UIViewController {
   }()
 
   // Scheduler
-  private let scheduler = Scheduler()
   private let pomodoro = Pomodoro.sharedInstance
 
   // Time
-  private var timer: Timer?
-  private var currentTime: Double = 0
-  private var running = false
+  private var completionPlayer: AVAudioPlayer?
 
   // Configuration
   private let animationDuration = 0.3
   private let settings = SettingsManager.sharedManager
 
   // Pomodoros view
-
-  // Audio
-  private var completionPlayer: AVAudioPlayer?
 
   // MARK: - Initialization
 
@@ -111,21 +106,13 @@ class TimerViewController: UIViewController {
       self, selector: #selector(handleDidBecomeActive),
       name: UIApplication.didBecomeActiveNotification, object: nil)
 
-    // Initialize UI state
-    resetCurrentTime()
-    updateTimerLabel()
+    bindViewModel()
+    viewModel.refreshOnAppear()
     updateSkipBreakVisibility()
   }
 
   @objc private func handleDidBecomeActive() {
-    setCurrentTime()
-    updateTimerLabel()
-
-    if scheduler.pausedTime != nil {
-      animateStarted()
-      animatePaused()
-    }
-
+    viewModel.handleDidBecomeActive()
     reloadData()
     updateSkipBreakVisibility()
   }
@@ -168,80 +155,30 @@ class TimerViewController: UIViewController {
     stackView.addArrangedSubview(collectionView)
   }
 
-  @objc private func tick() {
-    if currentTime > 0 {
-      currentTime = currentTime - 1.0
-      updateTimerLabel()
-      return
-    }
-
-    playCompletionFeedback()
-
-    if pomodoro.state == .initial {
-      pomodoro.completePomodoro()
-      reloadData()
-    } else {
-      pomodoro.completeBreak()
-    }
-
-    stop()
-  }
+  // Timer ticks handled inside ViewModel
 
   // MARK: - Actions
 
-  @objc private func togglePaused() {
-    scheduler.paused ? unpause() : pause()
-  }
+  @objc private func togglePaused() { viewModel.togglePaused() }
 
   @objc private func start() {
-    guard !running else { return }
-
-    scheduler.start()
-    running = true
-    animateStarted()
-    fireTimer()
+    viewModel.start()
     generateHapticFeedback()
   }
 
   @objc private func stop() {
-    scheduler.stop()
-    running = false
-    animateStopped()
-    timer?.invalidate()
-    resetCurrentTime()
-    updateTimerLabel()
+    viewModel.stop()
     updateSkipBreakVisibility()
     generateHapticFeedback()
   }
 
   @objc private func skipBreak() {
-    guard !running else { return }
-    guard pomodoro.state == .shortBreak || pomodoro.state == .longBreak else { return }
-
-    pomodoro.completeBreak()
-    resetCurrentTime()
-    updateTimerLabel()
+    viewModel.skipBreak()
     updateSkipBreakVisibility()
     generateHapticFeedback()
   }
 
-  private func pause() {
-    guard running else { return }
-
-    scheduler.pause(currentTime)
-    running = false
-    timer?.invalidate()
-    animatePaused()
-    generateHapticFeedback()
-  }
-
-  private func unpause() {
-    scheduler.unpause()
-    running = true
-    fireTimer()
-    animateUnpaused()
-    generateHapticFeedback()
-  }
+  // Pause/unpause handled inside ViewModel
 
   func presentAlertFromNotification(_ notification: UNNotification) {
     let alertController = UIAlertController(
@@ -257,12 +194,10 @@ class TimerViewController: UIViewController {
 
   // MARK: - Helpers
 
-  private func reloadData() {
-    collectionView.reloadData()
-  }
+  private func reloadData() { collectionView.reloadData() }
 
-  private func updateTimerLabel() {
-    let time = Int(currentTime)
+  private func updateTimerLabel(seconds: Double) {
+    let time = Int(seconds)
     let newString = String(format: "%02d:%02d", time / 60, time % 60)
 
     withAnimation(.easeInOut(duration: animationDuration)) {
@@ -270,29 +205,7 @@ class TimerViewController: UIViewController {
     }
   }
 
-  private func setCurrentTime() {
-    if let pausedTime = scheduler.pausedTime {
-      currentTime = pausedTime
-      return
-    }
-
-    if let fireDate = scheduler.fireDate {
-      let newTime = fireDate.timeIntervalSinceNow
-      currentTime = (newTime > 0 ? newTime : 0)
-      return
-    }
-
-    resetCurrentTime()
-  }
-
-  private func resetCurrentTime() {
-    switch pomodoro.state {
-    case .initial: currentTime = Double(settings.pomodoroLength)
-    case .shortBreak: currentTime = Double(settings.shortBreakLength)
-    case .longBreak: currentTime = Double(settings.longBreakLength)
-    }
-    resetTimerLabelColor()
-  }
+  // Time handling moved to ViewModel
 
   private func resetTimerLabelColor() {
     switch pomodoro.state {
@@ -303,15 +216,7 @@ class TimerViewController: UIViewController {
     }
   }
 
-  private func fireTimer() {
-    timer = Timer.scheduledTimer(
-      timeInterval: 1,
-      target: self,
-      selector: #selector(tick),
-      userInfo: nil,
-      repeats: true
-    )
-  }
+  // Timer firing handled in ViewModel
 
   private func playCompletionFeedback() {
     // Haptic feedback for completion
@@ -360,8 +265,30 @@ class TimerViewController: UIViewController {
   }
 
   private func updateSkipBreakVisibility() {
-    let onBreak = (pomodoro.state == .shortBreak || pomodoro.state == .longBreak)
-    skipBreakButton.isHidden = running || !onBreak
+    skipBreakButton.isHidden = !viewModel.shouldShowSkipBreak
+  }
+
+  private func bindViewModel() {
+    viewModel.onTimeChanged = { [weak self] seconds in
+      self?.updateTimerLabel(seconds: seconds)
+    }
+    viewModel.onRunningChanged = { [weak self] isRunning in
+      if isRunning { self?.animateStarted() } else { self?.animateStopped() }
+      self?.updateSkipBreakVisibility()
+    }
+    viewModel.onPausedChanged = { [weak self] isPaused in
+      if isPaused { self?.animatePaused() } else { self?.animateUnpaused() }
+    }
+    viewModel.onPhaseChanged = { [weak self] _ in
+      self?.resetTimerLabelColor()
+      self?.updateSkipBreakVisibility()
+    }
+    viewModel.onCycleCompleted = { [weak self] in
+      self?.playCompletionFeedback()
+    }
+    viewModel.onNeedsReload = { [weak self] in
+      self?.reloadData()
+    }
   }
 
 }
@@ -375,7 +302,7 @@ extension TimerViewController: UICollectionViewDataSource {
     numberOfItemsInSection section: Int
   ) -> Int {
 
-    return settings.targetPomodoros
+    return viewModel.targetPomodorosCount
   }
 
   func collectionView(
@@ -383,7 +310,7 @@ extension TimerViewController: UICollectionViewDataSource {
     cellForItemAt indexPath: IndexPath
   ) -> UICollectionViewCell {
     let identifier =
-      (indexPath.row < pomodoro.pomodorosCompleted)
+      (indexPath.row < viewModel.pomodorosCompletedCount)
       ? String(describing: FilledCell.self) : String(describing: EmptyCell.self)
     return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
   }
