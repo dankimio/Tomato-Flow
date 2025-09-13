@@ -43,6 +43,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     timerViewController?.pause()
   }
 
+  func sceneDidBecomeActive(_ scene: UIScene) {
+    // Clear any badges when the scene becomes active again
+    if #available(iOS 17.0, *) {
+      UNUserNotificationCenter.current().setBadgeCount(0) { _ in }
+    } else {
+      UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+  }
+
   func handleNotification(_ notification: UNNotification) {
     timerViewController?.presentAlertFromNotification(notification)
   }

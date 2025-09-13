@@ -5,8 +5,6 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-  var window: UIWindow?
-
   // Override point for customization after application launch.
   func application(
     _ application: UIApplication,
@@ -44,13 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     completionHandler([.banner, .badge, .sound])
   }
 
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    // Restart any tasks that were paused (or not yet started) while
-    // the application was inactive. If the application was previously in the background,
-    // optionally refresh the user interface.
-
-    resetBadgeNumber()
-  }
+  // Scene lifecycle handles active/background transitions in SceneDelegate
 
   // MARK: - Helpers
 
@@ -66,13 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
   }
 
-  private func resetBadgeNumber() {
-    if #available(iOS 17.0, *) {
-      UNUserNotificationCenter.current().setBadgeCount(0) { _ in }
-    } else {
-      UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-  }
+  // Badge reset is handled in SceneDelegate.sceneDidBecomeActive(_:)
 
   private func configureColor() {
     guard let accent = UIColor(named: "AccentColor") else { return }
