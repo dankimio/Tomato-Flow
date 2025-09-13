@@ -82,7 +82,7 @@ class TimerViewController: UIViewController {
   private let pomodoro = Pomodoro.sharedInstance
 
   // Time
-  private var completionPlayer: AVAudioPlayer?
+  private let soundPlayer = SoundPlayer()
 
   // Configuration
   private let animationDuration = 0.3
@@ -223,17 +223,7 @@ class TimerViewController: UIViewController {
     UINotificationFeedbackGenerator().notificationOccurred(.success)
 
     // Play custom completion sound when app is in foreground
-    guard let url = Bundle.main.url(forResource: "success", withExtension: "wav") else {
-      return
-    }
-
-    do {
-      completionPlayer = try AVAudioPlayer(contentsOf: url)
-      completionPlayer?.prepareToPlay()
-      completionPlayer?.play()
-    } catch {
-      print("Failed to play completion sound: \(error)")
-    }
+    soundPlayer.play(resource: "success", withExtension: "wav")
   }
 
   private func animateStarted() {
