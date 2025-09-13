@@ -53,6 +53,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   func handleNotification(_ notification: UNNotification) {
+    // Ensure the Timer tab is visible so the alert presents on the right VC
+    if let tab = window?.rootViewController as? UITabBarController {
+      tab.selectedIndex = 0
+    }
     timerViewController?.presentAlertFromNotification(notification)
   }
 }
