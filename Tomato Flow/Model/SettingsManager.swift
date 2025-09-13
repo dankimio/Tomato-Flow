@@ -22,7 +22,7 @@ class SettingsManager {
     get {
       let value = userDefaults.object(forKey: Settings.pomodoroLength) as? Int ?? 25
       #if DEBUG
-        return 5
+        return value
       #else
         return value * 60
       #endif
