@@ -17,12 +17,13 @@ final class TimerViewModel {
 
   var onTimeChanged: ((Double) -> Void)?
   var onPlaybackStateChanged: ((PlaybackState) -> Void)?
-  var onPhaseChanged: ((TimerState) -> Void)?
+  var onTimerStateChanged: ((TimerState) -> Void)?
   var onCycleCompleted: (() -> Void)?
-  var onNeedsReload: (() -> Void)?
+  var onPomodoroCountersChanged: (() -> Void)?
+  var onSkipBreakVisibilityChanged: ((Bool) -> Void)?
 
   // Derived
-  var shouldShowSkipBreak: Bool {
+  var isSkipBreakVisible: Bool {
     // Show Skip only when on a break, not running, and not paused
     return !running && !scheduler.paused
       && (pomodoro.state == .shortBreak || pomodoro.state == .longBreak)
@@ -44,7 +45,8 @@ final class TimerViewModel {
       onPlaybackStateChanged?(.stopped)
     }
 
-    onPhaseChanged?(pomodoro.state)
+    onTimerStateChanged?(pomodoro.state)
+    emitSkipVisibility()
   }
 
   func handleDidBecomeActive() {
@@ -56,7 +58,8 @@ final class TimerViewModel {
       onPlaybackStateChanged?(.paused)
     }
 
-    onPhaseChanged?(pomodoro.state)
+    onTimerStateChanged?(pomodoro.state)
+    emitSkipVisibility()
   }
 
   // Actions
@@ -69,6 +72,7 @@ final class TimerViewModel {
     emitTime()
     cancelTimer()
     fireTimer()
+    emitSkipVisibility()
   }
 
   func stop() {
@@ -78,7 +82,8 @@ final class TimerViewModel {
     cancelTimer()
     resetCurrentTime()
     emitTime()
-    onPhaseChanged?(pomodoro.state)
+    onTimerStateChanged?(pomodoro.state)
+    emitSkipVisibility()
   }
 
   func pause() {
@@ -87,6 +92,7 @@ final class TimerViewModel {
     running = false
     cancelTimer()
     onPlaybackStateChanged?(.paused)
+    emitSkipVisibility()
   }
   func resume() {
     scheduler.unpause()
@@ -94,6 +100,7 @@ final class TimerViewModel {
     cancelTimer()
     fireTimer()
     onPlaybackStateChanged?(.running)
+    emitSkipVisibility()
   }
 
   func skipBreak() {
@@ -102,7 +109,8 @@ final class TimerViewModel {
     pomodoro.completeBreak()
     resetCurrentTime()
     emitTime()
-    onPhaseChanged?(pomodoro.state)
+    onTimerStateChanged?(pomodoro.state)
+    emitSkipVisibility()
   }
 
   // Internals
@@ -119,7 +127,7 @@ final class TimerViewModel {
 
     if pomodoro.state == .initial {
       pomodoro.completePomodoro()
-      onNeedsReload?()
+      onPomodoroCountersChanged?()
     } else {
       pomodoro.completeBreak()
     }
@@ -163,5 +171,9 @@ final class TimerViewModel {
 
   private func emitTime() {
     onTimeChanged?(currentTime)
+  }
+
+  private func emitSkipVisibility() {
+    onSkipBreakVisibilityChanged?(isSkipBreakVisible)
   }
 }

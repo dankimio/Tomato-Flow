@@ -116,13 +116,11 @@ class TimerViewController: UIViewController {
 
     bindViewModel()
     viewModel.refreshOnAppear()
-    updateSkipBreakVisibility()
   }
 
   @objc private func handleDidBecomeActive() {
     viewModel.handleDidBecomeActive()
     reloadData()
-    updateSkipBreakVisibility()
   }
 
   private func setUpSubviews() {
@@ -186,13 +184,11 @@ class TimerViewController: UIViewController {
 
   @objc private func stop() {
     viewModel.stop()
-    updateSkipBreakVisibility()
     generateHapticFeedback()
   }
 
   @objc private func skipBreak() {
     viewModel.skipBreak()
-    updateSkipBreakVisibility()
     generateHapticFeedback()
   }
 
@@ -257,7 +253,6 @@ class TimerViewController: UIViewController {
     pauseButton.isHidden = true
     resumeButton.isHidden = true
     stopButton.isHidden = true
-    updateSkipBreakVisibility()
 
   }
 
@@ -275,10 +270,6 @@ class TimerViewController: UIViewController {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
   }
 
-  private func updateSkipBreakVisibility() {
-    skipBreakButton.isHidden = !viewModel.shouldShowSkipBreak
-  }
-
   private func bindViewModel() {
     viewModel.onTimeChanged = { [weak self] seconds in
       self?.updateTimerLabel(seconds: seconds)
@@ -294,17 +285,18 @@ class TimerViewController: UIViewController {
       case .stopped:
         self?.animateStopped()
       }
-      self?.updateSkipBreakVisibility()
     }
-    viewModel.onPhaseChanged = { [weak self] _ in
+    viewModel.onTimerStateChanged = { [weak self] _ in
       self?.resetTimerLabelColor()
-      self?.updateSkipBreakVisibility()
     }
     viewModel.onCycleCompleted = { [weak self] in
       self?.playCompletionFeedback()
     }
-    viewModel.onNeedsReload = { [weak self] in
+    viewModel.onPomodoroCountersChanged = { [weak self] in
       self?.reloadData()
+    }
+    viewModel.onSkipBreakVisibilityChanged = { [weak self] isVisible in
+      self?.skipBreakButton.isHidden = !isVisible
     }
   }
 
