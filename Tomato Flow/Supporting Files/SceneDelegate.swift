@@ -38,4 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     appDelegate?.timerViewController = timerViewController
   }
+
+  func sceneDidEnterBackground(_ scene: UIScene) {
+    (UIApplication.shared.delegate as? AppDelegate)?.timerViewController?.pause()
+  }
 }
