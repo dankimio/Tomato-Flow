@@ -23,14 +23,9 @@ struct TimerTextView: View {
       .minimumScaleFactor(0.2)
 
     Group {
-      if #available(iOS 17.0, *) {
-        baseText
-          .contentTransition(.numericText())
-          .animation(.easeInOut(duration: 0.3), value: viewModel.timeString)
-      } else {
-        baseText
-          .animation(.easeInOut(duration: 0.3), value: viewModel.timeString)
-      }
+      baseText
+        .contentTransition(.numericText())
+        .animation(.easeInOut(duration: 0.3), value: viewModel.timeString)
     }
   }
 }

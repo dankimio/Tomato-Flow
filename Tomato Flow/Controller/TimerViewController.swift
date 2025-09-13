@@ -165,7 +165,7 @@ class TimerViewController: UIViewController {
     stackView.addArrangedSubview(timerHostingController.view)
     timerHostingController.didMove(toParent: self)
     stackView.setCustomSpacing(4, after: timerHostingController.view)
-    
+
     skipBreakButton.addTarget(self, action: #selector(skipBreak), for: .touchUpInside)
     buttonsContainer.addArrangedSubview(skipBreakButton)
 
@@ -291,11 +291,8 @@ class TimerViewController: UIViewController {
   private func updateTimerLabel() {
     let time = Int(currentTime)
     let newString = String(format: "%02d:%02d", time / 60, time % 60)
-    if #available(iOS 17.0, *) {
-      withAnimation(.easeInOut(duration: animationDuration)) {
-        timerTextViewModel.timeString = newString
-      }
-    } else {
+
+    withAnimation(.easeInOut(duration: animationDuration)) {
       timerTextViewModel.timeString = newString
     }
   }
