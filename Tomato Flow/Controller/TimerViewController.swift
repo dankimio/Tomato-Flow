@@ -118,6 +118,13 @@ class TimerViewController: UIViewController {
     bindViewModel()
     viewModel.refreshOnAppear()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    viewModel.refreshOnAppear()
+    reloadData()
+  }
 
   @objc private func handleDidBecomeActive() {
     viewModel.handleDidBecomeActive()
