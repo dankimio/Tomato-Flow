@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 struct SettingsView: View {
   @State private var pomodoroMinutes: Int = 25
@@ -97,25 +96,20 @@ struct SettingsView: View {
         }
 
         Section(header: Text("About")) {
-          Button(action: { open(url: About.twitterURL) }) {
+          Link(destination: About.twitterURL) {
             HStack {
               Text("Follow me on Twitter")
-                .tint(.black)
+                
               Spacer()
+              
               Text("@dankimio")
-                .tint(.secondary)
+                .foregroundStyle(Color(UIColor.systemGray))
             }
           }
 
-          Button(action: { open(url: About.homepageURL) }) {
-            Text("Visit my website")
-              .tint(.black)
-          }
+          Link("Visit my website", destination: About.homepageURL)
 
-          Button(action: { open(url: About.appStoreURL) }) {
-            Text("Rate on the App Store")
-              .tint(.black)
-          }
+          Link("Rate on the App Store", destination: About.appStoreURL)
         }
       }
       .navigationTitle("Settings")
@@ -130,9 +124,6 @@ struct SettingsView: View {
     targetPomodoros = settings.targetPomodoros
   }
 
-  private func open(url: URL) {
-    UIApplication.shared.open(url)
-  }
 }
 
 private func displayMinutes(from value: Int) -> Int {
